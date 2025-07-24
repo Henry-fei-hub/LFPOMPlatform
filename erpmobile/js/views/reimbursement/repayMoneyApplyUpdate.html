@@ -1,0 +1,75 @@
+
+<div id="cNnavlistcontainer" class="demo-panel-contrast1 oj-contrast-marker">
+    <div class="topHeader" >
+        <button class="buttonIcon2 arrLeft"
+                data-bind=" click: dl.backToClick,
+                               ojComponent: {
+                                   component:'ojButton', 
+                                   icons: {start:'oj-fwk-icon-caret-start oj-fwk-icon'}, 
+                                   label: ''
+                               }">
+        </button>
+        <h3 id="header" class="itemTitle" data-bind="text:specialHeaderTitle"></h3>
+    </div>
+    <div class=" disFlex mt70">
+        <button class="button" data-bind="attr: {id : 0}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '同意'}"></button>
+        <button class="button" data-bind="attr: {id : 1}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '驳回'}"></button>
+        <button class="button" data-bind="attr: {id : 2}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '回退'}"></button>
+        <button class="button" data-bind="attr: {id : 3}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '转交'}"></button>
+    </div>   
+    <button class='mar20 jindu ' data-bind="event: {click: jinduClick}">进度</button>
+    <div id='mainmenu' data-bind="ojComponent:{
+                            component:'ojListView',
+                            drillMode:'sliding',
+                            data: dataSource,
+                            item: { template: 'bm-folder_template' }
+                }">
+
+    </div>
+
+
+    <div class="mar20 disFlex mt40">
+        <button class="button" data-bind="attr: {id : 0}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '同意'}"></button>
+        <button class="button" data-bind="attr: {id : 1}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '驳回'}"></button>
+        <button class="button" data-bind="attr: {id : 2}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '回退'}"></button>
+        <button class="button" data-bind="attr: {id : 3}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '转交'}"></button>
+    </div>   
+    <button class='mar20 jindu mb40' data-bind="event: {click: jinduClick}">进度</button>
+
+</div>
+
+<script type="text/html" id="bm-folder_template">
+    <ul class='list'>
+        <li>
+            <span class="title">申请人：</span> <input data-bind="text:dl.getLabelByValue('employees', $data['employeeId'])" readonly/>
+        </li>
+        <li>
+            <span class="title">工号：</span>   <input data-bind="value:$data['employeeNo']" />
+        </li>
+        <li>
+            <span class="title">部门：</span>   <input data-bind="text:dl.getLabelByValue('all_departments', $data['departmentId'])" readonly/>
+        </li>
+        <li>
+            <span class="title">实际还款日期：</span>   <input data-bind="text: dl.datetimeConverter.format(dl.parseValueFromService($data['startDate']))" readonly/>
+        </li>
+        <li>
+            <span class="title">还款金额：</span>   <input data-bind="text: $data['fee']"/>
+        </li>
+         <li>
+            <span class="title">收款方：</span>   <input data-bind="text:dl.getLabelByValue('system_dictionary_69', $data['projectId'])"/>
+        </li>
+        <li>
+            <span class="title flex1_5">银行名称：</span>   <input data-bind="text:$data['projectName']"/>
+        </li>
+         <li>
+            <span class="title flex1_5">银行账号：</span> <input data-bind="text:$data['projectCode']"/>
+        </li>
+       <li>
+            <span class="title">付款人：</span> <span data-bind="text:dl.getLabelByValue('employees', $data['parentId'])"></span>
+        </li>
+        <li>
+            <span class="textmany title">备注：</span>   <input data-bind="text:$data['remark']"/>
+        </li>
+    </ul>
+</script>
+

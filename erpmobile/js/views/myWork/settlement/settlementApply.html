@@ -1,0 +1,51 @@
+
+<div id="oj-hybrid-padding"  style='position:relative;'>
+    <div id='rBmain-header'>
+        <button class="buttonIcon2 arrLeft"
+                data-bind=" click: dl.backToClick,
+                               ojComponent: {
+                                   component:'ojButton', 
+                                   icons: {start:'oj-fwk-icon-caret-start oj-fwk-icon'}, 
+                                   label: ''
+                               }">
+        </button>
+        
+        <h3 id="header" class="itemTitle" data-bind="text:dl.headerTitle"></h3>
+    </div> 
+    <div id='mainmenu'>
+     <ul class='list' style="margin-top: 70px">
+         <li>
+            <span class="title">申 请 人：</span>   <span data-bind="text:dl.getLabelByValue('employees', $data['employeeId'])"></span>
+        </li>
+        <li>
+            <span class="title">部门：</span>   <span data-bind="text:dl.getLabelByValue('all_departments', $data['departmentId'])"></span>
+        </li>
+        <li>
+            <span class="title">归属公司：</span>   <span data-bind="text:dl.getLabelByValue('system_dictionary_26', $data['companyId'])"></span>
+        </li>
+        <li>
+            <span class="title">项目编号：</span>   <span data-bind="text:$data['projectCode']"></span>
+        </li>
+        <li>
+            <span class="title">项目名称：</span>   <span data-bind="text: $data['projectName']"></span>
+        </li>
+        <li>
+            <span class="title">配合时间：</span>   <span data-bind="text: dl.dateConverter.format(dl.parseValueFromService($data['startDate']))"></span>
+        </li>
+        <li>
+            <span class="title">产值申请数量：</span>   <span data-bind="text:$data['subType']"></span>
+        </li>
+        <li>
+            <span class="title">配合内容：</span>   <span class="textmany" data-bind="text:$data['reason']"></span>
+        </li>
+     </ul>
+    </div>
+</div>
+
+
+<div class=" mar20 zjList">
+    <!--<span style="font-weight:bold;color:#FF7F27;">♥ 温馨提示：自漏打卡之日起，<span style="color:red">7个自然日内</span>可以发起补卡申请，逾期无法申请！</span>-->
+    <span style="font-weight:bold;color:#FF7F27;" data-bind="text:errorMessage"></span>
+</div>
+<button class='mar20 jindu mb40' data-bind="event: {click: submitClick}">提交</button>
+

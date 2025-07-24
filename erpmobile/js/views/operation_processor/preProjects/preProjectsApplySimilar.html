@@ -1,0 +1,137 @@
+
+<div id="oj-hybrid-padding"  style='position:relative;'>
+    <div id='rBmain-header'>
+        <button  class="buttonIcon2 arrLeft"
+                data-bind=" click: dl.backToClick,
+                               ojComponent: {
+                                   component:'ojButton', 
+                                   icons: {start:'oj-fwk-icon-caret-start oj-fwk-icon'}, 
+                                   label: ''
+                               }">
+        </button>
+        
+        <h3 id="header" class="itemTitle" data-bind="text:dl.headerTitle"></h3>
+    </div> 
+        <h3 id="header" class="itemTitle" style=' margin-top: 45px; color: red; padding: 0; font-size: 15px;border-bottom:none;'>
+<!--        <span data-bind="text:dl.getLabelByValue('employees', applyEmployeeId)"></span><span>于</span><span data-bind="text:dl.dateConverter.format(dl.parseValueFromService($data['createTime']))"></span><span>提交类似项目，</span><br/><span>请核实是否为同一项目</span></h3>-->
+        <span>存在类似项目，请核实是否为同一项目</span>
+    </h3>
+    <h3 id="header" class="itemTitle" style='border-bottom:none;font-size: 15px;'>相似的项目信息</h3>
+    <div id='mainmenu' style='border:1px solid #ccc;' data-bind="ojComponent:{
+                            component:'ojListView',
+                            drillMode:'sliding',
+                            data: dataSource,
+                            item: { template: 'folder_template' }
+                }">
+    </div>
+    <h3 id="header" class="itemTitle" style='border-bottom:none;font-size: 15px;'>本次提交的项目信息</h3>
+    <div id='mainmenu' style='border:1px solid #ccc;' data-bind="ojComponent:{
+                            component:'ojListView',
+                            drillMode:'sliding',
+                            data: dataSource1,
+                            item: { template: 'folder_template1' }
+                }">
+
+    </div>
+
+<button class='mar20 jindu mb40' style='width:49%;margin-left:0;' data-bind="event: {click: submitClick}">提交</button>
+<button class='mar20 jindu mb40' style='width:49%;margin-left:0;' data-bind="event: {click: dl.backToClick}">取消</button>
+</div>
+ <script type="text/html" id="folder_template">
+    <ul class='list'>
+        <li>
+            <span class="title">客户名称：</span>   <span data-bind="text:$data['customerName']"></span>
+        </li>
+        <li>
+            <span class="title">项目名称：</span>   <span data-bind="text:$data['projectName']"></span>
+        </li>
+        <li>    
+              <span class='title'>(项目地址)省：</span><span data-bind="text:$data['province']"></span>      
+        </li>
+        <li>
+            <span class='title'>(项目地址)市：</span><span data-bind="text:$data['city']"></span> 
+        </li>
+         <li>
+            <span class='title'>区域：</span><span data-bind="text:dl.getLabelByValue('system_dictionary_170', $data['region'])"></span> 
+        </li>
+        <li>
+            <span class='title'>详细地址：</span><span data-bind="text:$data['detailAddress']"></span> 
+        </li>
+        <li>
+            <span class="title">联系人：</span>   <span data-bind="text:$data['contactName']"></span>
+        </li>
+         <li>
+            <span class="title">职位：</span>  <span data-bind="text:$data['grade']"></span>
+        </li>
+        <li>
+            <span class="title">联系电话：</span>  <span data-bind="text:$data['contactPhone']"></span>
+        </li>
+        <li>
+            <span class="title">项目业态：</span>  <span data-bind="text:dl.getLabelByValue('pre_business_type', $data['projectType'])"></span>
+        </li>
+        <li>
+            <span class="title">建筑面积(㎡)：</span>   <span data-bind="text:$data['totalBuildingAreas']"></span>
+        </li>
+        <li>
+            <span class="title">设计面积(㎡)：</span>   <span data-bind="text:$data['estimateTheDesignAreas']"></span>
+        </li>
+        <li>
+            <span class="title">项目信息来源：</span>  <span data-bind="text:$data['projectOrigination']"></span>
+        </li>
+         <li>
+            <span class="title">比选形式：</span>  <span data-bind="text:dl.getLabelByValue('system_dictionary_168',$data['comparisonForm'] )"></span>
+        </li>
+         <li>
+            <span class="title">备注：</span>  <span data-bind="text:$data['remark']"></span>
+        </li>
+    </ul>
+</script>
+<script type="text/html" id="folder_template1">
+    <ul class='list'>
+        <li>
+            <span class="title">客户名称：</span>   <span data-bind="text:$data['customerName']"></span>
+        </li>
+        <li>
+            <span class="title">项目名称：</span>   <span data-bind="text:$data['projectName']"></span>
+        </li>
+        <li>    
+              <span class='title'>(项目地址)省：</span><span data-bind="text:$data['province']"></span>      
+        </li>
+        <li>
+            <span class='title'>(项目地址)市：</span><span data-bind="text:$data['city']"></span> 
+        </li>
+         <li>
+            <span class='title'>区域：</span><span data-bind="text:dl.getLabelByValue('system_dictionary_170',$data['region'] )"></span> 
+        </li>
+        <li>
+            <span class='title'>详细地址：</span><span data-bind="text:$data['detailAddress']"></span> 
+        </li>
+        <li>
+            <span class="title">联系人：</span>   <span data-bind="text:$data['contactName']"></span>
+        </li>
+         <li>
+            <span class="title">职位：</span>  <span data-bind="text:$data['grade']"></span>
+        </li>
+        <li>
+            <span class="title">联系电话：</span>  <span data-bind="text:$data['contactPhone']"></span>
+        </li>
+        <li>
+            <span class="title">项目业态：</span>  <span data-bind="text:dl.getLabelByValue('pre_business_type', $data['projectType'])"></span>
+        </li>
+        <li>
+            <span class="title">建筑面积(㎡)：</span>   <span data-bind="text:$data['totalBuildingAreas']"></span>
+        </li>
+        <li>
+            <span class="title">设计面积(㎡)：</span>   <span data-bind="text:$data['estimateTheDesignAreas']"></span>
+        </li>
+        <li>
+            <span class="title">项目信息来源：</span>  <span data-bind="text:$data['projectOrigination']"></span>
+        </li>
+         <li>
+            <span class="title">比选形式：</span>  <span data-bind="text:dl.getLabelByValue('system_dictionary_168', $data['comparisonForm'])"></span>
+        </li>
+         <li>
+            <span class="title">备注：</span>  <span data-bind="text:$data['remark']"></span>
+        </li>
+    </ul>
+</script>

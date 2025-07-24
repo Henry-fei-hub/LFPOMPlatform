@@ -1,0 +1,172 @@
+
+
+<div id="cNnavlistcontainer" class="demo-panel-contrast1 oj-contrast-marker">
+    <div class="topHeader" >
+        <button class="buttonIcon2 arrLeft"
+                data-bind=" click: dl.backToClick,
+                               ojComponent: {
+                                   component:'ojButton', 
+                                   icons: {start:'oj-fwk-icon-caret-start oj-fwk-icon'}, 
+                                   label: ''
+                               }">
+        </button>
+        <h3 id="header" class="itemTitle" data-bind="text:specialHeaderTitle"></h3>
+    </div>
+
+    <div class="disFlex mt70" data-bind='visible: isApproval()'>
+        <button class="button" data-bind="attr: {id : 0}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '同意'}"></button>
+        <button class="button" data-bind="attr: {id : 1}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '驳回'}"></button>
+        <button class="button" data-bind="attr: {id : 2}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '回退'}"></button>
+        <button class="button" data-bind="attr: {id : 3}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '转交'}"></button>
+    </div>   
+    <button class='mar20 jindu' data-bind="event: {click: jinduClick},style:{marginTop:isApproval()? '20px' :'70px'}">进度</button>
+    <div id='mainmenu'>
+        <ul class='list'>
+            <li>
+                <span class="titlelong">起 草 人：</span>   <span data-bind="text:dl.getLabelByValue('employees', __drafter())"></span>
+            </li>
+            <li>
+                <span class="titlelong">离职员工归属公司：</span>   <span data-bind="text:dl.getLabelByValue('system_dictionary_26', __companyId())"></span>
+            </li>
+            <li>
+                <span class="titlelong">离职类型：</span>   <span data-bind="text:dl.getLabelByValue('system_dictionary_94',__type())"></span>
+            </li>
+            <li>
+                <span class="titlelong">离职员工所在部门：</span>   <span data-bind="text:dl.getLabelByValue('departments',__departmentId())"></span>
+            </li>
+            <li>
+                <span class="titlelong">离职员工姓名：</span>   <span data-bind="text:dl.getLabelByValue('employees', __employeeId())"></span>
+            </li>
+            <li>
+                <span class="titlelong">离职员工工号：</span>   <span data-bind="text:__employeeNo()"></span>
+            </li>
+            <li>
+                <span class="titlelong">入职日期：</span>   <span data-bind="text: dl.datetimeConverter.format(dl.parseValueFromService(__startDate()))"/></span>
+            </li>
+            <li>
+                <span class="titlelong">最后工作时间：</span>   <span data-bind="text: dl.datetimeConverter.format(dl.parseValueFromService(__endDate()))"/></span>
+            </li>
+            <li>
+                <span class="titlelong">离职员工身份证：</span>   <span data-bind="text: __card()"></span>
+            </li>
+            <li>
+                <span class="titlelong">职位：</span>   <span data-bind="text:dl.getLabelByValue('duties', __dutyId())"></span>
+
+            </li>
+            <li>
+                <span class="titlelong">离职原因：</span>   <span data-bind="text:dl.getLabelByValue('system_dictionary_101', __startDateDetail())"></span>
+            </li>
+            <li>
+                <span class="titlelong">申请时间：</span>   <span class="textmany" data-bind="text:dl.datetimeConverter.format(dl.parseValueFromService(__createTime()))"></span>
+            </li>
+            <li data-bind='visible: isshow(1)'>  
+                <span class="title">当月绩效情况：</span>  
+                <input class="cont" data-bind="ojComponent: {component: 'ojSelect', value: __targetProvince, options: dl.getOptionsByName('system_dictionary_99',true)}"/>
+            </li>
+            <li data-bind="visible:isshow(2)">
+                <span class="titlelong">最终账户积分：</span>   <input data-bind="value: __livingExpenses,enable:isenable()"/>
+            </li>
+            <li data-bind="visible:isshow(3)">
+                <span class="titlelong">冻结积分：</span>   <input data-bind="value: __housingFinance,enable:isenable()"/>
+            </li>
+            <li data-bind="visible:isshow(4)">
+                <span class="titlelong">设计师离职奖金：</span>   <input data-bind="value:__fee,enable:isenable()"/>
+            </li>   
+            <li data-bind="visible:isshow(5)">
+                <span class="titlelong">借款情况：</span>   <input data-bind="value: __contactPerson"/>
+            </li>
+            <li data-bind="visible:isshow(6)">
+                <span class="titlelong">拖柜钥匙数量：</span>  <input data-bind="value: __companyProvince"/>
+            </li>   
+            <li data-bind="visible:isshow(6)">
+                <span class="titlelong">储物柜钥匙数量：</span>   <input data-bind="value: __numberOfBaby"/>
+            </li>
+            <li data-bind="visible:isshow(7)">
+                <span class="titlelong">办公电脑等设备：</span>   <input data-bind="value: __equivalentNumber"/>
+            </li>
+            <li data-bind="visible:isshow(8)">
+                <span class="titlelong">离职考勤：</span>   <input data-bind="value: __transportation"/>
+            </li>
+            <li data-bind="visible:isshow(9)">
+                <span class="titlelong">离职补偿金：</span>   <input data-bind="value: __severance"/>
+            </li>
+            <li data-bind="visible:isshow(9)">
+                <span class="titlelong">社保/公积金停缴月份：</span>   <input data-bind="value: __unit"/>
+            </li>
+            <li data-bind="visible:isshow(9)">
+                <span class="titlelong">工卡是否已回收：</span>
+                <input type = "checkbox" data-bind="checked: __isRemoteCity"/>
+            </li>
+            <li>
+                <span class="title">离职申请书：</span>
+                <span  class="demo-download-icon-24 demo-icon-font-24" style="font-size:18px;padding-right: 10px;" data-bind="click: uploadAttachmentClick"></span>
+                <a class="file" style='flex: 2; overflow: auto; border: none' data-bind=" attr: {href: __attachmentName}, text: uploadFileName" target="_blank"></a>
+            </li>
+            <li>
+                <span class="title">解除劳动合同申请书：</span>
+                <span  class="demo-download-icon-24 demo-icon-font-24" style="font-size:18px;padding-right: 10px;" data-bind="click: uploadAttachmentClick"></span>
+                <a class="file" style='flex: 2; overflow: auto; border: none' data-bind=" attr: {href: __attachmentName}, text: uploadFileName" target="_blank"></a>
+            </li>
+        </ul>      
+    </div>
+    <h3 class="navTitle" data-bind="visible: detailContShow()">工作交接详细</h3>
+    <div id='mainmenu' data-bind="visible: detailContShow() , ojComponent:{
+                            component:'ojListView',
+                            drillMode:'sliding',
+                            data: dataSource1,
+                            item: { template: 'folder_template1' }
+                }">
+
+    </div>
+</div>
+<div class="zjList" style='padding: 15px;'>
+    <span style="font-weight:bold;color:#FF7F27;" data-bind="text: tixinMessage()"></span>
+</div>
+<div class="zjList" style='padding: 15px;'>
+    <span style="font-weight:bold;color:red;" data-bind="text:errorMessage"></span>
+</div>
+<div class=" mar20 zjList" data-bind='visible: isApproval()' style="padding-bottom: 0;margin-top: 0;">
+    <span class="w75 textR">转交人：</span>
+    <select id="basicSelect" data-bind="ojComponent: {component: 'ojSelect',
+                                value: additionalApprovalment,
+                                placeholder: '',
+                                rootAttributes: {style:'max-width:18em'}, options: dl.getOptionsByName('employees', true)}">
+    </select>
+</div>
+<div class=" mar20 zjList" data-bind='visible: isApproval()'>
+    <span class="w75">审批意见：</span>
+    <textarea id="textarea1" 
+              type="text"
+              class="oj-form-control oj-textarea-nocomp"
+              data-bind="value: __processComment">
+
+    </textarea>
+
+</div>
+<div class="mar20 disFlex" data-bind='visible: isApproval()'>
+    <button class="button" data-bind="attr: {id : 0}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '同意'}"></button>
+    <button class="button" data-bind="attr: {id : 1}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '驳回'}"></button>
+    <button class="button" data-bind="attr: {id : 2}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '回退'}"></button>
+    <button class="button" data-bind="attr: {id : 3}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '转交'}"></button>
+</div>   
+<button class='mar20 jindu mb40' data-bind="event: {click: jinduClick}">进度</button>
+
+<script type="text/html" id="folder_template1">
+    <ul class='list'>
+        <li>
+            <span class="titlelong">工作交接类型：</span>   <span data-bind="text: $data.type"></span>
+        </li>
+        <li>
+            <span class="titlelong">名称：</span>   <span data-bind="text: $data.name"></span>  
+        </li>
+        <li>
+            <span class="titlelong">主要内容：</span>  <span data-bind="text: $data.content"></span>  
+        </li>
+        <li>
+            <span class="titlelong">交接者：</span>   <span data-bind="text: dl.getLabelByValue('employees',$data.fromEmployeeId)"></span>  
+        </li>
+        <li>
+            <span class="titlelong">被交接者：</span> <span data-bind="text: dl.getLabelByValue('employees',$data.toEmployeeId)"></span>  
+        </li>
+    </ul>
+</script>

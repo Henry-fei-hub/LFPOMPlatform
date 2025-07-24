@@ -1,0 +1,144 @@
+
+<div id="cNnavlistcontainer" class="demo-panel-contrast1 oj-contrast-marker">
+    <div class="topHeader" >
+        <button class="buttonIcon2 arrLeft"
+                data-bind=" click: dl.backToClick,
+                               ojComponent: {
+                                   component:'ojButton', 
+                                   icons: {start:'oj-fwk-icon-caret-start oj-fwk-icon'}, 
+                                   label: ''
+                               }">
+        </button>
+        <h3 id="header" class="itemTitle" data-bind="text:specialHeaderTitle"></h3>
+    </div>
+   
+    <button class='mar20 mt70 jindu' data-bind="event: {click: jinduClick}">进度</button>
+    <div id='mainmenu' data-bind="ojComponent:{
+                            component:'ojListView',
+                            drillMode:'sliding',
+                            data: dataSource,
+                            item: { template: 'folder_template' }
+                }">
+    </div>
+       <h3 class="navTitle">供应商详情</h3>
+    <div id='mainmenu' data-bind="ojComponent:{
+                            component:'ojListView',
+                            drillMode:'sliding',
+                            data: dataSource1,
+                            item: { template: 'folder_template1' }
+                }">
+    </div>
+    <h3 class="navTitle">与JA合作过的项目</h3>
+    <div id='mainmenu' data-bind="ojComponent:{
+                            component:'ojListView',
+                            drillMode:'sliding',
+                            data: dataSource2,
+                            item: { template: 'folder_template2' }
+                }">
+    </div>
+    <h3 class="navTitle">相应的供应商收款单位</h3>
+    <div id='mainmenu' data-bind="ojComponent:{
+                            component:'ojListView',
+                            drillMode:'sliding',
+                            data: dataSource3,
+                            item: { template: 'folder_template3' }
+                }">
+    </div>
+</div>
+
+
+<button class='mar20 jindu mb40' data-bind="event: {click: jinduClick}">进度</button>
+
+<script type="text/html" id="folder_template">
+    <ul class='list'>
+        <li>
+            <span class="titlelong">供应商名称：</span>   <span data-bind="text:$data['supplierName']"></span>
+        </li>
+        <li>    
+            <span class='titlelong'>供应商联系人：</span> <span data-bind="text:$data['supplierContact']"></span>      
+        </li>
+        <li>
+            <span class='titlelong'>供应商电话：</span><span data-bind="text:$data['supplierPhone']"></span> 
+        </li>
+        <li>
+            <span class='titlelong'>供应商邮箱：</span><span data-bind="text:$data['supplierEmail']"></span> 
+        </li>
+        <li>   
+            <span class='titlelong'>供应商类型：</span><span data-bind="text:$data['supplierType']==1? '外包供应商': '固定资产供应商'"></span> 
+        </li>
+        <li>
+            <span class="title">操作时间：</span>   <span data-bind="text: dl.datetimeConverter.format(dl.parseValueFromService($data['operateTime']))"></span>
+        </li>
+        <li>
+            <span class="title">供应商是否有效：</span>   <span data-bind="text:$data['isUse']==0? '无效': '有效'"></span>   
+        </li>
+        <li>
+            <span class="titlelong">团队规模：</span>   <span data-bind="text:$data['teamSize']"></span>
+        </li>
+        <li>
+            <span class="titlelong">擅长领域：</span>   <span data-bind="text:dl.getLabelByValue('system_dictionary_213', $data['areasExpertise'])"></span>
+        </li>
+        <li>
+            <span class="title">附件：</span>  
+            <span>
+                 <a class='attachment' target='_self' data-bind="attr:{href : $parent.fileUrl}" >
+                    <i class='link' data-bind="text:dl.isNullOrUndefined($parent.fileUrl) ? '无':$parent.fileUrl"></i>
+                    <span class='attachmentWarning'>（附件可打开预览）</span>
+                </a>
+            </span>
+        </li>
+    </ul>
+</script>
+
+<script type="text/html" id="folder_template1">
+    <ul class='list' data-bind="attr:{id: $data['mainItemId']}">
+        <li>
+            <span class="title">项目名称：</span>   <span data-bind="text: $data['projectName']"></span>
+        </li>
+        <li>
+            <span class="title">项目地址：</span>   <span data-bind="text:$data['projectAddress']"></span>
+        </li>
+        <li>
+            <span class="titlelong">主要负责内容：</span>   <span data-bind="text:$data['supplierDuty']"></span>
+        </li>
+    </ul>
+</script>
+
+<script type="text/html" id="folder_template2">
+    <ul class='list'>
+        <li>
+            <span class="titlelong">合作的项目名称：</span>   <span data-bind="text:$data['projectName']"></span>
+        </li>
+        <li>
+            <span class="title">J&A负责人：</span>   <span data-bind="text:dl.getLabelByValue('employees', $data['projectLeader'])"></span>
+        </li>
+        <li>
+            <span class="title">供应商评价：</span>   <span data-bind="text:$data['supplierEvaluate']"></span>
+        </li>
+    </ul>
+</script>
+
+<script type="text/html" id="folder_template3">
+    <ul class='list'>
+        <li>
+            <span class="title">收款单位：</span>   <span data-bind="text:$data['receiveUnit']"></span>
+        </li>
+        <li>
+            <span class="title">银行账号：</span>   <span data-bind="text:$data['bankAccount']"></span>
+        </li>
+        <li>
+            <span class="title">开户行：</span>   <span data-bind="text:$data['bankName']"></span>
+        </li>
+        <li>
+            <span class="titlelong">收款单位所在地：</span>   <span data-bind="text:$data['receiveUnitAddress']"></span>
+        </li>
+        <li>
+            <span class="title">操作人：</span>   <span data-bind="text:dl.getLabelByValue('employees', $data['operateEmployeeId'])"></span>
+        </li>
+        <li>
+            <span class="title">创建时间：</span>   <span data-bind="text: dl.datetimeConverter.format(dl.parseValueFromService($data['operateTime']))"></span>
+        </li>
+    </ul>
+</script>
+
+

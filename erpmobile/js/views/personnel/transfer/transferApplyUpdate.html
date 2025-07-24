@@ -1,0 +1,124 @@
+
+<div id="cNnavlistcontainer" class="demo-panel-contrast1 oj-contrast-marker">
+    <div class="topHeader" >
+        <button  class="buttonIcon2 arrLeft"
+                data-bind=" click: dl.backToClick,
+                               ojComponent: {
+                                   component:'ojButton', 
+                                   icons: {start:'oj-fwk-icon-caret-start oj-fwk-icon'}, 
+                                   label: ''
+                               }">
+        </button>
+        <h3 id="header" class="itemTitle" data-bind="text:specialHeaderTitle"></h3>
+    </div>
+
+    <div class="disFlex mt70">
+        <button class="button" data-bind="attr: {id : 0}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '同意'}"></button>
+        <button class="button" data-bind="attr: {id : 1}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '驳回'}"></button>
+        <button class="button" data-bind="attr: {id : 2}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '回退'}"></button>
+        <button class="button" data-bind="attr: {id : 3}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '转交'}"></button>
+    </div>   
+    <button class='mar20 jindu' data-bind="event: {click: jinduClick}">进度</button>
+    <div id='mainmenu' data-bind="ojComponent:{
+                            component:'ojListView',
+                            drillMode:'sliding',
+                            data: dataSource,
+                            item: { template: 'folder_template' }
+                }">
+
+    </div>
+    <h3 class="navTitle">交接详细</h3>
+    <div id='mainmenu' data-bind="ojComponent:{
+                            component:'ojListView',
+                            drillMode:'sliding',
+                            data: dataSource1,
+                            item: { template: 'folder_template1' }
+                }">
+
+    </div>
+</div>
+
+<div class=" mar20 zjList">
+    <span class="w75 textR">转交人：</span>
+    <select id="basicSelect" data-bind="ojComponent: {component: 'ojSelect',
+                                value: additionalApprovalment,
+                                placeholder: '',
+                                rootAttributes: {style:'max-width:18em'}, options: dl.getOptionsByName('employees', true)}">
+    </select>
+</div>
+<div class=" mar20 zjList">
+    <span class="w75">审批意见：</span>
+    <textarea id="textarea1" 
+              type="text"
+              class="oj-form-control oj-textarea-nocomp"
+              data-bind="value: processComment">
+
+    </textarea>
+
+</div>
+<div class="mar20 disFlex">
+    <button class="button" data-bind="attr: {id : 0}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '同意'}"></button>
+    <button class="button" data-bind="attr: {id : 1}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '驳回'}"></button>
+    <button class="button" data-bind="attr: {id : 2}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '回退'}"></button>
+    <button class="button" data-bind="attr: {id : 3}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '转交'}"></button>
+</div>   
+<button class='mar20 jindu mb40' data-bind="event: {click: jinduClick}">进度</button>
+
+<script type="text/html" id="folder_template">
+    <ul class='list'>
+        <li>
+            <span class="title">申 请 人：</span>   <input data-bind="value:dl.getLabelByValue('employees', $data['employeeId'])" readonly/>
+        </li>
+        <li>
+            <span class="title">工号：</span>   <input data-bind="value:$data['employeeNo']" readonly/>
+        </li>
+        <li>
+            <span class="title">部门：</span>   <input data-bind="value:dl.getLabelByValue('departments', $data['departmentId'])"/>
+        </li>
+        <li>
+            <span class="title">归属公司：</span>   <input data-bind="value:dl.getLabelByValue('system_dictionary_26', $data['companyId'])"/>
+        </li>
+        <li>
+            <span class="title">申请调岗日期：</span>   <input data-bind="value: dl.datetimeConverter.format(dl.parseValueFromService($data['startDate']))"/>
+        </li>
+        <li>
+            <span class="title">实际调岗日期：</span>   <input data-bind="value: dl.datetimeConverter.format(dl.parseValueFromService($data['endDate']))"/>
+        </li>
+        <li>
+            <span class="title">申请缘由：</span>   <input data-bind="value:$data['reason']"/>
+        </li>
+        <li>
+            <span class="title">转调部门：</span>   <input data-bind="value:dl.getLabelByValue('duties', $data['dutyId'])"/>
+        </li>
+        <li>
+            <span class="title">起草时间：</span>   <input data-bind="value: dl.datetimeConverter.format(dl.parseValueFromService($data['startDate']))"/>
+        </li>
+        <li>
+            <span class="title">备注：</span>   <input class="textmany" data-bind="value:$data['remark']"/>
+        </li>
+    </ul>
+</script>
+
+<script type="text/html" id="folder_template1">
+    <ul class='list'>
+        <li>  
+            <span class="title">工作交接类型：</span>   <input data-bind="value:$data['type']"/>
+        </li>
+        <li>
+            <span class="title">名称：</span>   <input data-bind="value:$data['name']"/>
+        </li>
+        <li>
+            <span class="title">主要内容：</span>   <input data-bind="value:$data['content']"/>
+        </li>
+        <li>
+            <span class="title">交接者：</span>   <input data-bind="value:dl.getLabelByValue('employees', $data['fromEmployeeId'])"/>
+        </li>
+        <li>
+            <span class="title">被交接者：</span>   <input data-bind="value:dl.getLabelByValue('employees', $data['toEmployeeId'])"/>
+        </li>
+        <li>
+            <span class="title">备注：</span>   <span class="textmany" data-bind="text:$data['remark']"></span>
+        </li>
+    </ul>
+</script>
+

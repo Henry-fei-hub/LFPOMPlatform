@@ -1,0 +1,87 @@
+
+<div id="cNnavlistcontainer" class="demo-panel-contrast1 oj-contrast-marker">
+    <div class="topHeader" >
+        <button class="buttonIcon2 arrLeft"
+                data-bind=" click: dl.backToClick,
+                               ojComponent: {
+                                   component:'ojButton', 
+                                   icons: {start:'oj-fwk-icon-caret-start oj-fwk-icon'}, 
+                                   label: ''
+                               }">
+        </button>
+        <h3 id="header" class="itemTitle" data-bind="text:specialHeaderTitle"></h3>
+    </div>
+    <div class=" disFlex mt70" data-bind='visible: isApproval()'>
+        <button class="button" data-bind="attr: {id : 0}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '同意'}"></button>
+        <button class="button" data-bind="attr: {id : 1}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '驳回'}"></button>
+        <button class="button" data-bind="attr: {id : 2}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '回退'}"></button>
+        <button class="button" data-bind="attr: {id : 3}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '转交'}"></button>
+    </div>   
+    <button class='mar20 jindu' data-bind="event: {click: jinduClick},style:{marginTop:isApproval()? '20px' :'70px'}">进度</button>
+    <div id='mainmenu' data-bind="ojComponent:{
+                            component:'ojListView',
+                            drillMode:'sliding',
+                            data: dataSource,
+                            item: { template: 'bm-folder_template' }
+                }">
+
+    </div>
+
+<div class=" mar20 zjList" data-bind='visible: isApproval()'>
+    <span class="w75 textR">转交人：</span>
+    <input style='margin:5px;' id="projectwithp-status" data-bind="ojComponent: {component: 'ojSelect', placeholder: '', value: additionalApprovalment, options: dl.getOptionsByName('employees', true)}"/>
+</div>
+<div class=" mar20 zjList"  data-bind='visible: isApproval()'>
+    <span class="w75">审批意见：</span>
+    <textarea id="textarea1" 
+         type="text"
+         class="oj-form-control oj-textarea-nocomp"
+        data-bind="value: processComment">
+    </textarea>    
+</div>
+
+    <div class="mar20 disFlex mt40" data-bind='visible: isApproval()'>
+        <button class="button" data-bind="attr: {id : 0}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '同意'}"></button>
+        <button class="button" data-bind="attr: {id : 1}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '驳回'}"></button>
+        <button class="button" data-bind="attr: {id : 2}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '回退'}"></button>
+        <button class="button" data-bind="attr: {id : 3}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '转交'}"></button>
+    </div>   
+    <button class='mar20 jindu mb40' data-bind="event: {click: jinduClick}">进度</button>
+
+</div>
+
+<script type="text/html" id="bm-folder_template">
+    <ul class='list'>
+        <li>
+            <span class="title">申请人：</span> <span data-bind="text:dl.getLabelByValue('employees', $data['employeeId'])"></span>
+        </li>
+        <li>
+            <span class="title">工号：</span>   <span data-bind="text: $data['employeeNo']" ></span>
+        </li>
+        <li>
+            <span class="title">部门：</span>   <span data-bind="text:dl.getLabelByValue('all_departments', $data['departmentId'])"></span>
+        </li>
+        <li>
+            <span class="title">实际还款日期：</span>   <span data-bind="text: dl.datetimeConverter.format(dl.parseValueFromService($data['startDate']))"></span>
+        </li>
+        <li>
+            <span class="title">还款金额：</span>   <span data-bind="text: $data['fee']"></span>
+        </li>
+         <li>
+            <span class="title">收款方：</span>  <span data-bind="text:dl.getLabelByValue('system_dictionary_69', $data['projectId'])"></span>
+        </li>
+        <li>
+            <span class="title">银行名称：</span>   <span data-bind="text:$data['projectName']"></span>
+        </li>
+         <li>
+            <span class="title">银行账号：</span> <span data-bind="text:$data['projectCode']"></span>
+        </li>
+        <li>
+            <span class="title">付款人：</span> <span data-bind="text:dl.getLabelByValue('employees', $data['parentId'])"></span>
+        </li>
+        <li>
+            <span class="textmany title">备注：</span>   <span data-bind="text:$data['remark']"></span>
+        </li>
+    </ul>
+</script>
+

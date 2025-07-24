@@ -1,0 +1,196 @@
+<div id="main-projecttest">
+    <div id="diagram" data-bind="ojComponent: {
+            component: 'ojDiagram',
+            renderer: dl.nodeRenderer,
+            selectionRenderer: dl.nodeRenderer,
+            hoverRenderer: dl.nodeRenderer,
+            
+            layout: dl.diagramLayout,
+            styleDefaults : diagramDefaults,
+            data: diagramData
+        }, event: {resize: diagramResize}"
+         style="max-width:800px;width:100%; height:300px;margin: auto;">
+    </div>
+    <div id="projecttest-form-container" class="oj-flex">
+        <div id="projecttest-buttons" class="oj-flex-item oj-sm-12 oj-md-4">
+            <div id="projecttest-button-container">
+                <div style="width: 100%;"
+                     data-bind="ojComponent: {
+			component: 'ojConveyorBelt', 
+			orientation: 'horizontal'}" > 
+                    <button id="btn-add-projecttest" data-bind="event: { click: addprojecttestClick},ojComponent: {
+	component:'ojButton',
+	display: 'all',
+	icons: {start:'bootstrap-icon glyphicon glyphicon-plus '}, 
+	label: '添加' }"
+                            style = "margin-left: 10px; width: 100px; " ></button>
+                    <button id="btn-modify-projecttest" data-bind="event: { click: modifyprojecttestClick},ojComponent: {
+	component:'ojButton',
+	display: 'all',
+	icons: {start:'bootstrap-icon glyphicon glyphicon-edit '}, 
+	label: '修改' }"
+                            style = "margin-left: 10px; width: 100px; " ></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="projecttest-container">
+
+
+    </div>
+    <script type="text/html" id="projecttestHeaderTemplate">
+        <!-- ko if: $headerContext.key == 'projectCode' -->
+        <span>项目编号</span>
+        <!-- /ko -->
+
+        <!-- ko if: $headerContext.key == 'projectName' -->
+        <span>项目名称</span>
+        <!-- /ko -->
+
+        <!-- ko if: $headerContext.key == 'englishName' -->
+        <span>项目英文名称</span>
+        <!-- /ko -->
+
+        <!-- ko if: $headerContext.key == 'status' -->
+        <span>项目状态</span>
+        <!-- /ko -->
+
+        <!-- ko if: $headerContext.key == 'designStatus' -->
+        <span>设计状态</span>
+        <!-- /ko -->
+
+        <!-- ko if: $headerContext.key == 'infoCode' -->
+        <span>信息编号</span>
+        <!-- /ko -->
+
+        <!-- ko if: $headerContext.key == 'signCompany' -->
+        <span>拟签约公司</span>
+        <!-- /ko -->
+
+    </script>
+    <script type="text/html" id="projecttestDisplayTemplate">
+        <!-- ko if: $keys.column == 'projectCode' -->
+        <span data-bind="text: $cell.data"></span>
+        <!-- /ko -->
+
+        <!-- ko if: $keys.column == 'projectName' -->
+        <span data-bind="text: $cell.data"></span>
+        <!-- /ko -->
+
+        <!-- ko if: $keys.column == 'englishName' -->
+        <span data-bind="text: $cell.data"></span>
+        <!-- /ko -->
+
+        <!-- ko if: $keys.column == 'status' -->
+        <span data-bind="text: dl.getLabelByValue('domain_values_project_status', $cell.data)"></span>
+        <!-- /ko -->
+
+        <!-- ko if: $keys.column == 'designStatus' -->
+        <span data-bind="text: dl.getLabelByValue('domain_values_design_status', $cell.data)"></span>
+        <!-- /ko -->
+
+        <!-- ko if: $keys.column == 'infoCode' -->
+        <span data-bind="text: $cell.data"></span>
+        <!-- /ko -->
+
+        <!-- ko if: $keys.column == 'signCompany' -->
+        <span data-bind="text: $cell.data"></span>
+        <!-- /ko -->
+
+    </script>
+    <script type="text/html" id="projecttestEditTemplate">
+        <!-- ko if: $cellContext.keys.column == 'projectCode' -->
+        <input data-bind="ojComponent:{ 
+			component:'ojInputText',
+			value: $cell.data,
+			rootAttributes: {class: 'oj-helper-text-align-start'}
+		}">
+        <!-- /ko -->
+
+        <!-- ko if: $cellContext.keys.column == 'projectName' -->
+        <input data-bind="ojComponent:{ 
+			component:'ojInputText',
+			value: $cell.data,
+			rootAttributes: {class: 'oj-helper-text-align-start'}
+		}">
+        <!-- /ko -->
+
+        <!-- ko if: $cellContext.keys.column == 'englishName' -->
+        <input data-bind="ojComponent:{ 
+			component:'ojInputText',
+			value: $cell.data,
+			rootAttributes: {class: 'oj-helper-text-align-start'}
+		}">
+        <!-- /ko -->
+
+        <!-- ko if: $cellContext.keys.column == 'status' -->
+        <select data-bind="ojComponent:{
+			component: 'ojSelect',
+			value: $cell.data,
+			options: dl.getOptionsByName('domain_values_project_status', true),
+			rootAttributes: {class: 'oj-helper-text-align-start'}
+			}">
+        </select>
+        <!-- /ko -->
+
+        <!-- ko if: $cellContext.keys.column == 'designStatus' -->
+        <select data-bind="ojComponent:{
+			component: 'ojSelect',
+			value: $cell.data,
+			options: dl.getOptionsByName('domain_values_design_status', true),
+			rootAttributes: {class: 'oj-helper-text-align-start'}
+			}">
+        </select>
+        <!-- /ko -->
+
+        <!-- ko if: $cellContext.keys.column == 'infoCode' -->
+        <input data-bind="ojComponent:{ 
+			component:'ojInputText',
+			value: $cell.data,
+			rootAttributes: {class: 'oj-helper-text-align-start'}
+		}">
+        <!-- /ko -->
+
+        <!-- ko if: $cellContext.keys.column == 'signCompany' -->
+        <input data-bind="ojComponent:{ 
+			component:'ojInputText',
+			value: $cell.data,
+			rootAttributes: {class: 'oj-helper-text-align-start'}
+		}">
+        <!-- /ko -->
+
+        </script>
+    </div>
+    <div style="display: none; width: 100%; height: 100%;" id="projecttestDialog" title="流程定义"
+         data-bind="ojComponent:{ component: 'ojDialog', initialVisibility: 'hide',rootAttributes: { style: 'width: 100%;  height:auto; min-height:900px;'}}">
+        <div class="oj-dialog-body" style="height:100%; width:100%;">
+            <div id="projecttest-body" data-bind="ojModule: currentEditPage">
+            </div>
+        </div>
+        <div class="oj-dialog-footer">
+            <button id="btn-previous" data-bind="event: { click: previousClick},ojComponent: {
+	component:'ojButton',
+	display: 'all',
+	icons: {start:'oj-fwk-icon-back oj-fwk-icon'}, 
+	label: '上一页' }"
+                    style = "margin-left: 10px; width: 100px; " ></button>
+            <button id="btn-next" data-bind="event: { click: nextClick},ojComponent: {
+	component:'ojButton',
+	display: 'all',
+	icons: {end:'oj-fwk-icon-next oj-fwk-icon'}, 
+	label: '下一页' }"
+                    style = "margin-left: 10px; width: 100px; " ></button>
+            <button id="btn-ok" data-bind="event: { click: okClick},ojComponent: {
+	component:'ojButton',
+	display: 'all',
+	icons: {start:'oj-fwk-icon-status-confirmation oj-fwk-icon'}, 
+	label: '确定' }"
+                    style = "margin-left: 10px; width: 100px; " ></button>
+            <button id="btn-cancel" data-bind="event: { click: cancelClick},ojComponent: {
+	component:'ojButton',
+	display: 'all',
+	icons: {start:'oj-fwk-icon-status-error oj-fwk-icon'}, 
+	label: '取消' }"
+                    style = "margin-left: 10px; width: 100px; " ></button>
+        </div>
+    </div>

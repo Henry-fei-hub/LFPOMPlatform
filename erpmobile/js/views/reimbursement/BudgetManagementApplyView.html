@@ -1,0 +1,215 @@
+
+<div id="cNnavlistcontainer" class="demo-panel-contrast1 oj-contrast-marker">
+    <div class="topHeader" >
+        <button  class="buttonIcon2 arrLeft"
+                 data-bind=" click: dl.backToClick,
+                               ojComponent: {
+                                   component:'ojButton', 
+                                   icons: {start:'oj-fwk-icon-caret-start oj-fwk-icon'}, 
+                                   label: ''
+                               }">
+        </button>
+        <h3 id="header" class="itemTitle" data-bind="text:specialHeaderTitle"></h3>
+    </div>
+
+    <div class="disFlex mt70" data-bind="visible:isApproval()">
+        <button class="button" data-bind="attr: {id : 0}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '同意'}"></button>
+        <button class="button" data-bind="attr: {id : 1}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '驳回'}"></button>
+        <button class="button" data-bind="attr: {id : 2}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '回退'}"></button>
+        <button class="button" data-bind="attr: {id : 3}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '转交'}"></button>
+    </div>  
+    <button class='mar20 jindu' data-bind="event: {click: jinduClick},style:{marginTop:isApproval()? '20px' :'70px'}">进度</button>
+      <div id='mainmenu' data-bind="ojComponent:{
+                            component:'ojListView',
+                            drillMode:'sliding',
+                            data: dataSource,
+                            item: { template: 'folder_template' }
+                }">
+
+    </div>
+    <h3 class="navTitle">预算详情</h3>
+    <div id='mainmenu' data-bind="ojComponent:{
+                            component:'ojListView',
+                            drillMode:'sliding',
+                            data: dataSource1,
+                            item: { template: 'folder_template1' }
+                }">
+
+    </div>
+    <h3 class="navTitle" data-bind='visible: isShowtemplate2()'>关联的物品领用</h3>
+    <oj-list-view id='mainmenu' aria-label="list using collection"  data-bind='visible: isShowtemplate2()'
+              data="[[dataSource2]]" item.renderer="[[oj.KnockoutTemplateUtils.getRenderer('folder_template2')]]">
+    </oj-list-view>
+    <h3 class="navTitle" style='align-items: center;display: flex;' data-bind="visible: isShowFilesButton()">
+         查看附件<i class='iconfont icon-down' style='font-size: 13px;margin-left: 10px; color: #00ccff;' data-bind='click: showFiles'></i>
+    </h3>
+    <h3 class="navTitle"  data-bind='visible: isShowFilesTitle()'>
+        附件详情 <i class='iconfont icon-jiantou' style='font-size: 15px;margin-left: 10px; color: #00ccff;' data-bind='click: hideFiles'></i>
+    </h3>
+    <oj-list-view id='mainmenu' aria-label="list using collection"  data-bind='visible: isShowFiles()'
+              data="[[dataSource5]]" item.renderer="[[oj.KnockoutTemplateUtils.getRenderer('folder_template5')]]">
+    </oj-list-view>
+    
+      <h3 class="navTitle" style='align-items: center;display: flex;' data-bind="visible: __bdType() ==4 && isShowOrderButton()">
+         查看订单详情<i class='iconfont icon-down' style='font-size: 13px;margin-left: 10px; color: #00ccff;' data-bind='click: showOrder'></i>
+    </h3>
+    <h3 class="navTitle"  data-bind='visible: __bdType() ==4 && isShowOrderTitle()'>
+        订单详情 <i class='iconfont icon-jiantou' style='font-size: 15px;margin-left: 10px; color: #00ccff;' data-bind='click: hideOrder'></i>
+    </h3>
+    <oj-list-view id='mainmenu' aria-label="list using collection"  data-bind='visible: isShowOrder()'
+              data="[[dataSource6]]" item.renderer="[[oj.KnockoutTemplateUtils.getRenderer('folder_template6')]]">
+    </oj-list-view>
+</div>
+<div class=" mar20 zjList" data-bind="visible:isApproval()">
+    <span class="w75 textR">转交人：</span>
+    <select id="basicSelect" data-bind="ojComponent: {component: 'ojSelect',
+                                value: additionalApprovalment,
+                                placeholder: '',
+                                rootAttributes: {style:'max-width:18em'}, options: dl.getOptionsByName('employees', true)}">
+    </select>
+</div>
+<div class=" mar20 zjList" data-bind="visible:isApproval()">
+    <span class="w75">审批意见：</span>
+    <textarea id="textarea1" 
+              type="text"
+              class="oj-form-control oj-textarea-nocomp"
+              data-bind="value: processComment">
+
+    </textarea>  
+</div>
+<div class="mar20 disFlex" data-bind="visible:isApproval()">
+    <button class="button" data-bind="attr: {id : 0}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '同意'}"></button>
+    <button class="button" data-bind="attr: {id : 1}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '驳回'}"></button>
+    <button class="button" data-bind="attr: {id : 2}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '回退'}"></button>
+    <button class="button" data-bind="attr: {id : 3}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '转交'}"></button>
+</div>   
+<button class='mar20 jindu mb40' data-bind="event: {click: jinduClick}">进度</button>
+<script type="text/html" id="folder_template">
+    <ul class='list'>
+            <li>
+                <span class="title">预算类型：</span>   <span class="cont" data-bind="text:dl.getLabelByValue('system_dictionary_191',$data.bdType)"></span>
+            </li>
+            <li>
+                <span class="title">预算总金额：</span>   <span data-bind="text:dl.numberConverter.format(dl.parseValueFromService($data.bdTotalAmount))"></span>
+            </li>
+            <li data-bind="visible: $data.bdType==4">
+                <span class="title" style="flex:1.5;">拟外协供应商(公司)：</span>   <span data-bind="text: $data.bdSupplierCompany"></span>
+            </li>
+            <li data-bind="visible:$data.bdType==4">
+                <span class="title" style="flex:1.5;">拟供应商主要负责人：</span>   <span data-bind="text: $data.bdSupplierPerson"></span>
+            </li>
+            <li data-bind="visible:$data.bdType==4">
+                <span class="title">外包类型：</span>   <span class="cont" data-bind="text:dl.getLabelByValue('system_dictionary_206', $data.outSourceType)"></span>
+            </li>
+            <li>
+                <span class="title">申请时间：</span>   <span data-bind="text:dl.datetimeConverter.format(dl.parseValueFromService($data.bdApplyTime))"></span> 
+            </li>
+            <li>
+                <span class="title">预期关闭时间：</span>   <span data-bind="text:dl.datetimeConverter.format(dl.parseValueFromService($data.bdEstimatecloseTime))"></span> 
+            </li>
+            <li>
+                <span class="title">申请人：</span>   <span data-bind="text:dl.getLabelByValue('employees', $data.bdApplyEmployeeId)"></span>
+            </li>
+            <li data-bind="visible:$data.bdType!==4">
+                <span class="title">承接部门：</span>   <span data-bind="text:dl.getLabelByValue('system_dictionary_1', $data.departmentId)"></span>
+            </li>
+            <li>
+                <span class="title">归属公司：</span>   <span data-bind="text:dl.getLabelByValue('system_dictionary_26', $data.companyId)"></span>
+            </li>    
+            <li id='project' data-bind="visible: $data.bdType!==2">
+                <!--行政 项目隐藏-->
+                <span class="title">项目：</span>   <span data-bind="text:dl.getDirectValueFromServer('projects', $data.projectId)"></span>
+            </li>
+            <li data-bind="visible:$data.bdType==4">
+                <!--采买 项目出现-->
+                <span class="title">订单合同金额：</span>   <span data-bind="text: $parent.__sheetAmount"></span>
+            </li>
+            <li data-bind="visible:($data.bdType==1) || ($data.bdType==3)">
+                <span class="title">签约合同金额：</span>   <span data-bind="text: $parent.__signingMoneySum"></span>
+            </li>
+             <li data-bind="visible: $data.outSourceType==2">
+                <span class="title">订单总积分：</span>   <span data-bind="text: $parent.__totalIntegral"></span>
+            </li>
+              <li data-bind="visible:($data.bdType==1) || ($data.bdType==3)">
+                <span class="titlelong">预算百分比(%)：</span>   <span data-bind="text: $parent.__percent"></span>
+            </li>
+            <li>
+                <span class="title">费用承担：</span>   <span data-bind="text: $data.costBearing"></span>
+            </li>
+            <li>
+                <span class="title">备注：</span>   <span class="textmany" data-bind="text: $data.bdRemark"></span>
+            </li>
+        </ul>
+</script>
+<script type="text/html" id="folder_template1">
+    <ul class='list special' data-bind="attr:{id: $data['mainItemId']}">
+        <li>
+            <span class="title">预算类别：</span>   <span data-bind="text:$data.bddType"></span>
+        </li>
+        <li>
+            <span class="title">预算类别金额：</span>   <span data-bind="text:dl.numberConverter.format(dl.parseValueFromService($data.bddAmount))"></span>
+        </li>
+    </ul>
+</script>
+<script type="text/html" id="folder_template2">
+    <li class="appList" data-bind="attr: {id: $data['businessId']}, event:{click:$parent.goDetail}">
+        <div class="oj-flex-bar">
+            <div data-bind="attr: {class: 'oj-flex-bar-start oj-flex-bar oj-navigationlist-item-icon demo-home-icon-24 demo-icon-font-24'}">
+            </div>
+            <div class="oj-flex-bar-middle oj-flex-bar">
+                <div class="oj-flex-bar-middle oj-flex-bar dhsl">       
+                    <span class='first' data-bind="text: dl.getLabelByValue('employees', $data['employeeId'])"></span>
+                    <span class='second' data-bind="text: dl.getLabelByValue('departments', $data['departmentId'])"></span>
+                    <span class='third' data-bind="text: '(' +dl.currencyConverter.format($data['totalPrice'])  +')'"></span>
+                     <span class='third' data-bind="text: $data['reason']"></span>
+                </div>
+            </div>
+            <div class="oj-flex-bar-end oj-sm-align-items-end">
+                <div role="presentation" class="oj-flex-item oj-fwk-icon oj-listview-drill-icon"></div>
+            </div>     
+        </div>
+    </li>
+</script>
+<script type="text/html" id="folder_template5">
+    <ul class='list'>
+        <li>
+            <span class="title">文件名称：</span>   <span data-bind="text:$data.bdAttachmentName"></span>
+        </li>
+        <li>
+            <span class="title">路径：</span> 
+            <!--<span data-bind="text:$data.fileUrl"></span>-->
+                <a class="file" style='flex: 2; overflow: auto; border: none' data-bind=" attr: {href: $data.fileUrl}, text: $data.fileUrl" target="_blank"></a>
+        </li>
+              <li>
+            <span class="title">上传时间：</span>   <span data-bind="text:dl.datetimeConverter.format(dl.parseValueFromService($data.createTime))"></span> 
+        </li>
+        <li>
+            <span class="title">上传备注：</span>   <span data-bind="text:$data.bdUploadRemark"></span>
+        </li>
+    </ul>
+</script>
+<script type="text/html" id="folder_template6">
+    <ul class='list'>
+        <li>
+            <span class="title">合同编号：</span>   <span data-bind="text:$data.contractCode"></span>
+        </li>
+        <li>
+            <span class="title">合同名称：</span>    <span data-bind="text:$data.contractName"></span>
+        </li>
+              <li>
+            <span class="title">项目编号：</span>   <span data-bind="text:$data.projectCode"></span> 
+        </li>
+        <li>
+            <span class="title">签约总金额：</span>   <span data-bind="text:$data.contractPrice"></span>
+        </li>
+         <li>
+            <span class="title">合同状态：</span>    <span data-bind="text:dl.getLabelByValue('system_dictionary_35', $data.contractStatus)"></span>
+        </li>
+              <li>
+            <span class="title">合同签订状态：</span>  <span data-bind="text:dl.getLabelByValue('system_dictionary_139', $data.contractSigningStatus)"></span>
+        </li>
+        <li>
+            <span class="title">合同签订日期：</span>  <span data-bind="text:dl.datetimeConverter.format(dl.parseValueFromService($data.contractDate))"></span> 
+        </li>
+    </ul>
+</script>

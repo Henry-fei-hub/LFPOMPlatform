@@ -1,0 +1,125 @@
+
+<div id="navlistcontainer" class="demo-panel-contrast1 oj-contrast-marker">
+    <div id='rBmain-header'>
+        <button class="buttonIcon2 arrLeft"
+                data-bind=" click: dl.backToClick,
+                               ojComponent: {
+                                   component:'ojButton', 
+                                   icons: {start:'oj-fwk-icon-caret-start oj-fwk-icon'}, 
+                                   label: ''
+                               }">
+        </button>
+        <h3 id="header" class="itemTitle" data-bind="text:dl.headerTitle()"></h3>
+    </div>
+    
+    <div class="disFlex mt70">
+            <button class="button" data-bind="attr: {id : 0}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '同意'}"></button>
+            <button class="button" data-bind="attr: {id : 1}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '驳回'}"></button>
+            <button class="button" data-bind="attr: {id : 2}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '回退'}"></button>
+            <button class="button" data-bind="attr: {id : 3}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '转交'}"></button>
+    </div> 
+    <button class='mar20 jindu ' data-bind="event: {click: jinduClick}">进度</button>
+    <div id='mainmenu' data-bind="ojComponent:{
+                            component:'ojListView',
+                            drillMode:'sliding',
+                            data: dataSource,
+                            item: { template: 'folder_template' }
+                }">
+
+    </div>
+
+</div>
+
+
+<div class=" mar20 zjList">
+    <span class="w75 textR">转交人：</span>
+    <input style='margin:5px;' id="projectwithp-status" data-bind="ojComponent: {component: 'ojSelect', placeholder: '', value: additionalApprovalment, options: dl.getOptionsByName('employees', true)}"/>
+</div>
+<div class=" mar20 zjList">
+    <span class="w75">审批意见：</span>
+    <textarea id="textarea1" 
+         type="text"
+         class="oj-form-control oj-textarea-nocomp"
+        data-bind="value: processComment">
+
+    </textarea>
+        
+</div>
+<div class="mar20 disFlex">
+            <button class="button" data-bind="attr: {id : 0}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '同意'}"></button>
+            <button class="button" data-bind="attr: {id : 1}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '驳回'}"></button>
+            <button class="button" data-bind="attr: {id : 2}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '回退'}"></button>
+            <button class="button" data-bind="attr: {id : 3}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '转交'}"></button>
+</div>
+<button class='mar20 jindu mb40' data-bind="event: {click: jinduClick}">进度</button>
+
+<script type="text/html" id="folder_template">
+    <ul class='list'>
+        <li>
+            <span class="title">申 请 人：</span>   <span data-bind="text:dl.getLabelByValue('employees', $data['employeeId'])"></span>
+        </li>
+        <li>
+            <span class="title">工号：</span>   <span data-bind="text:$data['employeeNo']"></span>
+        </li>
+        <li>
+            <span class="title">部门：</span>   <span data-bind="text:dl.getLabelByValue('all_departments', $data['departmentId'])"></span>
+        </li>
+        <li>
+            <span class="title">外出日期：</span>   
+            <input id="projecttest-completed_time" data-bind="ojComponent: {component: 'ojInputDate', value: $data['startDate'], converter: dl.dateConverter}"/>
+        </li>
+        <li>
+            <span class="title">外出时段：</span> 
+            <select id="basicSelect2" data-bind="ojComponent: {component: 'ojSelect',value: $data['startDateDetail'],rootAttributes: {style:'flex:2;max-width:none;'}, options: dl.getOptionsByName('system_dictionary_73', true)}">
+            </select>
+        </li>
+        <li>
+            <span class="title">预期返回日期：</span>   
+            <input id="projecttest-completed_time" data-bind="ojComponent: {component: 'ojInputDate', value: $data['endDate'], converter: dl.dateConverter}"/>
+        </li>
+        <li>
+            <span class="title">预期返回时段：</span> 
+            <select id="basicSelect2" data-bind="ojComponent: {component: 'ojSelect',value: $data['endDateDetail'],rootAttributes: {style:'flex:2;max-width:none;'}, options: dl.getOptionsByName('system_dictionary_73', true)}">
+            </select>
+        </li>
+        
+        <li>
+            <span class="title">外出天数：</span>   <input data-bind="value:$data['days']"></input>
+        </li>
+        
+        <li>
+            <span class="title">外出类型：</span>   <span data-bind="text:$data['projectTypeName']"></span>
+        </li>
+        
+        <li data-bind="visible:$data['projectType']==1 || $data['projectType']==2">
+            <span class="title">项目编号：</span> 
+            <span data-bind="text:$data['projectCode']"></span>
+        </li>
+        
+        <li data-bind="visible:$data['projectType']==1 || $data['projectType']==2">
+            <span class="title">项目名称：</span> 
+            <span data-bind="text:$data['projectName']"></span>
+        </li>
+        
+        <li data-bind="visible:$data['projectType']==2">
+            <span class="title">项目经理：</span> 
+            <span data-bind="text:dl.getLabelByValue('employees', $data['nextAuditor'])"></span>
+        </li>
+        <li>
+            <span class="title">外访单位：</span>   <input data-bind="value:$data['unit']"></input>
+        </li>
+        <li>
+            <span class="title">外访联系人：</span>   <input data-bind="value:$data['contactPerson']"></input>
+        </li>
+        <li>
+            <span class="title">外访地址：</span>   <input data-bind="value:$data['address']"></input>
+        </li>
+        <li>
+            <span class="title">申请缘由：</span>   <input data-bind="value:$data['reason']"></input>
+        </li>
+        <li>
+            <span class="title">备注信息：</span>   <input class="textmany" data-bind="value:$data['remark']"></input>
+        </li>
+    </ul>
+</script>
+

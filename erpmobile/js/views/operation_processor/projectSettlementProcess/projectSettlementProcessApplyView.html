@@ -1,0 +1,128 @@
+
+<div id="cNnavlistcontainer" class="demo-panel-contrast1 oj-contrast-marker">
+    <div class="topHeader" >
+        <button class="buttonIcon2 arrLeft"
+                data-bind=" click: dl.backToClick,
+                               ojComponent: {
+                                   component:'ojButton', 
+                                   icons: {start:'oj-fwk-icon-caret-start oj-fwk-icon'}, 
+                                   label: ''
+                               }">
+        </button>
+        <h3 id="header" class="itemTitle" data-bind="text:specialHeaderTitle"></h3>
+    </div>
+    <div class=" disFlex mt70" data-bind="visible:isApproval()"> 
+        <button class="button" data-bind="attr: {id : 0}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '同意'}"></button>
+        <button class="button" data-bind="attr: {id : 1}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '驳回'}"></button>
+        <button class="button" data-bind="attr: {id : 2}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '回退'}"></button>
+        <button class="button" data-bind="attr: {id : 3}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '转交'}"></button>
+    </div>   
+    <button class='mar20 jindu' data-bind="event: {click: jinduClick},style:{marginTop:isApproval()? '20px' :'70px'}">进度</button>
+    <div id='mainmenu' data-bind="ojComponent:{
+                            component:'ojListView',
+                            drillMode:'sliding',
+                            data: dataSource,
+                            item: { template: 'ps-folder_template' }
+                }">
+    </div>
+    <h3 class="navTitle">明细</h3>
+    <div id="navlistcontainer3" class="demo-panel-contrast1 oj-contrast-marker">
+        <div id='mainmenu' data-bind="ojComponent:{
+                            component:'ojListView',
+                            drillMode:'sliding',
+                            data: dataSource1,
+                            item: { template: 'ps-folder_template1' }
+                }">
+        </div>
+    </div>
+    <div class=" mar20 zjList" data-bind='visible:isApproval()'>
+        <span class="w75 textR">转交人：</span>
+        <select id="basicSelect" data-bind="ojComponent: {component: 'ojSelect',
+                                value: additionalApprovalment,
+                                placeholder: '',
+                                rootAttributes: {style:'max-width:18em'}, options: dl.getOptionsByName('employees', true)}">
+        </select>
+    </div>
+    <div class=" mar20 zjList" data-bind='visible:isApproval()'>
+        <span class="w75">审批意见：</span>
+        <textarea id="textarea1" 
+                  type="text"
+                  class="oj-form-control oj-textarea-nocomp"
+                  data-bind="value: processComment">
+        </textarea>        
+    </div>
+    <div class="mar20 disFlex mt40" data-bind='visible:isApproval()'>
+        <button class="button" data-bind="attr: {id : 0}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '同意'}"></button>
+        <button class="button" data-bind="attr: {id : 1}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '驳回'}"></button>
+        <button class="button" data-bind="attr: {id : 2}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '回退'}"></button>
+        <button class="button" data-bind="attr: {id : 3}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '转交'}"></button>
+    </div>   
+    <button class='mar20 jindu mb40' data-bind="event: {click: jinduClick}">进度</button>
+</div>
+
+<script type="text/html" id="ps-folder_template">
+    <ul class='list'>
+        <li>
+            <span class="title">可确认积分：</span>   <span data-bind="text:$data['projectAmount']"></span>
+        </li>
+        <li>
+            <span class="title">已结算积分：</span>    <span data-bind="text: $data['sureAmount']"></span>
+        </li>
+        <li>
+            <span class="title">本次结算：</span>   <span data-bind="text:$data['totalAmount']"></span>
+        </li>
+        <li>
+            <span class="titlelong">项目结余积分：</span>   <span data-bind="text:$data['leftAmount']"></span>
+        </li>
+        <li>
+            <span class="titlelong">未结算项目成本：</span>   <span data-bind="text:$data['finalAmount']"></span>
+        </li>
+        <li>
+            <span class="titlelong">已结算项目成本：</span>   <span data-bind="text:$data['totalCost']"></span>
+        </li>
+        <li>
+            <span class="title">已结算次数：</span>   <span data-bind="text:$data['totalCount']"></span>
+        </li>
+        <li>
+            <span class="title">结算日期：</span>    <span data-bind="text: dl.dateConverter.format(dl.parseValueFromService($data['settlementDate']))"></span>
+        </li>
+        <li>
+            <span class="title">结算备注：</span>   <span data-bind="text:$data['remark']"></span>
+        </li>
+    </ul>
+</script>
+<script type="text/html" id="ps-folder_template1">
+    <ul class='list'>
+        <li>
+            <span class="title">员工编号：</span>   <span data-bind="text:$data['employeeNo']"></span>
+        </li>
+        <li>
+            <span class="title">员工姓名：</span>   <span data-bind="text:dl.getLabelByValue('employees', $data['employeeId'])"></span>
+        </li>
+        <li>
+            <span class="titlelonger">本次确认积分比例：</span>   <span data-bind="text:$data['finishPercent']"></span>
+        </li>
+        <li>
+            <span class="titlelong">本次确认积分：</span>   <span data-bind="text:$data['realAmount']"></span>
+        </li>
+        <li>
+            <span class="titlelong">历史确认积分：</span>   <span data-bind="text:$data['sureIntegral']"></span>
+        </li>
+        <li>
+            <span class="titlelong">本次分摊成本：</span>   <span data-bind="text:$data['cost']"></span>
+        </li>
+        <li>
+            <span class="titlelong">历史分摊成本：</span>   <span data-bind="text:$data['projectCost']"></span>
+        </li>
+        <li>
+            <span class="titlelong">最终结算积分：</span>   <span data-bind="text:$data['finalAmount']"></span>
+        </li>
+        <li>
+            <span class="title">在职状态：</span>   <span data-bind="text:dl.getLabelByValue('system_dictionary_11', $data['status'])"></span>
+        </li>
+        <li>
+            <span class="title">工作内容：</span>   <span data-bind="text:$data['workContent']"></span>
+        </li>
+        <h3 ></h3>
+    </ul>
+</script>

@@ -1,0 +1,67 @@
+
+<div id="cNnavlistcontainer" class="demo-panel-contrast1 oj-contrast-marker">
+    <div class="topHeader" >
+        <button class="buttonIcon2 arrLeft"
+                data-bind=" click: dl.backToClick,
+                               ojComponent: {
+                                   component:'ojButton', 
+                                   icons: {start:'oj-fwk-icon-caret-start oj-fwk-icon'}, 
+                                   label: ''
+                               }">
+        </button>
+        <h3 id="header" class="itemTitle" data-bind="text:specialHeaderTitle"></h3>
+    </div>
+
+    <button class='mar20 mt70 jindu' data-bind="event: {click: jinduClick}">进度</button>
+    <div id='mainmenu' data-bind="ojComponent:{
+                            component:'ojListView',
+                            drillMode:'sliding',
+                            data: dataSource,
+                            item: { template: 'folder_template' }
+                }">
+
+    </div>
+</div>
+ 
+<button class='mar20 jindu mb40' data-bind="event: {click: jinduClick}">进度</button>
+
+
+<script type="text/html" id="folder_template">
+     <ul class='list'>
+      <li>
+            <span class="title">调薪员工姓名：</span>   <span data-bind="text:dl.getLabelByValue('employees', $data['employeeId'])"></span>
+        </li>      
+        <li>
+            <span class="title">职务：</span>   <span data-bind="text:dl.getLabelByValue('duties',  $data['dutyId'])"></span>
+        </li>
+        <li>
+            <span class="title">调薪类型：</span>   <span data-bind="text:dl.getLabelByValue('system_dictionary_95', $data['type'])"></span>
+        </li>
+        <li>
+            <span class="title">所在部门：</span>   <span data-bind="text:dl.getLabelByValue('all_departments',$data['departmentId']"></span>
+        </li>
+         <li>
+             <span class="title">调薪日期：</span>    <span data-bind="text: dl.dateConverter.format(dl.parseValueFromService( $data['endDate']))"></span>
+        </li>
+        <li>
+            <span class="title">工号：</span>    <span data-bind="text:  $data['employeeNo']"></span>
+        </li>
+        <li>
+            <span class="title">现薪资：</span>   <span data-bind="text: $data['originalPay']"></span>
+        </li>  
+        <li>
+            <span class="titlelong">本次调薪金额：</span>   <span data-bind="text :$data['severance']"></span>
+        </li>  
+        <li>
+            <span class="titlelong">调整后薪资总额：</span>   <span data-bind="text: $data['monthPay']"><span/>
+        </li>  
+        <li>
+            <span class="titlelong">调薪比例(%)：</span>   <span data-bind="text: $data['subType']"></span>
+        </li>       
+        <li>
+            <span class="title">备注：</span>   <span class="textmany" data-bind="text:$data['remark']"></span>
+        </li>
+    </ul>
+</script>
+
+

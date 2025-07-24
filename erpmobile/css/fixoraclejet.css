@@ -1,0 +1,15 @@
+html:not([dir="rtl"]) .oj-navigationlist-vertical:not(.oj-navigationlist-icon-only) .oj-navigationlist-item {
+    padding-right: 1.07143rem;
+    padding-left: calc(1.07143rem - 10px);
+    padding-right: calc(1.07143rem - 3px);
+    background-color: #fff; 
+}
+.oj-contrast-marker .oj-navigationlist-item-icon {
+    color: lightskyblue;
+}
+body{
+    background-color: #f2f2f2;
+}
+.oj-listview-drill-icon {
+    color: #c0c4c8;
+}

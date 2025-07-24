@@ -1,0 +1,99 @@
+
+<div id="navlistcontainer" class="demo-panel-contrast1 oj-contrast-marker">
+    <div id='rBmain-header'>
+        <button  class="buttonIcon2 arrLeft"
+                data-bind=" click:rebackToClick,
+                               ojComponent: {
+                                   component:'ojButton', 
+                                   icons: {start:'oj-fwk-icon-caret-start oj-fwk-icon'}, 
+                                   label: ''
+                               }">
+        </button>
+        <h3 id="header" class="itemTitle" data-bind="text:dl.headerTitle"></h3>
+    </div>
+
+    <div id='mainmenu' style='margin-top: 70px;'>
+        <ul class="list">
+            <li>
+                <span class="title">申 请 人：</span></br>   <span class="cont" data-bind="text:dl.getLabelByValue('employees', __employeeId())"></span>
+            </li>
+            <li>
+                <span class="title">工号：</span>   <span class="cont" data-bind="text:__employeeNo"></span>
+            </li>
+            <li>
+                <span class="title">部门：</span>   <span class="cont" data-bind="text:dl.getLabelByValue('all_departments', __departmentId())"></span>
+            </li>
+            <li>
+                <span class="title"><i class="star">*</i>外出日期：</span>   
+                <input class="cont" data-bind="ojComponent: {component: 'ojInputDateTime', value: __startDate,placeholder:'', converter: dl.datetimeConverter}"/>
+            </li>
+<!--            <li>
+                <span class="title"><i class="star">*</i>外出时段：</span> 
+                <select class="cont" data-bind="ojComponent: {component: 'ojSelect',value: __startDateDetail,placeholder:'', options: dl.getOptionsByName('system_dictionary_73', false)}">
+                </select>
+            </li>-->
+            <li>
+                <span class="titlelong"><i class="star">*</i>预期返回日期：</span>   
+                <input class="cont" id="projecttest-completed_time" data-bind="ojComponent: {component: 'ojInputDateTime', value: __endDate,placeholder:'', converter: dl.datetimeConverter}"/>
+            </li>
+<!--            <li>
+                <span class="titlelong"><i class="star">*</i>预期返回时段：</span> 
+                <select class="cont" data-bind="ojComponent: {component: 'ojSelect',value: __endDateDetail, placeholder:'', options: dl.getOptionsByName('system_dictionary_73', false)}">
+                </select>
+            </li>   -->
+            <li>
+                <span class="title">外出小时数：</span>   <input class="textmany" data-bind="value: __days()"/>
+            </li>
+            <li>
+                <span class="title"><i class="star">*</i>外出类型：</span> 
+                <input class="cont" data-bind="ojComponent: {component: 'ojSelect', value: __projectType, placeholder:'', optionsKeys: {value : 'projectId', label : 'title'}, options: projectTypes}"/>
+<!--                <select class="cont" id="basicSelect2" data-bind="ojComponent: {component: 'ojSelect',value: __projectType, placeholder:''}">
+                    <option value='1'>项目外出</option>
+                    <option value='2'>前期项目外出</option>
+                    <option value='3'>非项目外出</option>
+                </select>-->
+            </li>
+            <li data-bind="visible:isShow()===1">
+                <span class="titlelong"><i class="star">*</i>请选择项目：</span>
+                <input class="cont" data-bind="ojComponent: {component: 'ojSelect', value: projectSelect, placeholder:'', optionsKeys: {value : 'projectId', label : 'title'}, options: subTypes}"/>
+            </li>
+            <li data-bind="visible:isShow()===2">
+                <span class="titlelong"><i class="star">*</i>请选择前期项目：</span>
+                <input class="cont" data-bind="ojComponent: {component: 'ojSelect', value: preProjectSelect, placeholder: '', optionsKeys: {value : 'preProjectReimbursementNumberId', label : 'preTitle'}, options: preSubTypes}"/>
+            </li>
+            <li data-bind="visible:isShow()===2">              
+                <span class="titlelong"><i class="star">*</i>项目经理：</span>
+                <input class="cont" data-bind="ojComponent: {component: 'ojSelect', value: __nextAuditor,  placeholder: '', optionsKeys: {value : 'employeeId', label : 'employeeName'}, options: nextAuditors}"/>
+            </li>
+            <li>
+                <span class="title">外访单位：</span>   <input class="cont" data-bind="value:__unit" />
+            </li>
+            <li>
+                <span class="title">外访联系人：</span>   <input class="cont" data-bind="value:__contactPerson" />
+            </li>
+            <li>
+                <span class="title">外访地址：</span>   <input class="cont" data-bind="value:__adress" />
+            </li>
+            <li>
+                <span class="title"><i class="star">*</i>申请缘由：</span>   <input class="cont" data-bind="value:__reason" />
+            </li>
+            <li>
+                <span class="title">备注：</span>   <input class="textmany" data-bind="value:__remark" />
+            </li>
+        </ul>
+    </div>
+<!--    <div class="mt20 zjList">-->
+<!--        <span class='tsmain'>温馨提示：以<span class='ts'>外出日期</span>的月份为准，该月份的加班/外出/出差申请必须在次月5日前（包括次月5日）前提出申请-->
+<!--        </span>-->
+<!--    </div>-->
+    <button class='mar20 jindu mb40' data-bind="event: {click: submitClick}">提交</button>
+
+    <div class="mb40 zjList">
+        <span style="font-weight:bold;color:#FF7F27;" data-bind="text:errorMessage"></span>
+    </div>
+</div>
+
+
+
+
+

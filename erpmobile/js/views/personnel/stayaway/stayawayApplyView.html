@@ -1,0 +1,108 @@
+
+<div id="cNnavlistcontainer" class="demo-panel-contrast1 oj-contrast-marker">
+    <div class="topHeader" >
+        <button class="buttonIcon2 arrLeft"
+                data-bind=" click: dl.backToClick,
+                               ojComponent: {
+                                   component:'ojButton', 
+                                   icons: {start:'oj-fwk-icon-caret-start oj-fwk-icon'}, 
+                                   label: ''
+                               }">
+        </button>
+        <h3 id="header" class="itemTitle" data-bind="text:dl.headerTitle()"></h3>
+    </div>
+
+    <div class="disFlex mt70" data-bind='visible: isApproval()'>
+        <button class="button" data-bind="attr: {id : 0}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '同意'}"></button>
+        <button class="button" data-bind="attr: {id : 1}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '驳回'}"></button>
+        <button class="button" data-bind="attr: {id : 2}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '回退'}"></button>
+        <button class="button" data-bind="attr: {id : 3}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '转交'}"></button>
+    </div>   
+    <button class='mar20 jindu' data-bind="event: {click: jinduClick},style:{marginTop:isApproval()? '20px' :'70px'}">进度</button>
+    <div id='mainmenu'>
+        <ul class='list'>
+            <li>
+                <span class="title">申 请 人：</span>   <span data-bind="text:dl.getLabelByValue('employees', __employeeId())"></span>
+            </li>
+            <li>
+                <span class="title">工号：</span>   <span data-bind="text:__employeeNo()"></span>
+            </li>
+            <li>
+                <span class="title">部门：</span>   <span data-bind="text:dl.getLabelByValue('all_departments', __departmentId())"></span>
+            </li>
+            <li>
+                <span class="title">外出日期：</span>   <span data-bind="text: dl.datetimeConverter.format(dl.parseValueFromService(__startDate()))"></span>
+            </li>
+            <li>
+                <span class="titlelong">预期返回日期：</span>   <span data-bind="text: dl.datetimeConverter.format(dl.parseValueFromService(__endDate()))"></span>
+            </li>
+            <li>
+                <span class="title">外出小时数：</span>   <span data-bind="text:__days()"></span>
+            </li>
+            <li>
+                <span class="title">外出类型：</span>   <span data-bind="text:__projectTypeName()"></span>
+            </li>
+            <li data-bind="visible:isShow()==1">
+                <span class="title">项目：</span> 
+                <span data-bind="text: __projectName()"></span>
+            </li>
+
+            <li data-bind="visible:isShow()===2">
+                <span class="title">前期项目：</span> 
+                <span data-bind="text: __projectName()"></span>
+            </li>
+
+            <li data-bind="visible:isShow()===2">
+                <span class="title">项目经理：</span> 
+                <span data-bind="text:dl.getLabelByValue('employees',__nextAuditor())"></span>
+            </li>
+            <li>
+                <span class="title">外访单位：</span>   <span data-bind="text:__unit()"></span>
+            </li>
+            <li>
+                <span class="title">外访联系人：</span>   <span data-bind="text:__contactPerson()"></span>
+            </li>
+            <li>
+                <span class="title">外访地址：</span>   <span data-bind="text:__address()"></span>
+            </li>
+            <li>
+                <span class="title">申请缘由：</span>   <span data-bind="text:__reason()"></span>
+            </li>
+            <li>
+                <span class="title">备注信息：</span>   <span class="textmany" data-bind="text:__remark()"></span>
+            </li>
+        </ul>
+    </div>
+
+</div>
+
+<div class=" mar20 zjList" data-bind='visible: isApproval()'>
+    <span class="w75 textR">转交人：</span>
+    <select id="basicSelect" data-bind="ojComponent: {component: 'ojSelect',
+                                value: additionalApprovalment,
+                                placeholder: '',
+                                rootAttributes: {style:'max-width:18em'}, options: dl.getOptionsByName('employees', true)}">
+    </select>
+</div>
+<div class=" mar20 zjList" data-bind='visible: isApproval()'>
+    <span class="w75">审批意见：</span>
+    <textarea id="textarea1" 
+              type="text"
+              class="oj-form-control oj-textarea-nocomp"
+              data-bind="value: processComment">
+
+    </textarea>
+
+</div>
+<div class="mar20 disFlex" data-bind='visible: isApproval()'>
+    <button class="button" data-bind="attr: {id : 0}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '同意'}"></button>
+    <button class="button" data-bind="attr: {id : 1}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '驳回'}"></button>
+    <button class="button" data-bind="attr: {id : 2}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '回退'}"></button>
+    <button class="button" data-bind="attr: {id : 3}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '转交'}"></button>
+</div>   
+<button class='mar20 jindu mb40' data-bind="event: {click: jinduClick}">进度</button>
+
+
+
+
+

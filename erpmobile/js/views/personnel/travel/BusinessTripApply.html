@@ -1,0 +1,86 @@
+
+<div id="navlistcontainer" class="demo-panel-contrast1 oj-contrast-marker">
+    <div id='rBmain-header'>
+        <button  class="buttonIcon2 arrLeft"
+                data-bind=" click:rebackToClick,
+                               ojComponent: {
+                                   component:'ojButton', 
+                                   icons: {start:'oj-fwk-icon-caret-start oj-fwk-icon'}, 
+                                   label: ''
+                               }">
+        </button>
+        <h3 id="header" class="itemTitle" data-bind="text:dl.headerTitle"></h3>
+    </div>
+
+    <div id='mainmenu' style='margin-top: 70px;'>
+        <ul class="list">
+            <li>
+                <span class="title">申 请 人：</span></br>   <span class="cont" data-bind="text:dl.getLabelByValue('employees', __employeeId())"></span>
+            </li>
+            <li>
+                <span class="title">工号：</span>   <span class="cont" data-bind="text:__employeeNo"></span>
+            </li>
+            <li>
+                <span class="title">部门：</span>   <span class="cont" data-bind="text:dl.getLabelByValue('all_departments', __departmentId())"></span>
+            </li>
+            <li>
+                <span class="title"><i class="star">*</i>归属公司：</span>   
+                <select class="cont" data-bind="ojComponent: {component: 'ojSelect',value: __companyId,placeholder:'', options: dl.getOptionsByName('system_dictionary_26', false)}">
+                </select>
+            </li>
+            <li>
+                <span class="title"><i class="star">*</i>开始日期：</span>   
+                <input class="cont" data-bind="ojComponent: {component: 'ojInputDate', value: __startDate,placeholder:'', converter: dl.dateConverter}"/>
+            </li>
+            <li>
+                <span class="title"><i class="star">*</i>开始时段：</span> 
+                <select class="cont" data-bind="ojComponent: {component: 'ojSelect',value: __startDateDetail,placeholder:'', options: dl.getOptionsByName('system_dictionary_73', false)}">
+                </select>
+            </li>
+            <li>
+                <span class="title"><i class="star">*</i>结束日期：</span>   
+                <input class="cont" id="projecttest-completed_time" data-bind="ojComponent: {component: 'ojInputDate', value: __endDate,placeholder:'', converter: dl.dateConverter}"/>
+            </li>
+            <li>
+                <span class="title"><i class="star">*</i>结束时段：</span> 
+                <select class="cont" data-bind="ojComponent: {component: 'ojSelect',value: __endDateDetail, placeholder:'', options: dl.getOptionsByName('system_dictionary_73', false)}">
+                </select>
+            </li>   
+            <li>
+                <span class="title">天数：</span>   <input class="textmany" data-bind="value: __days"/>
+            </li>
+            <li>
+                <span class="title"><i class="star">*</i>出差地址：</span>   <input class="cont" type='text' data-bind="value: __address"/>
+            </li>
+            <li>
+                <span class="title"><i class="star">*</i>交通工具：</span>   <input class="cont" type='text' data-bind="value: __transportation"/>
+            </li>
+            <li>
+                <span class="titlelong">预计费用(元)：</span>   <input class="cont" type='text' data-bind="value:__fee"/>
+            </li>
+            <li>
+                <span class="title"><i class="star">*</i>申请缘由：</span>   <input class="cont" data-bind="value:__reason" />
+            </li>
+            <li>
+                <span class="title"><i class="star">*</i>行程安排：</span>   <input class="textmany" data-bind="value:__plan" />
+            </li>
+            <li>
+                <span class="title">备注：</span>   <input class="textmany" data-bind="value:__remark" />
+            </li>
+        </ul>
+    </div>
+<!--    <div class="mt20 zjList">-->
+<!--        <span class='tsmain'>温馨提示：以<span class='ts'>开始日期</span>的月份为准，该月份的加班/外出/出差申请必须在次月5日前（包括次月5日）前提出申请-->
+<!--        </span>-->
+<!--    </div>-->
+    <button class='mar20 jindu mb40' data-bind="event: {click: submitClick}">提交</button>
+
+    <div class="mb40 zjList">
+        <span style="font-weight:bold;color:#FF7F27;" data-bind="text:errorMessage"></span>
+    </div>
+</div>
+
+
+
+
+

@@ -1,0 +1,76 @@
+
+<div id="navlistcontainer" class="demo-panel-contrast1 oj-contrast-marker">
+    <div id='rBmain-header'>
+        <button class="buttonIcon2 arrLeft"
+                data-bind=" click: dl.backToClick,
+                               ojComponent: {
+                                   component:'ojButton', 
+                                   icons: {start:'oj-fwk-icon-caret-start oj-fwk-icon'}, 
+                                   label: ''
+                               }">
+        </button>
+        <h3 id="header" class="itemTitle" data-bind="text:dl.headerTitle"></h3>
+    </div>
+
+
+
+    <div id='mainmenu' style='margin-top: 70px;'>
+     <ul class='list' >
+        <li>
+            <span class="title t_gray">客户名称：</span>
+            <input class="cont" data-bind="ojComponent: {component: 'ojInputText', value:__customerName}"/>
+        </li>
+        <li>
+            <span class="title t_gray">项目名称：</span>
+            <input class="cont" data-bind="ojComponent: {component: 'ojInputText', value: __projectName}"/>
+        </li>
+         <li>
+            <span class="title t_gray">会议时间：</span>
+            <input class="cont" data-bind="ojComponent: {component: 'ojInputDateTime', value: __meetTime, converter: dl.datetimeConverter}"/>
+        </li>
+        <li>
+            <span class="title t_gray">会议类型：</span>
+             <input class="cont" data-bind="ojComponent: {component: 'ojSelect', value: __meetType,  options: dl.getOptionsByName('system_dictionary_150', true)}"/>
+        </li>
+       
+        <li>
+            <span class="title t_gray">会议地址：</span>
+             <input class="cont" data-bind="ojComponent: {component: 'ojInputText', value: __meetAddress}"/>
+        </li>
+        <li>
+            <span class="title t_gray">会议主题：</span>
+            <input class="cont" data-bind="ojComponent: {component: 'ojInputText', value: __meetTitle}"/>
+        </li>
+      
+        <li>
+            <span class="title t_gray">联系人：</span>
+            <input class="cont" data-bind="ojComponent: {component: 'ojInputText', value: __contactName}"/>
+        </li>
+     
+        <li>
+            <span class="title t_gray">甲方出席人员：</span>
+            <input class="cont" data-bind="ojComponent: {component: 'ojInputText', value: __theirEmployees}"/>
+        </li>
+        <li>
+            <span class="title t_gray">我方出席人员：</span>
+<!--            <input class="cont" data-bind="ojComponent: {component: 'ojInputText', value: __ourEmployees}"/>-->
+              <input id="basicSelect1" data-bind="ojComponent: {component: 'ojCombobox',multiple: true,value: __ourEmployees,placeholder: '', options: dl.getOptionsByName('employees', false)}"/>
+        </li>
+         <li>
+            <span class="title t_gray">会议目标：</span>
+            <textarea class="cont" data-bind="ojComponent: {component: 'ojInputText', value: __meetTarget}"></textarea>
+        </li>
+        <li>
+            <span class="title t_gray">甲方要求：</span>
+            <textarea class="cont" data-bind="ojComponent: {component: 'ojInputText', value: __theirRequire }"></textarea>
+        </li>
+        <li>
+            <span class="title t_gray">备注：</span>
+            <textarea class="cont" data-bind="ojComponent: {component: 'ojInputText', value: __remark }"></textarea>
+        </li>
+    </ul>
+</div>
+    
+    <button class='smallbut mt8 mb40' data-bind="event: {click: submitClick}">提交</button>
+    <button class='smallbut mt8 mb40' data-bind="event: {click: cancleClick}">取消</button>
+</div>

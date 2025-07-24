@@ -1,0 +1,93 @@
+
+<div id="cNnavlistcontainer" class="demo-panel-contrast1 oj-contrast-marker">
+    <div class="topHeader" >
+        <button class="buttonIcon2 arrLeft"
+                data-bind=" click: dl.backToClick,
+                               ojComponent: {
+                                   component:'ojButton', 
+                                   icons: {start:'oj-fwk-icon-caret-start oj-fwk-icon'}, 
+                                   label: ''
+                               }">
+        </button>
+        <h3 id="header" class="itemTitle" data-bind="text:specialHeaderTitle"></h3>
+    </div>
+    
+    <div class="disFlex mt70" data-bind='visible: isApproval()'>
+            <button class="button" data-bind="attr: {id : 0}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '同意'}"></button>
+            <button class="button" data-bind="attr: {id : 1}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '驳回'}"></button>
+            <button class="button" data-bind="attr: {id : 2}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '回退'}"></button>
+            <button class="button" data-bind="attr: {id : 3}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '转交'}"></button>
+    </div>   
+   <button class='mar20 jindu mt70' data-bind="event: {click: jinduClick},style:{marginTop:isApproval()? '20px' :'70px'}">进度</button>
+    <div id='mainmenu' >
+      <ul class='list'>
+        <li>
+            <span class="title">调薪员工姓名：</span>   <span data-bind="text:dl.getLabelByValue('employees', __employeeId())"></span>
+        </li>      
+        <li>
+            <span class="title">职务：</span>   <span data-bind="text:dl.getLabelByValue('duties', __dutyId())"></span>
+        </li>
+        <li>
+            <span class="title">调薪类型：</span>   <span data-bind="text:dl.getLabelByValue('system_dictionary_95', __type())"></span>
+        </li>
+        <li>
+            <span class="title">所在部门：</span>   <span data-bind="text:dl.getLabelByValue('all_departments', __departmentId())"></span>
+        </li>
+         <li data-bind="visible:updateKey()==3">
+             <span class="title">调薪日期：</span>    <input data-bind="value: dl.datetimeConverter.format(dl.parseValueFromService(__endDate()))"/>
+        </li>
+         <li data-bind="visible:updateKey()!==3">
+             <span class="title">调薪日期：</span>    <span data-bind="text: dl.datetimeConverter.format(dl.parseValueFromService(__endDate()))"></span>
+        </li>
+        <li>
+            <span class="title">工号：</span>    <span data-bind="text: __employeeNo()"></span>
+        </li>
+        <li>
+            <span class="title">现薪资：</span>   <span data-bind="text: __originalPay()"></span>
+        </li>  
+        <li data-bind="visible:updateKey()==3">
+            <span class="titlelong"><i style="color:red;">(modify)</i>本次调薪金额：</span>   <input data-bind="value : __severance"/>
+            <!--若用__severance() 相当于执行了这个函数 成为了普通的 值 -->
+        </li>  
+        <li data-bind="visible: updateKey()!==3">
+            <span class="titlelong">本次调薪金额：</span>   <span data-bind="text : __severance"></span>
+             <!--若用__severance() 相当于执行了这个函数 成为了普通的 值 -->
+        </li>  
+        <li>
+            <span class="titlelong">调整后薪资总额：</span>   <span data-bind="text: __monthPay()"><span/>
+        </li>  
+        <li>
+            <span class="titlelong">调薪比例(%)：</span>   <span data-bind="text: __subType()"></span>
+        </li>  
+        <li>
+            <span class="title">备注：</span>   <span data-bind="text: __remark()"></span>
+        </li>       
+    </ul>
+  </div>
+
+</div>
+
+<div class=" mar20 zjList" data-bind='visible: isApproval()'>
+    <span class="w75 textR">转交人：</span>
+    <input style='margin:5px;' id="projectwithp-status" data-bind="ojComponent: {component: 'ojSelect', placeholder: '', value: additionalApprovalment, options: dl.getOptionsByName('employees', true)}"/>
+</div>
+<div class=" mar20 zjList"  data-bind='visible: isApproval()'>
+    <span class="w75">审批意见：</span>
+    <textarea id="textarea1" 
+         type="text"
+         class="oj-form-control oj-textarea-nocomp"
+        data-bind="value: processComment">
+    </textarea>    
+</div>
+
+<div class="mar20 disFlex"  data-bind='visible: isApproval()'>
+            <button class="button" data-bind="attr: {id : 0}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '同意'}"></button>
+            <button class="button" data-bind="attr: {id : 1}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '驳回'}"></button>
+            <button class="button" data-bind="attr: {id : 2}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '回退'}"></button>
+            <button class="button" data-bind="attr: {id : 3}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '转交'}"></button>
+</div>   
+<button class='mar20 jindu mb40' data-bind="event: {click: jinduClick}">进度</button>
+
+
+
+

@@ -1,0 +1,131 @@
+
+<div id="cNnavlistcontainer" class="demo-panel-contrast1 oj-contrast-marker">
+    <div class="topHeader" >
+        <button  class="buttonIcon2 arrLeft"
+                data-bind=" click: dl.backToClick,
+                               ojComponent: {
+                                   component:'ojButton', 
+                                   icons: {start:'oj-fwk-icon-caret-start oj-fwk-icon'}, 
+                                   label: ''
+                               }">
+        </button>
+        <h3 id="header" class="itemTitle" data-bind="text:specialHeaderTitle"></h3>
+    </div>
+    
+    <div class="disFlex mt70" data-bind="visible:isApproval()">
+            <button class="button" data-bind="attr: {id : 0}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '同意'}"></button>
+            <button class="button" data-bind="attr: {id : 1}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '驳回'}"></button>
+            <button class="button" data-bind="attr: {id : 2}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '回退'}"></button>
+            <button class="button" data-bind="attr: {id : 3}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '转交'}"></button>
+    </div>  
+     <button class='mar20 jindu' data-bind="event: {click: jinduClick},style:{marginTop:isApproval()? '20px' :'70px'}">进度</button>
+     <div id='mainmenu'>
+        <ul class='list'>
+            <li>
+                <span class="title">预算类型：</span> 
+                <oj-select-one style='flex:2;' value="[[__bdType]]" options="[[bdTypeData]]" placeholder=''  on-value-changed="[[valueChangedHandler]]">
+                </oj-select-one>
+            </li>
+            <li>
+                <span class="title">预算总金额：</span>   <input class='totalAmountInput' data-bind="textInput:dl.numberConverter.format(dl.parseValueFromService(__bdTotalAmount()))"/>
+            </li>
+            <li>
+                <span class="title">申请时间：</span>   <span data-bind="text:dl.datetimeConverter.format(dl.parseValueFromService(__bdApplyTime()))"></span> 
+            </li>
+            <li>
+                <span class="title">预期关闭时间：</span> 
+                <input id="projecttest-completed_time" data-bind="ojComponent: {component: 'ojInputDateTime', value:dl.parseValueFromService( __bdEstimatecloseTime()), converter: dl.dateTimeConverter}"/>
+            </li>
+            <li>
+                <span class="title">申请人：</span>   <span data-bind="text:dl.getLabelByValue('employees', __bdApplyEmployeeId())"></span>
+            </li>
+            <li>
+                <span class="title">承接部门：</span>  
+                      <!--新写法-->
+                <oj-select-one id="basicSelect" style='flex:2;'  value="[[__departmentId]]" options="[[departmentData]]" placeholder=''>
+                </oj-select-one>
+            </li>
+            <li>
+                <span class="title">归属公司：</span> 
+                <oj-select-one id="basicSelect" style='flex:2;'  value="[[__companyId]]" options="[[companyData]]" placeholder=''>
+                </oj-select-one>
+            </li> 
+            <li data-bind="visible:isshow()">
+                 <!--采买 项目出现-->
+                <span class="title">签约合同金额：</span>   <span data-bind="text:dl.numberConverter.format(dl.parseValueFromService(__signingMoneySum()))"></span>
+            </li> 
+            <li data-bind="visible:isshow()">
+                  <!--采买 项目出现-->
+                <span class="title">项目：</span>
+<!--                <oj-select-one id="basicSelect" style='flex:2;'  value="[[__projectId]]" options="[[projectArr]]" placeholder=''>
+                </oj-select-one>-->
+                 <span data-bind="text:dl.getDirectValueFromServer('projects', __projectId()) "></span>
+            </li>
+            <p class='attentionText'>手机端暂不能修改项目，如需要请移至pc端进行审批</p>
+            <li data-bind="visible:isshow()">
+                
+                 <!--采买 项目出现-->
+                <span class="titlelong">预算百分比(%)：</span>   <input class='percentInput' data-bind="textInput: __percent"/>
+            </li>
+            <li>
+                <span class="title">费用承担：</span>  
+                 <oj-combobox-one id="basicSelect" style='flex:2;'  value="[[__costBearing]]" options="[[costBearingArr]]" placeholder=''>
+                </oj-combobox-one>
+            </li>  
+            <li>
+                <span class="title">备注：</span>   <input class="textmany" data-bind="value: __bdRemark"/>
+            </li>
+        </ul>
+     </div>
+    <h3 class="navTitle">预算详情</h3>
+    <div id='mainmenu' data-bind="ojComponent:{
+                            component:'ojListView',
+                            drillMode:'sliding',
+                            data: dataSource1,
+                            item: { template: 'folder_template1' }
+                }">
+
+    </div>
+</div>
+<div class=" mar20 zjList" data-bind="visible:isApproval()">
+    <span class="w75 textR">转交人：</span>
+    <select id="basicSelect" data-bind="ojComponent: {component: 'ojSelect',
+                                value: additionalApprovalment,
+                                placeholder: '',
+                                rootAttributes: {style:'max-width:18em'}, options: dl.getOptionsByName('employees', true)}">
+    </select>
+</div>
+<div class=" mar20 zjList" data-bind="visible:isApproval()">
+    <span class="w75">审批意见：</span>
+    <textarea id="textarea1" 
+         type="text"
+         class="oj-form-control oj-textarea-nocomp"
+        data-bind="value: processComment">
+
+    </textarea>  
+</div>
+<div class="mar20 disFlex" data-bind="visible:isApproval()">
+            <button class="button" data-bind="attr: {id : 0}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '同意'}"></button>
+            <button class="button" data-bind="attr: {id : 1}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '驳回'}"></button>
+            <button class="button" data-bind="attr: {id : 2}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '回退'}"></button>
+            <button class="button" data-bind="attr: {id : 3}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '转交'}"></button>
+</div>   
+<button class='mar20 jindu mb40' data-bind="event: {click: jinduClick}">进度</button>
+
+<script type="text/html" id="folder_template1">
+    <ul class='list special' data-bind="attr:{id: $data['mainItemId']}">
+        <li>
+            <span class="title">预算类别：</span>  
+<!--            <select id="basicSelect2" class="cont" data-bind="ojComponent: {component: 'ojSelect',value: $parent.__bddType,rootAttributes: {style:'flex:2;max-width:none;'}, options: $parent.bddTypeArr}">
+            </select>-->
+<!--            <oj-select-one id="basicSelect" style='flex:2;'  value="{{$parent.__bddType}}" options="[[$parent.bddTypeArr]]" placeholder=''>
+            </oj-select-one>-->
+            <oj-combobox-one id="combobox" style='flex:2;' value="{{$parent.__bddType}}" options="[[$parent.bddTypeArr]]" placeholder=''>
+            </oj-combobox-one>
+        </li>
+        <li>
+            <span class="title">预算类别金额：</span>  
+            <span data-bind="text:dl.numberConverter.format(dl.parseValueFromService($data['bddAmount']))"></span>
+        </li>
+    </ul>
+</script>

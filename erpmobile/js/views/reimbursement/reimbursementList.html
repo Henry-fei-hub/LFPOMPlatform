@@ -1,0 +1,35 @@
+<div id='rBmain-header'>
+    <button class="buttonIcon2 arrLeft"
+            data-bind=" click: dl.backToClick,
+                               ojComponent: {
+                                   component:'ojButton', 
+                                   icons: {start:'oj-fwk-icon-caret-start oj-fwk-icon'}, 
+                                   label: ''
+                               }">
+    </button>
+    <h3 id="header" class="itemTitle" data-bind="text:dl.headerTitle"></h3>
+</div>
+<oj-list-view id='myListview' class="normal_approvalment fullSpringHeight" aria-label="list using collection" 
+              data="[[dataSource]]" item.renderer="[[oj.KnockoutTemplateUtils.getRenderer('folder_template')]]" scroll-policy="loadMoreOnScroll"  scroll-policy-options.fetch-size= "[[dl.fetchSize]]"  style="overflow-x:hidden;">
+</oj-list-view>
+<script type="text/html" id="folder_template">
+    <li class="appList" data-bind="attr: {id: $data['businessId']}, event:{click:$parent.iClicked}">
+        <div class="oj-flex-bar">
+            <div data-bind="attr: {class: 'oj-flex-bar-start oj-flex-bar '+dl.isNullOrUndefined($data['iconClass']) ? 'oj-navigationlist-item-icon demo-home-icon-24 demo-icon-font-24': $data['iconClass']}">
+            </div>
+            <div class="oj-flex-bar-middle oj-flex-bar">
+                <div class="oj-flex-bar-middle oj-flex-bar dhsl">       
+                    <span class='first' data-bind="text: dl.isNullOrUndefined($data['applicant']) ? dl.getLabelByValue('employees', $data['employeeId']) :dl.getLabelByValue('employees', $data['applicant'])"></span>
+                    <span class='second' data-bind=" visible:$parent.isShow()===1 , text:'('+ dl.currencyConverter.format($data[$parent.amountName()]) +')'"></span>
+                    <span class='third' data-bind="visible:$parent.isShow11()===0 ,text: $data['businessName']"></span>
+                    <span class='third' data-bind=" visible:$parent.isShow11()===1 ,text: $data['title']"></span>
+                    <span class='third' data-bind=" visible:$parent.isShow()===2 ,text:dl.getLabelByValue('employees', $data['bdApplyEmployeeId'])+ dl.getLabelByValue('system_dictionary_191', $data['bdType'])"></span>
+                </div>
+            </div>
+            <div class="oj-flex-bar-end oj-sm-align-items-end">
+                <div role="presentation" class="oj-flex-item oj-fwk-icon oj-listview-drill-icon"></div>
+            </div>     
+        </div>
+    </li>
+</script>
+

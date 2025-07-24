@@ -1,0 +1,34 @@
+<div id='rBmain-header'>
+    <button  class="buttonIcon2 arrLeft"
+             data-bind=" click: dl.backToClick,
+                               ojComponent: {
+                                   component:'ojButton', 
+                                   icons: {start:'oj-fwk-icon-caret-start oj-fwk-icon'}, 
+                                   label: ''
+                               }">
+    </button>
+    <h3 id="header" class="itemTitle" data-bind="text:dl.headerTitle"></h3>
+</div>
+<div data-bind="visible:showBut()">
+    <button id='but' class='mar20 mt70 shenpi' data-bind="event: {click: readToggetherClick}">一键标记已读</button>
+</div>
+<oj-list-view class="isnormal_approvalment fullSpringHeight" aria-label="list using collection" data="[[dataSource]]"  data-bind="style:{marginTop : showBut()? 0 : '70px'}"
+              item.renderer="[[oj.KnockoutTemplateUtils.getRenderer('folder_template')]]" scroll-policy="loadMoreOnScroll" scroll-policy-options.fetch-size= "[[dl.fetchSize]]"  style="overflow-x:hidden;">
+</oj-list-view>
+<script type="text/html" id="folder_template">
+    <li class="appList" data-bind="attr: {id: $data['businessId']}, event:{click:$parent.iClicked}">
+        <div class="oj-flex-bar">
+            <div data-bind="attr: {class: 'oj-flex-bar-start oj-flex-bar '+dl.isNullOrUndefined($data['iconClass']) ? 'oj-navigationlist-item-icon demo-home-icon-24 demo-icon-font-24': $data['iconClass']}">
+            </div>
+            <div class="oj-flex-bar-middle oj-flex-bar">
+                <div class="oj-flex-bar-middle oj-flex-bar dhsl">       
+                    <span class='first' data-bind="text:  dl.getLabelByValue('employees', $data['employeeId'])"></span>
+                </div>
+            </div>
+            <div class="oj-flex-bar-end oj-sm-align-items-end">
+                <div role="presentation" class="oj-flex-item oj-fwk-icon oj-listview-drill-icon"></div>
+            </div>     
+        </div>
+
+    </li>
+</script>

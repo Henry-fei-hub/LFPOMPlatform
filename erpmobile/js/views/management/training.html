@@ -1,0 +1,144 @@
+<div id="navlistcontainer" class="demo-panel-contrast1 oj-contrast-marker">
+    <div id='rBmain-header'>
+        <button class="buttonIcon2 arrLeft"
+                data-bind=" click:rebackToClick,
+                               ojComponent: {
+                                   component:'ojButton', 
+                                   icons: {start:'oj-fwk-icon-caret-start oj-fwk-icon'}, 
+                                   label: ''
+                               }">
+        </button>
+        <h3 id="header" class="itemTitle" data-bind="text:dl.headerTitle"></h3>
+    </div>
+
+    <div id='mainmenu' class="trainingDiv" style='margin-top: 70px;'>
+        <ul class="list">
+            <li>
+                <span class="title">主   题：</span>
+                <span class="cont" data-bind="text: __sub"></span>
+            </li>
+            <li>
+                <span class="title">主 讲 人：</span>
+                <span class="cont" data-bind="text:__compere"></span>
+            </li>
+            <li>
+                <span class="title">时    间：</span>
+                <span class="cont" data-bind="text: __date"></span>
+            </li>
+            <li>
+                <span class="title">所属部门：</span>
+                <span class="cont" data-bind="text: dl.getLabelByValue('departments', __departmentId())"></span>
+            </li>
+            <li>
+                <span class="title">培训地点：</span>
+                <span class="cont" data-bind="text: __site"></span>
+            </li>
+            <li>
+                <span class="title">课程积分：</span>
+                 <span class="cont" data-bind="text: __courseScore"></span>
+            </li>
+        </ul>
+    </div>    
+     <div id='othermenu' class="trainingDiv" data-bind="visible: ulShow()>0">
+         <oj-validation-group id="tracker">
+            <oj-form-layout label-edge="start" id="fl1">
+                <ul class="list">
+                    <h3 class="navTitle">请完成课程评价</h3>
+                    <li>
+                        <span class="title">培训内容：</span>
+                        <span class="cont">
+                            <oj-input-number id="input-number-range-validator"
+                                    value="{{__trainingContent}}"
+                                    min="0"
+                                    max="100"
+                                    step="10">
+                            </oj-input-number>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="title">授课评价：</span>
+                        <span class="cont">
+                            <oj-input-number id="input-number-range-validator"
+                                    value="{{__courseEvaluation}}"
+                                    min="0"
+                                    max="100"
+                                    step="10">
+                            </oj-input-number>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="title">工作指导：</span>
+                        <span class="cont">
+                            <oj-input-number id="input-number-range-validator"
+                                    value="{{__guidingFunction}}"
+                                    min="0"
+                                    max="100"
+                                    step="10">
+                            </oj-input-number>
+                        </span>
+                    </li>
+                      <li>
+                        <span class="title">培训方式：</span>
+                        <span class="cont">
+                            <oj-input-number id="input-number-range-validator"
+                                    value="{{__trainingMethod}}"
+                                    min="0"
+                                    max="100"
+                                    step="10">
+                            </oj-input-number>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="title">培训频率：</span>
+                        <span class="cont">
+                            <oj-select-one value="{{__trainingFrequency}}">
+                                <oj-option>请选择培训频率</oj-option>
+                                <oj-option value="1">每月一次</oj-option>
+                                <oj-option value="2">每季一次</oj-option>
+                                <oj-option value="3">每半年一次</oj-option>
+                                <oj-option value="4">每年一次</oj-option>
+                            </oj-select-one>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="title">培训时长：</span>
+                        <span class="cont">
+                            <oj-select-one value="{{__trainingPeriod}}">
+                                <oj-option>请选择培训时长</oj-option>
+                                <oj-option value="1">半小时</oj-option>
+                                <oj-option value="2">1-2小时</oj-option>
+                                <oj-option value="3">3-4小时</oj-option>
+                                <oj-option value="4">1天</oj-option>
+                            </oj-select-one>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="title">业余时间培训：</span>
+                        <span class="cont">
+                            <oj-select-one value="{{__spareTimeTraining}}">
+                                <oj-option>请选择是否接受业余时间培训</oj-option>
+                                <oj-option value="1">接受</oj-option>
+                                <oj-option value="2">不接受</oj-option>
+                                <oj-option value="3">看课程</oj-option>
+                            </oj-select-one>
+                        </span>
+                    </li>
+                </ul>
+            </oj-form-layout>
+      </oj-validation-group>
+    </div>    
+    <button class='mt30 jindu' style='margin-top:20px;' data-bind="click: signInClick,visible:ulShow()<0">签到</button>
+    <button class='mt30 jindu' style='margin-top:20px;'  data-bind="click: signOutClick,visible:ulShow()>0">签退</button>
+    <p data-bind="visible: ulShow()==0" class='attention'>温馨提示：您已经签退成功</p>
+</div>    
+<style>
+    oj-form-layout:not(.oj-complete){
+            visibility: visible;
+    }
+</style>
+
+
+
+
+
+

@@ -1,0 +1,78 @@
+
+<div id="oj-hybrid-padding"  >
+    <div id='rBmain-header'>
+        <button class="buttonIcon2 arrLeft"
+                data-bind=" click: dl.backToClick,
+                               ojComponent: {
+                                   component:'ojButton', 
+                                   icons: {start:'oj-fwk-icon-caret-start oj-fwk-icon'}, 
+                                   label: ''
+                               }">
+        </button>
+        <h3 id="header" class="itemTitle" data-bind="text:dl.headerTitle"></h3>
+    </div> 
+    <div id='mainmenu' data-bind="ojComponent:{
+        component:'ojListView',
+        drillMode:'sliding',
+        data: dataSource,
+        item: { template: 'folder_template' }
+    }">
+    </div>
+
+</div>
+
+<script type="text/html" id="folder_template">
+    <ul class='list'style="margin-top: 70px" data-bind="attr:{id: $data['employeeDayCheckId']}">
+        <li>
+            <span class="title t_gray">考勤日期：</span><span data-bind="text : dl.dateConverter.format(dl.parseValueFromService($data['recordDate']))"></span>
+        </li>
+        <li>
+            <span class="title t_gray">班次：</span><span data-bind="text : dl.getLabelByValue('shift_manages', $data['shiftManageId'])"></span>
+        </li>
+        <li>
+            <span class="title t_gray">上班：</span><span data-bind="text : dl.timeConverter.format(dl.parseValueFromService($data['checkin']))"></span>
+        </li>
+        <li>
+            <span class="title t_gray">下班：</span><span data-bind="text : dl.timeConverter.format(dl.parseValueFromService($data['checkout']))"></span>
+        </li>
+<!--        <li>
+            <span class="title t_gray">迟到5分钟：</span><span data-bind="text : $data['lateLeave5m']"></span>
+        </li>
+        <li>
+            <span class="title t_gray">迟到10分钟：</span><span data-bind="text : $data['lateLeave10m']"></span>
+        </li>
+        <li>
+            <span class="title t_gray">迟到30分钟：</span><span data-bind="text : $data['lateLeave30m']"></span>
+        </li>
+        <li>
+            <span class="title t_gray">扣款迟到：</span><span data-bind="text : $data['lateLeave']"></span>
+        </li>
+        <li>
+            <span class="title t_gray">事假天数：</span><span data-bind="text : $data['thingLeaveDay']"></span>
+        </li>
+        <li>
+            <span class="title t_gray">事假小时：</span><span data-bind="text : $data['thingLeavehours']"></span>
+        </li>
+        <li>
+            <span class="title t_gray">病假天数：</span><span data-bind="text : $data['illLeaveDays']"></span>
+        </li>
+        <li>
+            <span class="title t_gray">病假小时：</span><span data-bind="text : $data['illLeaveHours']"></span>
+        </li>
+        <li>
+            <span class="title t_gray">其他假类天数：</span><span data-bind="text : $data['otherLeaveDays']"></span>
+        </li>
+        <li>
+            <span class="title t_gray">旷工天数：</span><span data-bind="text : $data['absenceDays']"></span>
+        </li>
+        <li>
+            <span class="title t_gray">应到天数：</span><span data-bind="text : $data['shouldDays']"></span>
+        </li>
+        <li>
+            <span class="title t_gray">实到天数：</span><span data-bind="text : $data['factDays']"></span>
+        </li>-->
+        <li>
+            <span class="title t_gray">考勤状态：</span><span data-bind="text : dl.getLabelByValue('system_dictionary_91', $data['status'])"></span>
+        </li>
+    </ul>
+</script>

@@ -1,0 +1,99 @@
+
+<div id="oj-hybrid-padding"  style='position:relative;'>
+    <div id='rBmain-header'>
+        <button class="buttonIcon2 arrLeft"
+                data-bind=" click: dl.backToClick,
+                               ojComponent: {
+                                   component:'ojButton', 
+                                   icons: {start:'oj-fwk-icon-caret-start oj-fwk-icon'}, 
+                                   label: ''
+                               }">
+        </button>
+        
+        <h3 id="header" class="itemTitle" data-bind="text:dl.headerTitle"></h3>
+    </div> 
+    <div id='mainmenu' style='margin-top: 70px;'>
+          <ul class='list'>
+        <li>
+            <span class="title"><i class="star">*</i>报备人：</span>  <input data-bind="ojComponent: {component: 'ojInputText', value:dl.getLabelByValue('employees', __applyEmployeeId())}"/>
+        </li>
+       <li>
+            <span class="title"><i class="star">*</i>客户名称：</span>   
+            <input id="basicSelect1" data-bind="ojComponent: {component: 'ojInputSearch',value: __customerName, placeholder: '',rootAttributes: {style:'flex:2;max-width:none;'},optionsKeys: {value : 'customerName', label : 'customerName'}, options: dl.getOptionsByName('customers_name', false)}"/>
+        </li>
+      <li>
+            <span class="title"><i class="star">*</i>项目名称：</span> 
+            <input class="textmany" data-bind="ojComponent: {component: 'ojInputText', value: __projectName}"/>
+      </li>
+      <li>    
+             <span class="title"><i class="star">*</i>项目地址(省)：</span><input id="basicSelect1" data-bind="ojComponent: {component: 'ojSelect',value: __province, placeholder: '', rootAttributes: {style:'flex:2;max-width:none;'}, options: dl.getOptionsByName('provinces_names', false)}"/>
+      </li>
+      <li style='border: none;'>    
+            <span class="title"><i class="star">*</i>项目地址(市)：</span>  <input id="basicSelect1" data-bind="ojComponent: {component: 'ojSelect',value: __city, placeholder: '',rootAttributes: {style:'flex:2;max-width:none;'}, options: cityArr}"/>
+      </li>
+      <li>    
+            <span class="title">区域：</span> <input data-bind="ojComponent: {component: 'ojInputText', value: showRegion}" readonly/>
+      </li>
+      <li > 
+        <span class="title"><i class="star">*</i>详细地址：</span>  <input data-bind="ojComponent: {component: 'ojInputText', value: __detailAddress}"/>
+      </li>
+       <li>
+            <span class="title"><i class="star">*</i>联系人：</span>  <input data-bind="ojComponent: {component: 'ojInputText', value: __contactName}"/>
+        </li>
+        <li>
+            <span class="title"><i class="star">*</i>职位：</span>  <input data-bind="ojComponent: {component: 'ojInputText', value: __grade}"/>
+        </li>
+        <li>
+            <span class="title"><i class="star">*</i>联系电话：</span>  <input data-bind="ojComponent: {component: 'ojInputText', value: __contactPhone}"/>
+        </li>
+      <li>
+        <span class="title"><i class="star">*</i>业务类别：</span> 
+        <input id='combobox' class="cont" data-bind="ojComponent: {component: 'ojCombobox', multiple: true,  value: __businessTypes, optionsKeys: {value : 'businessCategoryId', label : 'businessCategoryName'}, options:  businessTypes }"/>                
+   
+      </li>  
+      <li>
+            <span class="title">建筑面积(㎡)：</span>  <input class="textmany" data-bind="ojComponent: {component: 'ojInputText', value: __totalBuildingAreas}"/>
+      </li> 
+      <li>
+            <span class="title">设计面积(㎡)：</span>  <input class="textmany" data-bind="ojComponent: {component: 'ojInputText', value: __estimateTheDesignAreas}"/>
+      </li>
+      <li>
+            <span class="title"><i class="star">*</i>项目信息来源：</span> 
+            <select id="basicSelect2" data-bind="ojComponent: {component: 'ojSelect',value: __projectOrigination, placeholder: '',rootAttributes: {style:'flex:2;max-width:none;'}, options: dl.getOptionsByName('system_dictionary_156', false)}">
+            </select>
+       </li> 
+       <li>
+            <span class="title">比选形式：</span> 
+            <select id="basicSelect2" data-bind="ojComponent: {component: 'ojSelect',value: __comparisonForm, placeholder: '',rootAttributes: {style:'flex:2;max-width:none;'}, options: dl.getOptionsByName('system_dictionary_168', false)}">
+            </select>
+       </li>
+       <li>
+          <oj-label id="mainlabelid"><i class="star">*</i>运营组分配项目 :</oj-label>
+          <oj-radioset id="radiosetBasicDemoId" labelled-by="mainlabelid"
+                       value="{{__isOperationDepartment}}" >
+              <oj-bind-for-each data="[[colorOptions]]">
+                <template>
+                  <oj-option :id="[[$current.data.id]]" value="[[$current.data.value]]">
+                    <oj-bind-text value="[[$current.data.color]]"></oj-bind-text>
+                  </oj-option>
+                </template>
+              </oj-bind-for-each>
+            </oj-radioset>
+       </li>
+       <li>
+            <span class="title">备注：</span>  <input class="textmany" data-bind="ojComponent: {component: 'ojInputText', value: __remark}"/>
+      </li>
+    </ul>
+  </div>   
+<div class=" mar20 zjList">
+    <span style="font-weight:bold;color:#FF7F27;" data-bind="text:errorMessage"></span>
+</div>
+<button class='mar20 jindu mb40' data-bind="event: {click: submitClick}">提交</button>
+</div>
+
+<style>
+.textmany {
+    height: 43px;
+    
+}
+</style>

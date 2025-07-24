@@ -1,0 +1,14 @@
+
+.oj-listview-container {
+    overflow: visible;
+}
+.oj-listview-item{
+    padding: 0;
+    border-top:none;
+}
+.special{
+border-bottom: 1px solid #ccc;
+}
+#mainmenu .special:last-child{
+border-bottom: none;
+}

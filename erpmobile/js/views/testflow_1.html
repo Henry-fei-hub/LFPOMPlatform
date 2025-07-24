@@ -1,0 +1,50 @@
+<div id='diagram-container'>
+    <div id='sCmain-header'>
+        <button class="buttonIcon2 arrLeft"
+                data-bind=" click: dl.backToClick,
+                               ojComponent: {
+                                   component:'ojButton', 
+                                   icons: {start:'oj-fwk-icon-caret-start oj-fwk-icon'}
+                               }">
+        </button>
+        <h3 id="header" class="itemTitle" >123</h3>
+    </div>
+    <div style=" width: 30%; height: 100%; float: left;border:1px solid #d6dfe6;">
+        <div style="color: #535353; font-weight: bolder;">Diagram A</div>
+        <div id="diagram1" data-bind="ojComponent: {
+              component: 'ojDiagram',
+              layout: gridLayout,
+              data: data1,
+              nodeProperties:function(data){return data},
+              dnd: {
+                drag: {nodes: {dataTypes: ['text/nodes1']}},
+                drop: {background: {dataTypes: ['text/nodes1','text/nodes2'], drop: onDrop1}}
+              }
+          }"
+             style="max-width: 500px;height: 300px;">
+        </div>  
+    </div>
+    <div style=" width: 68%; height: 100%; float: left;border:1px solid #d6dfe6;">
+        <div style="color: #535353; font-weight: bolder;">Diagram B</div>
+        <div id="diagram2" data-bind="ojComponent: {
+              component: 'ojDiagram',
+              layout: dropLayout,
+              data: data2,
+              nodeProperties:function(data){return data},
+              linkProperties:function(data){return data},
+              minZoom:1, maxZoom:1,
+              panning:'auto',
+              dnd: {
+                drag: {nodes: {dataTypes: ['text/nodes2']}},
+                drop: {
+                  background: {dataTypes: ['text/nodes1','text/nodes2'], drop: onDrop2},
+                  nodes:    {dataTypes: ['text/nodes1','text/nodes2'], drop: onDrop2},
+                  links:    {dataTypes: ['text/nodes1','text/nodes2'], drop: onLinkDrop}
+                }
+              }
+          }"
+             style="max-width: 500px; height: 300px;">
+        </div>
+    </div>
+    <br clear="both"/>
+</div>

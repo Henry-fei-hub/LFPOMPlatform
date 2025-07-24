@@ -1,0 +1,34 @@
+<div id='rBmain-header'>
+    <button class="buttonIcon2 arrLeft"
+            data-bind=" click: dl.backToClick,
+                               ojComponent: {
+                                   component:'ojButton', 
+                                   icons: {start:'oj-fwk-icon-caret-start oj-fwk-icon'}
+                               }">
+    </button>
+    <h3 id="header" class="itemTitle" data-bind="text:'选择项目进行预分配'"></h3>
+</div>
+<div id="mPnavlistcontainer" class="demo-panel-contrast1 oj-contrast-marker" >
+    <oj-list-view class="normal_approvalment fullSpringHeight" aria-label="list using collection" 
+                  data="[[dataSource]]" item.renderer="[[oj.KnockoutTemplateUtils.getRenderer('folder_template')]]" scroll-policy="loadMoreOnScroll" scroll-policy-options.fetch-size= "[[dl.fetchSize]]"  style="overflow-x:hidden;">
+    </oj-list-view>
+</div>
+
+<script type="text/html" id="folder_template">
+    <li class="appList" data-bind="attr: {id: $data['projectId']}, event:{click:$parent.iClicked}, style:{ color:$data['count']>0?'red':''},visible:$data['count']>0">
+        <div class="oj-flex-bar">
+            <div data-bind="attr: {class: 'oj-flex-bar-start oj-flex-bar oj-navigationlist-item-icon demo-person-icon-24 demo-icon-font-24 '}, style:{ color:$data['count']>0?'red':''}"> </div>
+            <div class="oj-flex-bar-middle oj-flex-bar">
+                <div style='width:340px;overflow: hidden;text-overflow: ellipsis; white-space: nowrap;padding-left:7px;'>
+                    <span class="" data-bind="text:dl.getLabelByValue('employees',  $data['projectManageId'])"></span>
+                    <span class="" data-bind="text: $data['sheetName']"></span>
+                    <span class=""  data-bind="text:'('+$data['sheetCode']+')'"></span>
+                </div>
+            </div>
+            <div class="oj-flex-bar-end oj-sm-align-items-end">
+                <div role="presentation" class="oj-flex-item oj-fwk-icon oj-listview-drill-icon"></div>
+            </div>      
+        </div>
+
+    </li>
+</script>

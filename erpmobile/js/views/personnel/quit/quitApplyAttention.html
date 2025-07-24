@@ -1,0 +1,114 @@
+
+<div id="cNnavlistcontainer" class="demo-panel-contrast1 oj-contrast-marker">
+    <div class="topHeader" >
+        <button  class="buttonIcon2 arrLeft"
+                 data-bind=" click: dl.backToClick,
+                               ojComponent: {
+                                   component:'ojButton', 
+                                   icons: {start:'oj-fwk-icon-caret-start oj-fwk-icon'}, 
+                                   label: ''
+                               }">
+        </button>
+        <h3 id="header" class="itemTitle" data-bind="text:specialHeaderTitle"></h3>
+    </div>
+
+    <button class='mar20 mt70 jindu' data-bind="event: {click: jinduClick}">进度</button>
+    <div id='mainmenu' data-bind="ojComponent:{
+                            component:'ojListView',
+                            drillMode:'sliding',
+                            data: dataSource,
+                            item: { template: 'folder_template' }
+                }">
+
+    </div>
+</div>
+<button class='mar20 jindu mb40' data-bind="event: {click: jinduClick}">进度</button>
+<script type="text/html" id="folder_template">
+    <ul class='list'>
+        <li>
+            <span class="titlelong">起 草 人：</span>   <span data-bind="text:dl.getLabelByValue('employees', $data['drafter'])"></span>
+        </li>
+        <li>
+            <span class="titlelong">离职员工归属公司：</span>   <span data-bind="text:dl.getLabelByValue('system_dictionary_26', $data['companyId'])"></span>
+        </li>
+        <li>
+            <span class="titlelong">离职类型：</span>   <span data-bind="text:dl.getLabelByValue('system_dictionary_94',$data['type'])"></span>
+        </li>
+        <li>
+            <span class="titlelong">离职员工所在部门：</span>   <span data-bind="text:dl.getLabelByValue('all_departments', $data['departmentId'])"></span>
+        </li>
+        <li>
+            <span class="titlelong">离职员工姓名：</span>   <span data-bind="text:dl.getLabelByValue('employees', $data['employeeId'])"></span>
+        </li>
+        <li>
+            <span class="titlelong">离职员工工号：</span>   <span data-bind="text:$data['employeeNo']"></span>
+        </li>
+        <li>
+            <span class="titlelong">入职日期：</span>   <span data-bind="text: dl.datetimeConverter.format(dl.parseValueFromService($data['startDate']))"></span>
+        </li>
+        <li>
+            <span class="titlelong">离职员工身份证：</span>   <span data-bind="text:$data['card']"></span>
+        </li>
+        <li>
+            <span class="titlelong">最后工作时间：</span>   <span data-bind="text: dl.datetimeConverter.format(dl.parseValueFromService($data['endDate']))"></span>
+        </li>
+        <li>
+            <span class="titlelong">职务：</span>   <span data-bind="text:dl.getLabelByValue('duties', $data['dutyId'])"></span>
+        </li>
+        <li>
+            <span class="titlelong">离职原因：</span>   <span data-bind="text:dl.getLabelByValue('system_dictionary_101', $data['startDateDetail'])"></span>
+        </li>
+        <li>
+            <span class="titlelong">申请时间：</span>   <span class="textmany" data-bind="text:dl.datetimeConverter.format(dl.parseValueFromService($data['createTime']))"></span>
+        </li>
+        <li data-bind="visible:$parent.isShow(1)">
+            <span class="titlelonger">您认为公司哪些方面需要改善：</span>  <span data-bind="text: $parent.subTypeArr"></span>
+        </li>
+        <li data-bind="visible:$parent.isShow(1)">
+            <span class="titlelong">您离职后的计划：</span>  <span data-bind="text:dl.getLabelByValue('system_dictionary_103', $data['endDateDetail'])"></span>
+        </li>
+        <li data-bind="visible:$parent.isShow(1)">
+            <span class="titlelong">给公司的建议：</span>   <span data-bind="text:$data['remark']"></span>
+        </li>
+        <li data-bind="visible:$parent.isShow(2)">
+            <span class="titlelong">当月绩效情况：</span>  <span data-bind="text:dl.getLabelByValue('system_dictionary_99', $data['targetProvince'])"></span>
+        </li>
+        <li data-bind="visible:$parent.isShow(3)">
+            <span class="titlelong">借款情况：</span>   <span data-bind="text: $data['contactPerson']"></span>
+        </li>
+        <li data-bind="visible:$parent.isShow(4)">
+            <span class="titlelong">最终账户积分：</span>   <span data-bind="text:$data['livingExpenses']"></span>
+        </li>
+        <li data-bind="visible:$parent.isShow(4)">
+            <span class="titlelong">冻结积分：</span>   <span data-bind="text: $data['housingFinance']"></span>
+        </li>
+        <li data-bind="visible:$parent.isShow(4)">
+            <span class="titlelong">设计师离职奖金：</span>   <span data-bind="text: $data['fee']"></span>
+        </li>
+        <li data-bind="visible:$parent.isShow(8)">
+            <span class="titlelong">离职补偿金：</span>   <span data-bind="text: $data['severance']"></span>
+        </li>
+        <li data-bind="visible:$parent.isShow(8)">
+            <span class="titlelong">社保/公积金停缴月份：</span>   <span data-bind="text: $data['unit']"></span>
+        </li>
+        <li data-bind="visible:$parent.isShow(5)">
+            <span class="titlelong">离职考勤：</span>   <span data-bind="text: $data['transportation']"></span>
+        </li>
+        <li data-bind="visible:$parent.isShow(6)">
+            <span class="titlelong">拖柜钥匙数量：</span>   <span class="textmany" data-bind="text:$data['companyProvince']"></span>
+        </li>
+        <li data-bind="visible:$parent.isShow(6)">
+            <span class="titlelong">储物柜钥匙数量：</span>   <span data-bind="text: $data['numberOfBaby']"></span>
+        </li>
+        <li data-bind="visible:$parent.isShow(6)">
+            <span class="titlelong">办公电脑等设备：</span>   <span data-bind="text:$data['equivalentNumber']"></span>
+        </li>
+        <li data-bind="visible:$parent.isShow(7)">
+            <span class="titlelong">工卡是否已回收：</span> <input type = "checkbox" data-bind="checked:$data['isRemoteCity']" disabled/>
+        </li>
+    </ul>
+
+
+</script>
+
+

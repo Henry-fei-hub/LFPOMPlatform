@@ -1,0 +1,108 @@
+
+<div id="cNnavlistcontainer" class="demo-panel-contrast1 oj-contrast-marker">
+    <div class="topHeader" >
+        <button class="buttonIcon2 arrLeft"
+                data-bind=" click: dl.backToClick,
+                               ojComponent: {
+                                   component:'ojButton', 
+                                   icons: {start:'oj-fwk-icon-caret-start oj-fwk-icon'}, 
+                                   label: ''
+                               }">
+        </button>
+        <h3 id="header" class="itemTitle" data-bind="text:specialHeaderTitle"></h3>
+    </div>
+
+    <button class='mar20 mt70 jindu' data-bind="event: {click: jinduClick}">进度</button>
+    <div id='mainmenu' data-bind="ojComponent:{
+                            component:'ojListView',
+                            drillMode:'sliding',
+                            data: dataSource,
+                            item: { template: 'folder_template' }
+                }">
+    </div>
+    <h3 class="navTitle">订单详情</h3>
+    <div id='mainmenu' data-bind="ojComponent:{
+                            component:'ojListView',
+                            drillMode:'sliding',
+                            data: dataSource1,
+                            item: { template: 'folder_template1' }
+                }">
+
+    </div>
+</div>
+<button class='mar20 jindu mb40' data-bind="event: {click: jinduClick}">进度</button>
+
+<script type="text/html" id="folder_template">
+    <ul class='list'>
+        <li>
+            <span class='titlelong'>申请人：</span><span data-bind="text:dl.getLabelByValue('employees', $data['employeeId'])"></span> 
+        </li>
+        <li>
+            <span class="titlelong">信息编号：</span>   <span data-bind="text:$data['unit']"></span>
+        </li>
+        <li>
+            <span class="titlelong">项目编号：</span>   <span data-bind="text:$data['projectCode']"></span>
+        </li>  
+        <li>    
+            <span class='titlelong'>项目名称：</span> <span data-bind="text:$data['projectName']"></span>      
+        </li>
+        <li>    
+            <span class='titlelong'>主办设计团队：</span> <span data-bind="text:dl.getLabelByValue('plate_records', $data['companyProvince'])"></span>      
+        </li>
+        <li>
+            <span class='titlelong'>客户名称：</span><span data-bind="text:$data['transportation']"></span> 
+        </li>
+        <li>
+            <span class='titlelong'>投标金额：</span><span data-bind="text:$data['livingExpenses']"></span> 
+        </li>
+        <li>
+            <span class="titlelong">投标日期：</span>  <span data-bind="text:dl.dateConverter.format(dl.parseValueFromService($data['startDate']))"></span>
+        </li>
+        <li>   
+            <span class='titlelong'>投标类型：</span><span data-bind="text:dl.getLabelByValue('system_dictionary_129', $data['startDateDetail'])"></span> 
+        </li>
+        <li>
+            <span class="titlelong">投标单位总数：</span>   <span data-bind="text:$data['endDateDetail']"></span>
+        </li>
+        <li>
+            <span class="titlelong">我方排名：</span>  <span data-bind="text:$data['address']"></span>
+        </li>
+        <li>
+            <span class='titlelong'>甲方补偿金额：</span><span data-bind="text:$data['severance']"></span> 
+        </li>
+        <li>
+            <span class="titlelong">关闭原因：</span>  <span data-bind="text:dl.getLabelByValue('system_dictionary_169', $data['projectType'])"></span>
+        </li>
+        <li>
+            <span class="titlelong">落标原因详情：</span>   <span data-bind="text:$data['reason']"></span>
+        </li>
+        <li>
+            <span class="title">附件：</span>   
+            <span>
+                <a class='attachment' target='_self' data-bind="attr:{href : attachmentName}" >
+                    <i class='link' data-bind="text:dl.isNullOrUndefined(attachmentName) ? '无':attachmentName"></i>
+                    <span class='attachmentWarning'>（附件可打开预览）</span>
+                </a>
+            </span>
+        </li>
+    </ul>
+</script>
+<script type="text/html" id="folder_template1">
+    <ul class='list' style="border-bottom: 2px solid #c2c2c2;">
+        <li>
+            <span class="title">订单编号：</span>   <span data-bind="text: $data.contractCode"></span>
+        </li>
+        <li>
+            <span class="title">项目名称：</span>   <span data-bind="text: $data.projectName"></span>
+        </li>
+        <li>
+            <span class="title">业务部门：</span>  <span data-bind="text:dl.getLabelByValue('plate_records', $data['plateId'])"></span> 
+        </li>    
+        <li>
+            <span class="title">落标补偿金：</span>   <span data-bind="text:$data.totalAmount"></span>
+        </li>  
+    </ul>
+</script>
+
+
+

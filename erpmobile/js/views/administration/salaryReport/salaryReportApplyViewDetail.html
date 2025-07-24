@@ -1,0 +1,205 @@
+
+<div id="cNnavlistcontainer" class="demo-panel-contrast1 oj-contrast-marker">
+    <div class="topHeader" >
+        <button class="buttonIcon2 arrLeft"
+                data-bind=" click: dl.backToClick,
+                               ojComponent: {
+                                   component:'ojButton', 
+                                   icons: {start:'oj-fwk-icon-caret-start oj-fwk-icon'}, 
+                                   label: ''
+                               }">
+        </button>
+        <h3 id="header" class="itemTitle" data-bind="text:specialHeaderTitle"></h3>
+    </div>
+    
+
+    <div id='mainmenu' class='tbtop70' data-bind=" visible: isSalary(), ojComponent:{
+                            component:'ojListView',
+                            drillMode:'sliding',
+                            data: dataSource,
+                            item: { template: 'folder_template' }
+                }">
+
+    </div>
+    <div id='mainmenu' class='tbtop40' data-bind="visible: isBonus(), ojComponent:{
+                            component:'ojListView',
+                            drillMode:'sliding',
+                            data: dataSource1,
+                            item: { template: 'folder_template1' }
+                }">
+
+    </div>
+    <div id='mainmenu' class='tbtop10' data-bind="visible: isYearBonus(), ojComponent:{
+                            component:'ojListView',
+                            drillMode:'sliding',
+                            data: dataSource4,
+                            item: { template: 'folder_template4' }
+                }">
+
+    </div>
+    
+<!--    二级部门列表  根据业务部门查看部门奖金数据列表  全部来自奖金分表-->
+    <h3 class="navTitle"  data-bind="visible: isBonus()" >归属部门奖金详细</h3>
+    <div class='titletr'  data-bind="visible: isBonus()">
+        <span class='thone'>归属部门</span><span class='thtwo'>实发奖金</span><span class='ththree'>操作</span>
+    </div>
+    <div id='mainmenu' style='width:96%;margin-left:1%;margin-right:1%;border-left:3px solid #cecece;border-right:3px solid #cecece;border-bottom:3px solid #cecece; ' data-bind="visible: isBonus(), ojComponent:{
+                            component:'ojListView',
+                            drillMode:'sliding',
+                            data: dataSource2,
+                            item: { template: 'folder_template2' }
+                }">
+
+    </div>
+        
+<!--    二级部门列表  根据业务部门查看部门工资数据列表  全部来自工资分表-->
+    <h3 class="navTitle"  style='margin-top: -60px;' data-bind="visible: isSalary()" >归属部门工资详细</h3>
+    <div class='titletr'  data-bind="visible: isSalary()">
+        <span class='thone'>归属部门</span><span class='thtwo'>实发工资</span><span class='ththree'>操作</span>
+    </div>
+    <div id='mainmenu' style='margin-bottom: 50px;width:96%;margin-left:1%;margin-right:1%;border-left:3px solid #cecece;border-right:3px solid #cecece;border-bottom:3px solid #cecece; ' data-bind="visible: isSalary(), ojComponent:{
+                            component:'ojListView',
+                            drillMode:'sliding',
+                            data: dataSource3,
+                            item: { template: 'folder_template3' }
+                }">
+
+    </div>
+    
+    <h3 class="navTitle" style='margin-top: -60px;'  data-bind="visible: isYearBonus()" >归属部门年终奖金详细</h3>
+    <div class='titletr'  data-bind="visible: isYearBonus()">
+        <span class='thone'>归属部门</span><span class='thtwo'>实发奖金</span><span class='ththree'>操作</span>
+    </div>
+    <div id='mainmenu' style='width:96%;margin-left:1%;margin-right:1%;border-left:3px solid #cecece;border-right:3px solid #cecece;border-bottom:3px solid #cecece; ' data-bind="visible: isYearBonus(), ojComponent:{
+                            component:'ojListView',
+                            drillMode:'sliding',
+                            data: dataSource5,
+                            item: { template: 'folder_template5' }
+                }">
+
+    </div>
+</div>
+ 
+<script type="text/html" id="folder_template">
+    <ul class='list'>
+        <li>
+            <span class="title">业务部门：</span>    <span class="textmany" data-bind="text:dl.getLabelByValue('system_dictionary_1', $data['plateId'])"></span>
+        </li>
+        <li>
+            <span class="title">年份：</span>   <span class="textmany" data-bind="text:$data['year']"></span>
+        </li>
+        <li>
+            <span class="title">月份：</span>   <span class="textmany" data-bind="text:$data['month']"></span>
+        </li>
+          <li>
+            <span class="title">应付工资：</span>   <span class="textmany" data-bind="text:$data['shouldSalary']"></span>
+        </li>           
+        <li>
+            <span class="title">离职补偿：</span>   <span class="textmany" data-bind="text:$data['leaveAdvance']"></span>
+        </li>
+        <li>
+            <span class="title">应付奖金：</span>   <span class="textmany" data-bind="text:$data['shouldBonus']"></span>
+        </li>
+        <li>
+            <span class="title">应付合计：</span>   <span class="textmany" data-bind="text:$data['shouldTotal']"></span>
+        </li>
+        <li>
+            <span class="title">代扣个税：</span>   <span class="textmany" data-bind="text:$data['shouldTax']"></span>
+        </li>
+        <li>
+            <span class="title">代扣社保：</span>   <span class="textmany" data-bind="text:$data['totalInsurance']"></span>
+        </li>
+        <li>
+            <span class="title">代扣公积金：</span>   <span class="textmany" data-bind="text:$data['totalFund']"></span>
+        </li>
+        <li>
+            <span class="title">代扣补贴：</span>   <span class="textmany" data-bind="text:$data['insteadDeduct']"></span>
+        </li>
+        <li>
+            <span class="title">代扣重疾险：</span>   <span class="textmany" data-bind="text:$data['insteadDeductIll']"></span>
+        </li>
+        <li>
+            <span class="title">实发工资：</span>   <span class="textmany" data-bind="text:$data['factSalary']"></span>
+        </li>
+        <li>
+            <span class="title">工资发放人数：</span>   <span class="textmany" data-bind="text:$data['num']"></span>
+        </li>
+        <li>
+            <span class="title">单位社保：</span>   <span class="textmany" data-bind="text:$data['unitTotalInsurance']"></span>
+        </li>
+        <li>
+            <span class="title">单位公积金：</span>   <span class="textmany" data-bind="text:$data['unitTotalFund']"></span>
+        </li>
+    </ul>
+</script>
+
+<script type="text/html" id="folder_template1">
+    <ul class='list'>
+        <li>
+            <span class="title">业务部门：</span>    <span class="textmany" data-bind="text:dl.getLabelByValue('plate_records', $data['plateId'])"></span>
+        </li>
+        <li>
+            <span class="title">年份：</span>   <span class="textmany" data-bind="text:$data['year']"></span>
+        </li>
+        <li>
+            <span class="title">月份：</span>   <span class="textmany" data-bind="text:$data['month']"></span>
+        </li>
+          <li>
+            <span class="title">应发奖金：</span>   <span class="textmany" data-bind="text:$data['shouldBonus']"></span>
+        </li>           
+        <li>
+            <span class="title">应纳个税：</span>   <span class="textmany" data-bind="text:$data['shouldTax']"></span>
+        </li>
+        <li>
+            <span class="title">实发奖金：</span>   <span class="textmany" data-bind="text:$data['factBonus']"></span>
+        </li>
+    </ul>
+</script>
+<script type="text/html" id="folder_template4">
+    <ul class='list'>
+        <li>
+            <span class="title">业务部门：</span>    <span class="textmany" data-bind="text:dl.getLabelByValue('plate_records', $data['plateId'])"></span>
+        </li>
+        <li>
+            <span class="title">年份：</span>   <span class="textmany" data-bind="text:$data['year']"></span>
+        </li>
+        <li>
+            <span class="title">应发奖金：</span>   <span class="textmany" data-bind="text:$data['shouldTotal']"></span>
+        </li>           
+        <li>
+            <span class="title">应纳个税：</span>   <span class="textmany" data-bind="text:$data['shouldTax']"></span>
+        </li>
+        <li>
+            <span class="title">实发奖金：</span>   <span class="textmany" data-bind="text:$data['factBonus']"></span>
+        </li>
+    </ul>
+</script>
+
+<script type="text/html" id="folder_template2">
+    <ul class='table'>
+        <li class='tr'>
+           <span class='tdone' data-bind="text:dl.getLabelByValue('all_departments', $data['departmentId'])"></span>
+           <span class="tdtwo" data-bind="text:$data['factBonus']"></span>
+           <span class='tdthree'data-bind="event: {click : $parent.goBonusDetail}">查看详情</span>
+        </li>
+    </ul>
+</script>
+
+<script type="text/html" id="folder_template3">
+    <ul class='table'>
+        <li class='tr'>
+           <span class='tdone' data-bind="text:dl.getLabelByValue('all_departments', $data['departmentId'])"></span>
+           <span class="tdtwo" data-bind="text:$data['factSalary']"></span>
+           <span class='tdthree'data-bind="event: {click : $parent.goSalaryDetail}">查看详情</span>
+        </li>
+    </ul>
+</script>
+<script type="text/html" id="folder_template5">
+    <ul class='table'>
+        <li class='tr'>
+           <span class='tdone' data-bind="text:dl.getLabelByValue('all_departments', $data['departmentId'])"></span>
+           <span class="tdtwo" data-bind="text:$data['factBonus']"></span>
+           <span class='tdthree'data-bind="event: {click : $parent.goYearBonusDetail}">查看详情</span>
+        </li>
+    </ul>
+</script>

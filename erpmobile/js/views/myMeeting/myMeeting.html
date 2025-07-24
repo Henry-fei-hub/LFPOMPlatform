@@ -1,0 +1,37 @@
+
+<div id="oj-hybrid-padding"  >
+    <div id='rBmain-header'>
+        <button class="buttonIcon2 arrLeft"
+                data-bind=" click: dl.backToClick,
+                               ojComponent: {
+                                   component:'ojButton', 
+                                   icons: {start:'oj-fwk-icon-caret-start oj-fwk-icon'}, 
+                                   label: ''
+                               }">
+        </button>
+        <h3 id="header" class="itemTitle" data-bind="text:specialHeaderTitle"></h3>
+    </div> 
+    <div style="background:#fff;height:45px;line-height:45px;margin-top: 50px;" data-bind="click:addClick">
+        <div class="oj-flex-bar">
+            <span style='color:#00ccff;padding-left: 15px;line-height:45px;' title=".demo-list-icon-16" role="img" class="demo-list-icon-16 demo-icon-font"></span>
+            <div class="oj-flex-bar-middle oj-flex-bar" style='padding-left: 15px;'>
+                <span>新增差旅&会议</span>               
+            </div>
+            <div class="oj-flex-bar-end oj-sm-align-items-center" style="padding-right: 5px;" >
+                <span role="presentation" class="oj-flex-item oj-fwk-icon oj-listview-drill-icon"></span>
+            </div>         
+        </div>  
+    </div>
+
+    <div style="background:#fff;height:45px;line-height:45px;margin-top: 30px;" data-bind="click:monthClick">
+        <div class="oj-flex-bar">
+            <span style='color:#00ccff;padding-left: 15px;line-height:45px;' title=".demo-list-icon-16" role="img" class="demo-list-icon-16 demo-icon-font"></span>
+            <div class="oj-flex-bar-middle oj-flex-bar" style='padding-left: 15px;'>
+                <span>差旅&会议详情</span>               
+            </div>
+            <div class="oj-flex-bar-end oj-sm-align-items-center" style="padding-right: 5px;" >
+                <span role="presentation" class="oj-flex-item oj-fwk-icon oj-listview-drill-icon"></span>
+            </div>         
+        </div>  
+    </div>
+</div>

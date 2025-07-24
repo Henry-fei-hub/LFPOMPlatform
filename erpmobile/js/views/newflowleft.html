@@ -1,0 +1,32 @@
+<div id="projecttest-form-container">
+	<div class="oj-flex oj-form-layout oj-sm-only-flex-direction-column oj-lg-flex-items-1">
+		<div class="oj-flex-item">
+			<div class="oj-form  oj-sm-odd-cols-12 oj-lg-odd-cols-4 oj-lg-labels-inline">
+				<div class="oj-flex">
+                                        <label for="projecttest-project_code">流程类型</label>
+				</div>
+				<div class="oj-flex">
+                                        <select id="newflowleft-process_type_id" data-bind="ojComponent:{
+                                                component: 'ojSelect',
+                                                value: __processTypeId,
+                                                options: dl.getOptionsByName('system_process_types', true),
+                                                rootAttributes: {class: 'oj-helper-text-align-start', style: 'max-width:100%; width:100%'}
+                                                }">
+                                        </select>
+				</div>
+				<div class="oj-flex">
+                                        <label for="projecttest-english_name">流程名称</label>
+				</div>
+                                <div class="oj-flex">
+                                        <input id="newflowleft-process_name" data-bind="ojComponent: {component: 'ojInputText', value: __processName, rootAttributes: {style: 'max-width:100%; width:100%'}}"/>
+				</div>
+				<div class="oj-flex">
+                                        <label for="projecttest-design_status">描述</label>
+				</div>
+				<div class="oj-flex">
+                                        <textarea id="newflowleft-description" data-bind="ojComponent: {component: 'ojTextArea', value: __description, rootAttributes: {style: 'max-width:100%; width:100%'}}" ></textarea>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

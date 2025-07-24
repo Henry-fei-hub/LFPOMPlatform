@@ -1,0 +1,87 @@
+
+<div id="cNnavlistcontainer" class="demo-panel-contrast1 oj-contrast-marker">
+    <div class="topHeader" >
+        <button class="buttonIcon2 arrLeft"
+                data-bind=" click: dl.backToClick,
+                               ojComponent: {
+                                   component:'ojButton', 
+                                   icons: {start:'oj-fwk-icon-caret-start oj-fwk-icon'}, 
+                                   label: ''
+                               }">
+        </button>
+        <h3 id="header" class="itemTitle" data-bind="text:dl.headerTitle()"></h3>
+    </div>
+    
+    <button class='mar20 mt70 jindu' data-bind="event: {click: jinduClick}">进度</button>
+    <div id='mainmenu' data-bind="ojComponent:{
+                            component:'ojListView',
+                            drillMode:'sliding',
+                            data: dataSource,
+                            item: { template: 'folder_template' }
+                }">
+    </div>
+</div>
+
+<button class='mar20 jindu mb40' data-bind="event: {click: jinduClick}">进度</button>
+<script type="text/html" id="folder_template">
+    <ul class='list'>
+        <li>
+            <span class="title">申 请 人：</span>   <span data-bind="text:dl.getLabelByValue('employees', $data['employeeId'])"></span>
+        </li>
+        <li>
+            <span class="title">工号：</span>   <span data-bind="text:$data['employeeNo']"></span>
+        </li>
+        <li>
+            <span class="title">部门：</span>   <span data-bind="text:dl.getLabelByValue('all_departments', $data['departmentId'])"></span>
+        </li>
+        <li>
+            <span class="title">归属公司：</span>   <span data-bind="text:dl.getLabelByValue('system_dictionary_26', $data['companyId'])"></span>
+        </li>
+        <li>
+            <span class="title">驻场开始日期：</span>   <span data-bind="text: dl.dateConverter.format(dl.parseValueFromService($data['startDate']))"></span>
+        </li>
+        <li>
+            <span class="title">驻场开始时段：</span>   <span data-bind="text:dl.getLabelByValue('system_dictionary_73', $data['startDateDetail'])"></span>
+        </li>
+        <li>
+            <span class="title">驻场结束日期：</span>   <span data-bind="text: dl.dateConverter.format(dl.parseValueFromService($data['endDate']))"></span>
+        </li>
+        <li>
+            <span class="title">驻场结束时段：</span>   <span data-bind="text:dl.getLabelByValue('system_dictionary_73', $data['endDateDetail'])"></span>
+        </li>
+        <li>
+            <span class="title">出差天数：</span>   <span data-bind="text:$data['days']"></span>
+        </li>
+        <li>
+            <span class="titlelong">预计费用(元)：</span>   <span data-bind="text:$data['fee']"></span>
+        </li>
+        
+        <li>
+            <span class="title">项目编号：</span> 
+            <span data-bind="text:$data['projectCode']"></span>
+        </li>
+        
+        <li>
+            <span class="title">项目名称：</span> 
+            <span data-bind="text:$data['projectName']"></span>
+        </li>
+        
+        <li>
+            <span class="title">项目经理：</span> 
+            <span data-bind="text:dl.getLabelByValue('employees', $data['nextAuditor'])"></span>
+        </li>
+        
+        <li>
+            <span class="title">驻场地址：</span>   <span data-bind="text:$data['address']"></span>
+        </li>
+        <li>
+            <span class="title">派驻甲方名称：</span>   <span data-bind="text:$data['contactPerson']"></span>
+        </li>
+        <li>
+            <span class="title">备注信息：</span>   <span class="textmany" data-bind="text:$data['remark']"></span>
+        </li>
+    </ul>
+</script>
+
+
+

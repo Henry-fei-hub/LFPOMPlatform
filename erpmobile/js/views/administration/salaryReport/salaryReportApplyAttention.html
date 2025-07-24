@@ -1,0 +1,218 @@
+
+<div id="cNnavlistcontainer" class="demo-panel-contrast1 oj-contrast-marker">
+    <div class="topHeader" >
+        <button class="buttonIcon2 arrLeft"
+                data-bind=" click: dl.backToClick,
+                               ojComponent: {
+                                   component:'ojButton', 
+                                   icons: {start:'oj-fwk-icon-caret-start oj-fwk-icon'}, 
+                                   label: ''
+                               }">
+        </button>
+        <h3 id="header" class="itemTitle" data-bind="text:specialHeaderTitle"></h3>
+    </div>
+
+    <button class='mar20 mt70 jindu' data-bind="event: {click: jinduClick}">进度</button>
+    <div id='mainmenu' data-bind="ojComponent:{
+                            component:'ojListView',
+                            drillMode:'sliding',
+                            data: dataSource,
+                            item: { template: 'folder_template' }
+                }">
+
+    </div>
+        <h3 class="navTitle" data-bind="visible: haveSalaryCompany()">工资详细</h3>
+    <div class='titletr'  data-bind="visible: haveSalaryCompany()">
+        <span class='thone'>业务部门</span><span class='thtwo'>实发工资</span><span class='ththree'>操作</span>
+    </div>
+       <div id='mainmenu' style='width:96%;margin-left:1%;margin-right:1%;border-left:3px solid #cecece;border-right:3px solid #cecece; ' data-bind="visible: haveSalaryCompany(), ojComponent:{
+                            component:'ojListView',
+                            drillMode:'sliding',
+                            data: dataSource1,
+                            item: { template: 'folder_template1' }
+                }">
+    </div>
+       <div class='tbbeizhu' data-bind="visible: haveSalaryCompany()">
+        <span class='tbbeizhuone'>备注：</span><span class='tbbeizhutwo' data-bind=" text: salaryBonusRemark"></span>
+    </div>  
+    <h3 class="navTitle" data-bind="style:{marginTop:haveBonusPlate()&& !haveSalaryCompany()?'-40px':0},visible: haveBonusPlate()" >奖金详细</h3>
+       <div class='titletr'  data-bind="visible: haveBonusPlate()">
+        <span class='thone'>业务部门</span><span class='thtwo'>实发奖金</span><span class='ththree'>操作</span>
+    </div>
+   <div id='mainmenu' style='width:96%;margin-left:1%;margin-right:1%;border-left:3px solid #cecece;border-right:3px solid #cecece;border-bottom:3px solid #cecece; ' data-bind="visible: haveBonusPlate(), ojComponent:{
+                            component:'ojListView',
+                            drillMode:'sliding',
+                            data: dataSource4,
+                            item: { template: 'folder_template4' }
+                }">
+
+    </div>
+    <h3 class="navTitle" data-bind="style:{marginTop: havaSararyAnnualPlate()&& !haveSalaryCompany()?'-40px':0},visible: havaSararyAnnualPlate()" >奖金详细</h3>
+       <div class='titletr'  data-bind="visible: havaSararyAnnualPlate()">
+        <span class='thone'>业务部门</span><span class='thtwo'>实发奖金</span><span class='ththree'>操作</span>
+    </div>
+    <div id='mainmenu' style='width:96%;margin-left:1%;margin-right:1%;border-left:3px solid #cecece;border-right:3px solid #cecece;border-bottom:3px solid #cecece; ' data-bind="visible: havaSararyAnnualPlate(), ojComponent:{
+                            component:'ojListView',
+                            drillMode:'sliding',
+                            data: dataSource5,
+                            item: { template: 'folder_template5' }
+                }">
+
+    </div>
+<!--    <h3 class="navTitle" data-bind="visible: haveBonusCompany(), style:{ marginTop: haveBonusCompany() ?'-80px':'0px'}">奖金总表详细</h3>
+    <div id='mainmenu' data-bind="visible: haveBonusCompany(), ojComponent:{
+                            component:'ojListView',
+                            drillMode:'sliding',
+                            data: dataSource3,
+                            item: { template: 'folder_template3' }
+                }">
+
+    </div>-->
+<!--    <h3 class="navTitle" data-bind="visible: haveBonusPlate(),style:{ marginTop: !haveBonusCompany() && haveBonusPlate()? '-100px':'0px'}" >奖金分表详细</h3>
+    <div id='mainmenu' data-bind="visible: haveBonusPlate(), ojComponent:{
+                            component:'ojListView',
+                            drillMode:'sliding',
+                            data: dataSource4,
+                            item: { template: 'folder_template4' }
+                }">
+
+    </div>-->
+</div>
+ 
+<button class='mar20 jindu mb40' data-bind="event: {click: jinduClick}">进度</button>
+
+
+<script type="text/html" id="folder_template">
+    <ul class='list'>
+        <li>
+            <span class="title">申 请 人：</span>   <span data-bind="text:dl.getLabelByValue('employees', $data['employeeId'])"></span>
+        </li>      
+        <li>
+            <span class="title">职员编号：</span>   <span data-bind="text:$data['employeeNo']"></span>
+        </li>
+        <li>
+            <span class="title">归属部门：</span>   <span data-bind="text:dl.getLabelByValue('all_departments', $data['departmentId'])"></span>
+        </li>
+         <li>
+            <span class="title">预计费用：</span>   <span data-bind="text: $data['fee']"></span>
+        </li>
+        <li>
+            <span class="title">年份：</span>    <span data-bind="text:$data['companyProvince']"></span>
+        </li>
+        <li>
+            <span class="title">月份：</span>    <span data-bind="text:$data['targetProvince']"></span>
+        </li>
+        <li>
+            <span class="title">发放类型：</span>    <span data-bind="text:dl.getLabelByValue('system_dictionary_127', $data['type'])"></span>
+        </li>
+         <li>
+            <span class="title">备注：</span>   <span class="textmany" data-bind="text:$data['remark']"></span>
+        </li>
+        <li>
+            <span class="title">申请时间：</span>    <span data-bind="text: dl.datetimeConverter.format(dl.parseValueFromService($data['createTime']))"></span>
+        </li>
+    </ul>
+    <h3></h3>
+</script>
+<script type="text/html" id="folder_template1">
+    <ul class='table'>
+        <li class='tr'>
+            <span class='tdone' data-bind="text:dl.getLabelByValue('system_dictionary_1', $data['plateId'])"></span>
+            <span class='tdtwo' data-bind="text:$data['factSalary']"></span>
+            <span class='tdthree'data-bind="event: {click : $parent.goSalaryDetail}">查看详情</span>
+        </li>   
+    </ul>
+</script>
+<!--<script type="text/html" id="folder_template2">
+    <ul class='list'>
+        <li>
+            <span class="title">业务部门：</span>    <span data-bind="text:dl.getLabelByValue('system_dictionary_1', $data['plateId'])"></span>
+        </li>
+        <li>
+            <span class="title">年份：</span>   <span class="textmany" data-bind="text:$data['year']"></span>
+        </li>
+        <li>
+            <span class="title">月份：</span>   <span class="textmany" data-bind="text:$data['month']"></span>
+        </li>
+          <li>
+            <span class="title">应付工资：</span>   <span data-bind="text:$data['shouldSalary']"></span>
+        </li>           
+        <li>
+            <span class="title">离职补偿：</span>   <span class="textmany" data-bind="text:$data['leaveAdvance']"></span>
+        </li>
+        <li>
+            <span class="title">应付奖金：</span>   <span class="textmany" data-bind="text:$data['shouldBonus']"></span>
+        </li>
+        <li>
+            <span class="title">应付合计：</span>   <span class="textmany" data-bind="text:$data['shouldTotal']"></span>
+        </li>
+        <li>
+            <span class="title">代扣个税：</span>   <span class="textmany" data-bind="text:$data['shouldTax']"></span>
+        </li>
+        <li>
+            <span class="title">代扣社保：</span>   <span class="textmany" data-bind="text:$data['totalInsurance']"></span>
+        </li>
+        <li>
+            <span class="title">代扣公积金：</span>   <span class="textmany" data-bind="text:$data['totalFund']"></span>
+        </li>
+        <li>
+            <span class="title">代扣补贴：</span>   <span class="textmany" data-bind="text:$data['insteadDeduct']"></span>
+        </li>
+        <li>
+            <span class="title">代扣重疾险：</span>   <span class="textmany" data-bind="text:$data['insteadDeductIll']"></span>
+        </li>
+        <li>
+            <span class="title">实发工资：</span>   <span class="textmany" data-bind="text:$data['factSalary']"></span>
+        </li>
+        <li>
+            <span class="title">工资发放人数：</span>   <span class="textmany" data-bind="text:$data['num']"></span>
+        </li>
+        <li>
+            <span class="title">单位社保：</span>   <span class="textmany" data-bind="text:$data['unitTotalInsurance']"></span>
+        </li>
+        <li>
+            <span class="title">单位公积金：</span>   <span class="textmany" data-bind="text:$data['unitTotalFund']"></span>
+        </li>
+    </ul>
+</script>
+
+<script type="text/html" id="folder_template3">
+    <ul class='list'>
+        <li>
+            <span class="title">归属公司：</span>    <span data-bind="text:dl.getLabelByValue('company_records', $data['companyId'])"></span>
+        </li>
+        <li>
+            <span class="title">年份：</span>   <span class="textmany" data-bind="text:$data['year']"></span>
+        </li>
+        <li>
+            <span class="title">月份：</span>   <span class="textmany" data-bind="text:$data['month']"></span>
+        </li>
+          <li>
+            <span class="title">应发奖金：</span>   <span data-bind="text:$data['shouldBonus']"></span>
+        </li>           
+        <li>
+            <span class="title">应纳个税：</span>   <span class="textmany" data-bind="text:$data['shouldTax']"></span>
+        </li>
+        <li>
+            <span class="title">实发奖金：</span>   <span class="textmany" data-bind="text:$data['factBonus']"></span>
+        </li>
+    </ul>
+</script>-->
+<script type="text/html" id="folder_template4">
+    <ul class='table'>
+        <li class='tr'>
+           <span class='tdone' data-bind="text:dl.getLabelByValue('plate_records', $data['plateId'])"></span>
+           <span class="tdtwo" data-bind="text:$data['factBonus']"></span>
+           <span class='tdthree'data-bind="event: {click : $parent.goBonusDetail}">查看详情</span>
+        </li>
+    </ul>
+</script>
+<script type="text/html" id="folder_template5">
+    <ul class='table'>
+        <li class='tr'>
+           <span class='tdone' data-bind="text:dl.getLabelByValue('plate_records', $data['plateId'])"></span>
+           <span class="tdtwo" data-bind="text:$data['factBonus']"></span>
+           <span class='tdthree'data-bind="event: {click : $parent.goYearBonusDetail}">查看详情</span>
+        </li>
+    </ul>
+</script>

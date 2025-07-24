@@ -1,0 +1,73 @@
+
+<div id="navlistcontainer" class="demo-panel-contrast1 oj-contrast-marker">
+    <div id='rBmain-header'>
+        <button class="buttonIcon2 arrLeft"
+                data-bind=" click:rebackToClick,
+                               ojComponent: {
+                                   component:'ojButton', 
+                                   icons: {start:'oj-fwk-icon-caret-start oj-fwk-icon'}, 
+                                   label: ''
+                               }">
+        </button>
+        <h3 id="header" class="itemTitle" data-bind="text:'新增前期跟踪记录台账'"></h3>
+    </div>
+
+    <div id='mainmenu' style='margin-top: 70px;'>
+        <ul class="list">
+            <li>
+                <span class="title">相关人员：</span>
+                 <input id='combobox' class="cont" data-bind="ojComponent: {component: 'ojCombobox', multiple: true,  value: __relevantEmployees, placeholder: '',options:  dl.getOptionsByName('employees', false)}"/>                
+            </li>
+            <li style="height:100px;">
+                <span class="title"><i class="star">*</i>情况描述：</span>
+                <oj-text-area id="text-area" class="cont" style="height: 100px;" value="{{__remark}}"> </oj-text-area>
+            </li>
+            <li>
+                <span class="title">附件：</span>
+                <span  class="demo-download-icon-24 demo-icon-font-24" style="font-size:18px;padding-right: 10px;" data-bind="click: uploadAttachmentClick"></span>
+                <a class="file" style='flex: 2; overflow: auto; border: none' data-bind=" attr: {href: __attachmentName}, text: uploadFileName" target="_blank"></a>
+            </li>
+            <li>
+                <span class="title">登记人：</span>
+                <span class="cont" style='max-width:none;' data-bind="text:dl.getLabelByValue('employees',__registerEmployee())"></span>
+            </li>
+            <li>
+                <span class="title"><i class="star">*</i>赢率(%)：</span>
+                <input class="cont" data-bind="ojComponent: {component: 'ojInputText', value: __winRate}"/>
+            </li>
+             <li>
+                <span class="titlelonger">预约合同金额(元)：</span>
+                <input class="cont" data-bind="ojComponent: {component: 'ojInputText', value: __contractAmount}"/>
+            </li>
+            <li>
+                <span class="titlelonger"><i class="star">*</i>设计详细报价：</span>
+                <input class="cont" data-bind="ojComponent: {component: 'ojInputText', value: __designPrice}"/>
+            </li>
+         </ul>
+    </div>
+
+    <p data-bind="visible: subok()<0" class='attention1'>附件上传中，请耐心等候！</p>
+    <p data-bind="visible: subok()==1" class='attention1'>附件上传成功！</p>
+    
+    <input type='file' style='visibility: hidden;' id = 'fileInput' multiple="multiple" data-bind="event: {change: uploadFile}">
+    <div style="display:flex;">
+        <button class='smallbut mt8 mb40' data-bind="event: {click: submitClick}">提交</button>
+        <button class='smallbut mt8 mb40' data-bind="event: {click: cancleClick}">取消</button>
+    </div>
+
+    <div class="mb40 zjList">
+        <span style="font-weight:bold;color:#FF7F27;" data-bind="text:errorMessage"></span>
+    </div>
+</div>
+<style>
+    .oj-textarea-input{
+        height:100px;
+    }
+    .list li span{
+    max-width: 200px;
+    }
+</style>
+
+
+
+

@@ -1,0 +1,246 @@
+
+<div id='sCbody'>
+
+    <div id='sCmain-header'>
+        <button class="buttonIcon2 arrLeft"
+                data-bind=" click: dl.backToClick,
+                               ojComponent: {
+                                   component:'ojButton', 
+                                   icons: {start:'oj-fwk-icon-caret-start oj-fwk-icon'}
+                               }">
+        </button>
+        <h3 id="header" class="itemTitle" data-bind="text:schedule"></h3>
+    </div>
+    <!--流程图-->
+    <div id="demo-container" class="oj-flex demo-edge-top" style="background:#fff; min-height: 700px;">
+        <oj-tab-bar id="scheduleNavlist" 
+                    edge="top"
+                    selection="{{selectedItem}}">
+            <ul>
+                <li id="home">
+                    <a href="#" id="home-tab" data-bind="event:{click: show}">
+                        <span class="iconfont icon-liucheng2 tabicon"> </span>  流程图
+                    </a>
+                </li>
+                <li id="blogs">
+                    <a href="#"  id="blogs-tab" data-bind="event:{click: showyj}">
+                        <span class="iconfont icon-yijian tabicon"></span>  审批意见图
+                    </a>
+                </li>
+            </ul>
+        </oj-tab-bar>
+
+
+        <div id='content'>
+            <!--           流程图-->
+
+            <div class='home'> 
+               <div id="diagram"  data-bind="ojComponent: {
+            component: 'ojDiagram',
+            renderer: dl.nodeRenderer,
+            selectionRenderer: dl.nodeRenderer,
+            hoverRenderer: dl.nodeRenderer,
+            zooming: 'auto',
+            panning: 'auto',
+            layout: dl.diagramLayout,
+            styleDefaults : diagramDefaults,
+            data: diagramData,
+            linkProperties:function(diagramData){return diagramData;}
+        }, event: {resize: diagramResize}"
+                     >
+
+                </div>
+            </div>
+            <!--审批意见图-->
+            <div class="blogs" style="display: none;">
+                <div class='line'></div>
+                <ul class='blogsUl' data-bind="foreach: commentArr"> 
+                    <li>
+                        <p>
+                            <span class='circleName' data-bind="style:{'backgroundColor': $data.status ==0? '#ccc':'lightskyblue'}, text:dl.isNullOrUndefined($data.employeeId)||($data.employeeId ==0)? $data.backViewName : dl.getLabelByValue('employees',$data.employeeId)"> </span>
+                            <span class='name' data-bind="text: dl.isNullOrUndefined($data.employeeId)||($data.employeeId ==0)? $data.backViewName : dl.getLabelByValue('employees',$data.employeeId)"></span>
+                            <i class='status' data-bind="text:$data.statusName,style:{'color':$data.color}"></i>
+                            <!--                             新建的 status==0 1审批中 不显示时间-->
+                            <span class='time' data-bind="visible:$data.status !==1 && $data.status !==0 ,text: dl.datetimeConverter.format(dl.parseValueFromService($data.operateTime))"></span>
+                            <!--                           审批中节点 status==1才显示天数-->
+                            <span class='time' data-bind="visible:$data.status ==1"><span data-bind="text:$parent.day"></span></span>
+                        </p>
+                        <p class='comment' data-bind="text: $data.processComment"></p>
+                        <!--                        当employeeId有值 不显示tasks数据，或 status ==2通过不显示 -->
+                        <ul class='blogsSmallUl' data-bind="style:{'display': $data.status ==2|| !dl.isNullOrUndefined($data.employeeId)? 'none':($data.poolType == 0 ? 'flex':'block')},foreach: tasks">
+                            <li>
+                                <p data-bind="style:{'text-align': $parent.poolType ==1? 'left':'center'}">
+                                    <span class='smallCircleName' data-bind="style:{'backgroundColor': $data.status ==0? '#ccc':'lightskyblue'}, text: dl.getLabelByValue('employees',$data.employeeId)"> </span>
+                                    <span class='smallName' data-bind="style:{'display':  $parent.poolType == 0 ? 'block':'inline','margin-left':$parent.poolType == 0 ? '0':'10px'} ,text: dl.getLabelByValue('employees',$data.employeeId)"></span>
+                                    <i class='smallstatus' data-bind="visible:$data.status !==0 ,text: dl.getLabelByValue('system_dictionary_38',$data.status) "></i>
+                                    <!--                                    新建 status==1 不显示时间-->
+                                    <span class='time' data-bind="visible:$data.status !==1 ,text: dl.datetimeConverter.format(dl.parseValueFromService($data.operateTime))"></span>
+                                </p>
+                            </li>
+                        </ul>
+                        <!--                         当employeeId有值 不显示tasks数据自然不显示并行提醒 ，poolType==0并行，有tasks数据并且 审核完不显示 -->
+                        <span class="warning" data-bind="visible: dl.isNullOrUndefined($parent.employeeId) && $data.poolType==0 && (!$parent.isEmpty($data.tasks) && ($data.status !==2))">任意一人审批</span>
+                    </li>
+                </ul>  
+                <!--<div class='endCircle'>未完</div>-->
+            </div>
+        </div>
+
+
+
+
+    </div> 
+</div>
+<style>
+    .demo-edge-top{
+        flex-direction: column;
+    }
+    .oj-tabbar-horizontal:not(.oj-tabbar-icon-only) .oj-tabbar-item.oj-selected{
+        border-color: #333; 
+    }
+    .oj-tabbar-horizontal:not(.oj-tabbar-icon-only) .oj-tabbar-item:not(.oj-disabled) a.oj-tabbar-item-content .oj-tabbar-item-label{
+        color: #c3c3c3;
+        font-weight: bold;
+        font-size: 15px;
+        height: 45px;
+        line-height: 45px;
+    }
+    .oj-tabbar-horizontal:not(.oj-tabbar-icon-only) .oj-tabbar-item-content{
+        padding: 0;
+    }
+    .tabicon{
+        color: #c6c6c6;
+        font-size: 20px;
+        line-height: 40px;
+    }
+    .oj-tabbar-item.oj-selected .iconfont{
+        color: #333;
+    }
+    .oj-tabbar-horizontal:not(.oj-tabbar-icon-only) .oj-tabbar-item.oj-selected a.oj-tabbar-item-content .oj-tabbar-item-label {
+        color: #333;
+    }
+    .blogs{
+        padding-left: 20px;
+        margin-top: 20px;
+        position: relative;
+    }
+    ul{
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    p{
+        margin: 0;
+        padding: 0;
+    }
+    .smallName{
+        font-size:1rem;
+        line-height: 30px;
+    }
+    .circleName{
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        text-align: center;
+        line-height: 50px;
+        color: #fff;
+        display: inline-block;
+        font-size: 10px;
+    }
+    .endCircle{
+        width: 50px;
+        height: 50px;
+        background-color: #ccc;
+        border-radius: 50%; 
+        text-align: center;
+        line-height: 50px;
+        color: #fff;
+        display: inline-block;
+        font-size: 10px;
+    }
+    .endline{
+        width:100%;
+        height:2px;
+        border: 1px dotted #ccc;
+
+    }
+    .smallCircleName{
+        width: 40px;
+        height: 40px;
+        background-color: lightskyblue;
+        border-radius: 50%;
+        text-align: center;
+        line-height: 40px;
+        color: #fff;
+        display: inline-block;
+        font-size: 10px;
+    }
+    .name{
+        padding: 0 10px;
+        font-size:1rem;
+    }
+    .status{
+        font-style: initial;
+    }
+    .smallstatus{
+        font-style: initial;
+        color: cadetblue;
+    }
+    .firstline{
+        padding: 10px 0;
+    }
+    .blogsUl>li{
+        margin: 20px 0;
+        position: relative;
+    }
+    .blogsUl>li>p{
+        display: flex;
+        align-items: center;
+    }
+    .blogsSmallUl{
+        position: relative;
+    }
+    .blogsSmallUl>li{
+        margin: 20px 0;
+        position: relative;
+    }
+    .blogsSmallUl>li>p{
+        margin:0 10px;
+        text-align: center;
+    }
+    .blogsSmallUl>li:last-child{
+        margin-bottom: 45px
+    }
+    .comment{
+        padding-left: 60px;
+        font-size: 15px;
+    }
+    .line{
+        position: absolute;
+        left: 45px;
+        top: 0;
+        border: 1px dotted #ccc;
+        height: calc(100% - 2px); ;
+    }
+    .startTime{
+        position: absolute;
+        height: 60px;
+        right: 20px;
+        top: 0;
+        color: #c3c3c3;
+        line-height: 60px;
+    }
+    .time{
+        position: absolute;
+        height: 50px;
+        right: 20px;
+        top: 0;
+        color: #c3c3c3;
+        line-height: 50px;
+    }
+    .warning{
+        position: absolute;
+        right: 10px;
+        bottom: 20px;
+    }
+</style>

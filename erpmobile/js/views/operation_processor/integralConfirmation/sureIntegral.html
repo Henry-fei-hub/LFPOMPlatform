@@ -1,0 +1,128 @@
+
+<div id="navlistcontainer" class="demo-panel-contrast1 oj-contrast-marker">
+    <div id='rBmain-header'>
+        <button class="buttonIcon2 arrLeft"
+                data-bind=" click:rebackToClick,
+                               ojComponent: {
+                                   component:'ojButton', 
+                                   icons: {start:'oj-fwk-icon-caret-start oj-fwk-icon'}, 
+                                   label: ''
+                               }">
+        </button>
+        <h3 id="header" class="itemTitle" data-bind="text:'预分配积分待确认'"></h3>
+    </div>
+
+    <div id='mainmenu' style='margin-top: 70px;overflow: auto;'>
+        <div style="width:400px; ">
+            <span style='position: relative;  font-weight: bold; top: 14px;'>员工姓名</span>
+            <ul data-bind="foreach:arr1" style="display: flex; margin-left: 70px!important;">
+                <li style=" position: relative;display: inline-block;">
+                    <span style="font-weight: bold;width:100%;  position: absolute;top: -17px;text-align: center;" data-bind="text:stageName" ></span>
+                    <ul  class="stageItem" style="display: flex;margin-right: 10px!important;">
+                        <li>
+                            <i style="font-weight:bold;">预分配积分</i>
+                        </li>
+                        <li>   
+                            <i style="font-weight:bold;">变动前预分配积分</i>
+                        </li>
+                        <li style="width: 95px;"> 
+                            <i style="font-weight:bold;">状态</i>  
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div style="width:400px; ">
+            <ul data-bind="foreach:newArr">
+                <li>
+                    <span style='position: relative;  font-weight: bold; top: 24px;' data-bind="text:employeeName"></span>
+                    <ul data-bind="foreach: stageDetail" style="display: flex; margin-left: 70px!important;">
+                        <li style=" position: relative;display: inline-block;">
+                            <span style="font-weight: bold;width:100%;  position: absolute;top: -17px;text-align: center;" data-bind="text:''" ></span>
+                            <ul  class="stageItem" style="display: flex;margin-right: 10px!important; " >
+                                <li>
+                                    <i data-bind="text:planIntegral"></i>
+                                </li>
+                                <li>   
+                                    <i data-bind="text:alternateField1"></i>
+                                </li>
+                                <li style="width: 95px;"> 
+                                   <div class="agreeOrdisButton" data-bind="visible: status ==1 && $parent.employeeId == dl.getEmployeeId()">
+                                        <span class="agreeButton" data-bind='click:agreeClick'>同意</span>
+                                        <span class="disagreeButton" data-bind='click:disagreeClick'>不同意</span>
+                                    </div>
+                                    <div  class='agreeText'>
+                                        <span style="color:green;">已同意</span>
+                                    </div>
+                                     <div  class='disagreeText'>
+                                        <span style="color:red;">已拒绝</span>
+                                    </div>
+                                    <span class="disagreeButton" style="background:darkgray;" data-bind="visible: status ==1 && $parent.employeeId != dl.getEmployeeId()">待确定</span>
+                                    <span  style="color:green;" data-bind="visible: status ==2">同意</span>
+                                    <span  style="color:red;" data-bind="visible: status ==3">不同意</span>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+ 
+
+<style>
+    .agreeText, .disagreeText{
+    display: none;
+    }
+    ul,li{
+        list-style:none;
+        padding:0!important;
+        margin:0!important;
+    }
+    .stageItem li:nth-child(3){
+        display: inline-block;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        width: 70px;
+        height: 38px;
+        line-height: 38px;
+        padding-right: 10px!important;
+        text-align: center;
+    }
+    .stageItem li:nth-child(1), .stageItem li:nth-child(2){
+        display: inline-block;
+        overflow: hidden;
+        width: 70px;
+        height: 38px;
+        line-height: 38px;
+        text-align: center;
+        margin-right: 5px!important;
+    }
+
+    i{
+        font-style: normal;
+    }
+    .agreeButton{
+        width: 42px;
+        display: inline-block;
+        background: #00ccff;
+        color: #fff!important;
+        border-radius: 4px;
+        border: none;
+        height: 30px;
+        line-height: 30px;
+        font-size: 10px;
+        margin-right: 5px;
+    }
+    .disagreeButton{
+        width: 42px;
+        display: inline-block;
+        background: #00ccff;
+        color: #fff!important;
+        border-radius: 4px;
+        border: none;
+        height: 30px;
+        line-height: 30px;
+        font-size: 10px;
+    }
+</style>

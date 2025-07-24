@@ -1,0 +1,103 @@
+
+<div id="cNnavlistcontainer" class="demo-panel-contrast1 oj-contrast-marker">
+    <div class="topHeader" >
+        <button class="buttonIcon2 arrLeft"
+                data-bind=" click: dl.backToClick,
+                               ojComponent: {
+                                   component:'ojButton', 
+                                   icons: {start:'oj-fwk-icon-caret-start oj-fwk-icon'}, 
+                                   label: ''
+                               }">
+        </button>
+        <h3 id="header" class="itemTitle" data-bind="text:specialHeaderTitle"></h3>
+    </div>
+    
+    <button class='mar20 mt70 jindu' data-bind="event: {click: jinduClick}">进度</button>
+    <div id='mainmenu' data-bind="ojComponent:{
+                            component:'ojListView',
+                            drillMode:'sliding',
+                            data: dataSource,
+                            item: { template: 'folder_template' }
+                }">
+    </div>
+</div>
+
+<button class='mar20 jindu mb40' data-bind="event: {click: jinduClick}">进度</button>
+<script type="text/html" id="folder_template">
+      <ul class='list'>
+        <li>
+            <span class="title">转正员工姓名：</span>   <span data-bind="text:dl.getLabelByValue('employees', $data['employeeId'])"></span>
+        </li>
+        <li>
+            <span class="title">归属公司：</span>   <span data-bind="text:dl.getLabelByValue('system_dictionary_26', $data['companyId'])"></span>
+        </li>       
+        <li>
+            <span class="title">入职日期：</span>   <span data-bind="text: dl.datetimeConverter.format(dl.parseValueFromService($data['startDate']))"></span>
+        </li>
+        <li>
+            <span class="title">所在部门：</span>   <span data-bind="text:dl.getLabelByValue('all_departments', $data['departmentId'])"></span>
+        </li>
+        <li>
+            <span class="title">转正类型：</span>   <span data-bind="text:dl.getLabelByValue('system_dictionary_98', $data['type'])"></span>
+        </li>
+        <li>
+            <span class="title">工号：</span>   <span data-bind="text:$data['employeeNo']"></span>
+        </li>             
+        <li>
+            <span class="title">转正日期：</span>   <span data-bind="text: dl.datetimeConverter.format(dl.parseValueFromService($data['endDate']))"></span>
+        </li>
+        <li>
+            <span class="title">职务：</span>   <span data-bind="text:dl.getLabelByValue('duties', $data['dutyId'])"></span>
+        </li>
+        <li>
+            <span class="title">职级：</span>   <span data-bind="text:dl.getLabelByValue('system_dictionary_3', $data['targetProvince'])"></span>
+        </li>
+       <li>
+            <span class="title">个人效益指数：</span>   <span data-bind="text:$data['fee']"></span>
+        </li>
+        <li>
+            <span class="title">试用期薪资：</span>   <span data-bind="text:$data['originalPay']"></span>
+        </li>
+        <li>
+            <span class="title">转正后薪资：</span>   <span data-bind="text: $data['totalPay']"></span>
+        </li>
+        <li>
+            <span class="title">月薪：</span>   <span data-bind="text:$data['monthPay']"></span>
+        </li>
+        <li>
+            <span class="title">工龄工资：</span>   <span data-bind="text:$data['foremanPay']"></span>
+        </li>
+        <li>
+            <span class="title">基本比例(%)：</span>   <span class="textmany" data-bind="text:$data['basicProportionStr']"></span>
+        </li>
+        <li>
+            <span class="title">其他补贴：</span>   <span class="textmany" data-bind="text:$data['otherSubsidy']"></span>
+        </li>
+        <li>
+            <span class="title">月基本工资：</span>  
+            <span class="textmany" data-bind="text:$data['monthBasicPay']"></span>
+        </li>
+        <li>
+            <span class="title">年度绩效：</span>  
+            <span class="textmany" data-bind="text:$data['annualPerformance']"></span>
+        </li>
+        <li>
+            <span class="title">月绩效工资：</span>  
+            <span class="textmany" data-bind="text:$data['monthPerformancePay']"></span>
+        </li>
+        <li>
+            <span class="title">费用归属：</span>  
+            <span class="textmany" data-bind="text:dl.getLabelByValue('system_dictionary_114', $data['costAttribution'])"></span>
+        </li>
+        <li style='min-height: 100px;height: auto;'>
+            <span class="title">自我鉴定：</span>   
+            <p style='min-height: 100px;line-height: 26px;flex: 2;padding: 2px;' data-bind="text:$data['reason']"></p>
+        </li>
+        <li style='min-height: 100px;height: auto;'>
+            <span class="title">试用期工作总结：</span>  
+            <p style='min-height: 100px;line-height: 26px;flex: 2;padding: 2px;' data-bind="text:$data['remark']"></p>
+        </li>
+    </ul>
+</script>
+
+

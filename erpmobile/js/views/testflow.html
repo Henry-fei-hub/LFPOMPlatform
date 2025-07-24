@@ -1,0 +1,53 @@
+<div id='diagram-container'>
+    <div id='sCmain-header'>
+        <button  class="buttonIcon2 arrLeft"
+                data-bind=" click: dl.backToClick,
+                               ojComponent: {
+                                   component:'ojButton', 
+                                   icons: {start:'oj-fwk-icon-caret-start oj-fwk-icon'}
+                               }">
+        </button>
+        <h3 id="header" class="itemTitle" >123</h3>
+    </div>
+    <div style=" width: 20%; height: 100%; float: left;border:1px solid #d6dfe6;">
+        <div style="color: #535353; font-weight: bolder;">Diagram A</div>
+        <div id="diagram1" data-bind="ojComponent: {
+              component: 'ojDiagram',
+              nodes: [{id: 'N0', label: '开始节点',
+                         icon : {source:'/css/images/start.png', width: 64, height : 64}, position:{x:10,y:10}},
+                    {id: 'N1', label: '普通处理节点',
+                      icon : {source:'/css/images/operator_add.png', width: 64, height : 64}, position:{x:138,y:10}},
+                    {id: 'N2', label: '结束节点',
+                      icon : {source:'/css/images/stop.png', width: 64, height : 64}, position:{x:276,y:10}}],
+            renderer: dl.nodeRenderer,
+            selectionRenderer: dl.nodeRenderer,
+            hoverRenderer: dl.nodeRenderer,
+            layout: dl.diagramLayout,
+          }"
+             style="max-width: 500px;height: 300px;">
+        </div>  
+    </div>
+    <div style=" width: 80%; height: 100%; float: right;border:1px solid #d6dfe6;">
+        <div style="color: #535353; font-weight: bolder;">Diagram B</div>
+        <div id="diagram2" data-bind="ojComponent: {
+              component: 'ojDiagram',
+              nodes: [{id: 'N0', label: '开始节点',
+                         icon : {source:'/css/images/start.png', width: 64, height : 64}, position:{x:10,y:10}},
+                    {id: 'N1', label: '普通处理节点',
+                      icon : {source:'/css/images/operator_add.png', width: 64, height : 64}, position:{x:138,y:10}},
+                    {id: 'N2', label: '结束节点',
+                      icon : {source:'/css/images/stop.png', width: 64, height : 64}, position:{x:276,y:10}}],
+            links : [{id: 'L0', startNode : 'N0', endNode : 'N1'},
+                {id: 'L1', startNode : 'N1', endNode : 'N2'}],
+                     renderer: dl.nodeRenderer,
+            selectionRenderer: dl.nodeRenderer,
+            hoverRenderer: dl.nodeRenderer,
+            layout: dl.diagramLayout,
+              minZoom:1, maxZoom:1,
+              panning:'auto',
+          }"
+             style="max-width: 500px; height: 300px;">
+        </div>
+    </div>
+    <br clear="both"/>
+</div>

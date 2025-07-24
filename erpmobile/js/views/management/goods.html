@@ -1,0 +1,55 @@
+
+<div id="navlistcontainer" class="demo-panel-contrast1 oj-contrast-marker">
+    <div id='rBmain-header'>
+        <button class="buttonIcon2 arrLeft"
+                data-bind=" click:rebackToClick,
+                               ojComponent: {
+                                   component:'ojButton', 
+                                   icons: {start:'oj-fwk-icon-caret-start oj-fwk-icon'}, 
+                                   label: ''
+                               }">
+        </button>
+        <h3 id="header" class="itemTitle" data-bind="text:dl.headerTitle"></h3>
+    </div>
+
+    <div id='mainmenu' style='margin-top: 70px;'>
+        <ul class="list">
+            <li>
+                <span class="title">主  题：</span>
+                <span class="cont" data-bind="text: __sub"></span>
+            </li>
+            <li>
+                <span class="title">日  期：</span>
+                <span class="cont" data-bind="text: __date"></span>
+            </li>
+            <li>
+                <span class="title">物  品：</span>
+                <span class="cont" data-bind="text: __goods"></span>
+            </li>
+            <li>
+                <span class="title">数  量：</span>
+                 <span class="cont" data-bind="text: __count"></span>
+            </li>
+         
+        </ul>
+    </div>
+
+    <button class='mt30 jindu' style='margin-top:20px;' data-bind="click: submitClick">领取</button>
+    <!--<p data-bind="visible: ulShow()==0" class='attention'>温馨提示：您已经领取成功</p>-->
+  </div>   
+<!--    <p data-bind="visible:subok()<0" class='attention1'>附件上传中，请耐心等候！</p>
+    <p data-bind="visible:subok()==1" class='attention1'>附件上传成功！</p>-->
+<!--    <p data-bind="visible: ulShow()<=0" class='attention'>温馨提示：请确认领取物品及数量后再点击领取！</p>-->
+
+    <!--<input type='file' style='visibility: hidden;' id = 'fileInput' multiple="multiple" data-bind="event: {change: uploadFile},visible:ulShow()>0,style:{marginTop:ulShow()>0? '150px': '0px'}">-->
+<!--
+    <button class='smallbut mt8 mb40' data-bind="event: {click: submitClick},style:{marginTop:ulShow()>0? '150px': '0px'},visible: subok()>=0">提交</button>
+    <button class='smallbut mt8 mb40' style="background-color: #999;" data-bind="style:{marginTop:ulShow()>0? '150px': '0px'},visible: subok()<0">提交</button> 
+    <button class='smallbut mt8 mb40' data-bind="event: {click: cancleClick},style:{marginTop:ulShow()>0? '150px': '0px'}">取消</button>-->
+<!--
+</div>
+
+
+
+
+

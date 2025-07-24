@@ -1,0 +1,39 @@
+<div id='rBmain-header'>
+    <button class="buttonIcon2 arrLeft"
+            data-bind=" click: dl.backToClick,
+                               ojComponent: {
+                                   component:'ojButton', 
+                                   icons: {start:'oj-fwk-icon-caret-start oj-fwk-icon'}
+                               }">
+    </button>
+    <h3 id="header" class="itemTitle" data-bind="text:dl.headerTitle"></h3>
+</div>
+
+<div id="mPnavlistcontainer" class="demo-panel-contrast1 oj-contrast-marker" >
+    <div id='mPmainmenu' data-bind="ojComponent:{
+                            component:'ojListView',
+                            drillMode:'sliding',
+                            data: dataSource,
+                            item: { template: 'folder_template' },
+                            selection: selectedItem
+                }">
+
+    </div>
+</div>
+
+<script type="text/html" id="folder_template">
+    <li class="appList" data-bind="attr: {id: $data['processType']}, event:{click:$parent.iClicked}">
+        <div class="oj-flex-bar">
+                <div data-bind="attr: {class: 'oj-flex-bar-start oj-flex-bar '+dl.isNullOrUndefined($data['iconClass']) ? dl.iconArr[$data.processType]: $data['iconClass']}">
+            </div>
+            <div class="oj-flex-bar-middle oj-flex-bar">
+                <div class="oj-flex-bar-middle_con oj-flex-bar-middle_left" data-bind="text: dl.getLabelByValue('system_process_types', $data['processType'])"></div>
+                <div class="oj-flex-bar-middle_con oj-flex-bar-middle_right"  data-bind="text:'('+$data['num']+')'"></div>
+            </div>
+            <div class="oj-flex-bar-end oj-sm-align-items-end">
+                <div role="presentation" class="oj-flex-item oj-fwk-icon oj-listview-drill-icon"></div>
+            </div>      
+        </div>
+
+    </li>
+</script>

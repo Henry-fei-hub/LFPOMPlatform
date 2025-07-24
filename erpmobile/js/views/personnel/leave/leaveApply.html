@@ -1,0 +1,127 @@
+
+<div id="navlistcontainer" class="demo-panel-contrast1 oj-contrast-marker">
+    <div id='rBmain-header'>
+        <button class="buttonIcon2 arrLeft"
+                data-bind="click: rebackToClick,
+                               ojComponent: {
+                                   component:'ojButton', 
+                                   icons: {start:'oj-fwk-icon-caret-start oj-fwk-icon'}, 
+                                   label: ''
+                               }">
+        </button>
+        <h3 id="header" class="itemTitle" data-bind="text:dl.headerTitle"></h3>
+    </div>
+
+    <div id='mainmenu' style='margin-top: 70px;' data-bind="visible: ulShow()<=0">
+        <ul class="list">
+            <li>
+                <span class="title">申 请 人：</span>
+                <span class="cont" data-bind="text:dl.getLabelByValue('employees', __employeeId())"></span>
+            </li>
+            <li>
+                <span class="title">公司所在地：</span>
+                <span class="cont" data-bind="text:dl.getLabelByValue('areas', __companyProvince())"></span>
+            </li>
+            <li>
+                <span class="title">工号：</span>
+                <span class="cont" data-bind="text:__employeeNo"></span>
+            </li>
+            <li>
+                <span class="title">部门：</span>
+                <span class="cont" data-bind="text:dl.getLabelByValue('all_departments', __departmentId())"></span>
+            </li>
+            <li>
+                <span class="title"><i class="star">*</i>假期类型：</span>
+                <input class="cont" data-bind="ojComponent: {component: 'ojSelect', value: __type, optionsKeys: {value : 'leaveTypeId', label : 'leaveTypeName'}, options: holidayTypes}"/>
+            </li>
+            <li>
+                <span class="title"><i class="star">*</i>交接人：</span>
+                <input class="cont" data-bind="ojComponent: {component: 'ojSelect', value: __nextAuditor,  options: dl.getOptionsByName('use_employees', true)}"/>
+            </li>
+            <li data-bind='visible: __TypeId()==9||__TypeId()==12'>
+                <span class="titlelong"><i class="star">*</i>假期类型明细项：</span>
+                <input class="cont" data-bind="ojComponent: {component: 'ojSelect', value: __subType, optionsKeys: {value : 'leaveTypeId', label : 'leaveTypeName'}, options: holidayDetailTypes}"/>
+            </li>
+            <li data-bind='visible:__TypeId()==1' style="display:block!important;">
+                <p class="titlelong" style="text-align:left;"><i class="star">*</i>假期类型明细项：</p>
+                <input id='combobox' class="cont1"  data-bind="ojComponent: {component: 'ojCombobox', multiple: true,  value: __subType, optionsKeys: {value : 'leaveTypeName', label : 'leaveTypeName'}, options: holidayDetailTypes}"/>                
+            </li>
+            <li data-bind='visible:__TypeId()==8'>
+                <span class="title"><i class="star">*</i>领证时间：</span>
+                <input class="cont" data-bind="ojComponent: {component: 'ojInputDateTime', value: __certificationTime, converter: dl.datetimeConverter}"/>
+            </li>
+            <li data-bind='visible: __subTypeId()=="多胞胎假"'>
+                <span class="title">婴儿数量：</span>
+                <input class="cont" data-bind="ojComponent: {component: 'ojInputText', value: __numberOfBaby}"/>
+            </li>
+            <li data-bind='visible:__TypeId()!=21'>
+                <span class="title"><i class="star">*</i>申请缘由：</span>
+                <input class="cont" data-bind="ojComponent: {component: 'ojInputText', value: __reason
+                }"/>
+            </li>
+            <li>
+                <span class="title"><i class="star">*</i>开始时间：</span>
+                <input class="cont" data-bind="ojComponent: {component: 'ojInputDateTime', value: __startDate, converter: dl.datetimeConverter}"/>
+            </li>
+            <li>
+                <span class="title"><i class="star">*</i>结束时间：</span>
+                <input class="cont" data-bind="ojComponent: {component: 'ojInputDateTime', value: __endDate, converter: dl.datetimeConverter}"/>
+            </li> 
+            <li data-bind='visible: __TypeId()==9'>
+                <span class="title">目标省份：</span>
+                <input class="cont" data-bind="ojComponent: {component: 'ojSelect', value: __targetProvince,  options: dl.getOptionsByName('provinces', true)}"/>
+            </li>
+            <p data-bind="visible: isType()>0 , html: errorMsg" style="font-weight:bold;color:#FF7F27; margin: 5px; text-align: center;" ></p>
+            <li data-bind='visible: __TypeId()==9'>
+                <span class="title">亲人去世：</span>
+                <input class="cont" data-bind="ojComponent: {component: 'ojSelect', value: __unit, optionsKeys: {value : 'value', label : 'key'}, options: unitArr}"/>
+            </li>
+            <li>
+                <span class="title"> 请假天数:           
+                </span>
+                <input class="cont" data-bind="ojComponent: {component: 'ojInputText', value: __days, optionsKeys: {value : 'leaveTypeId', label : 'leaveTypeName'}, options: holidayDetaildays}" readonly/>
+                <i style='font-size:10px;position:absolute;left:300px;color:#999;display: none;'>
+                    <span class="min"  data-bind="visible: __actualDays()>0">(最多<i data-bind="text: __actualDays"></i>天)</span>
+                    <span class="min"  data-bind="visible: __TypeId()==21">(最多<i data-bind="text: __actualHours"></i>时)</span>
+                </i>
+            </li>
+            <li>
+                <span class="title">请假小时数：</span>
+                <input class="cont" style='position: relative;' data-bind="ojComponent: {component: 'ojInputText', value:dl.isNullOrUndefined(__hours) ?  0 :  __hours}" readonly/>
+                <i style='font-size:10px;position:absolute;left:170px;color:#999;'>（仅限调休、事假、病假）</i>
+            </li> 
+            <li>
+                <span class="title">附件：</span>
+                <a class="file" style='flex: 2; overflow: auto; border: none' data-bind="attr: {href: __attachment},text: __attachmentName" target="_blank"></a>
+            </li>
+            <li data-bind='visible:__TypeId()!=21'>
+                <span class="title">备注：</span>
+                <input class="cont" data-bind="ojComponent: {component: 'ojInputText', value: __remark}"/>
+            </li>   
+        </ul>
+    </div>
+
+    <button class='mt30 jindu' data-bind="event: {click:uploadAttachmentClick},style:{marginTop:ulShow()>0? '230px': '40px'}">上传附件</button>
+    <p data-bind="visible:subok()<0" class='attention1'>附件上传中，请耐心等候！</p>
+    <p data-bind="visible:subok()==1" class='attention1'>附件上传成功！</p>
+    <p data-bind="visible: ulShow()<=0" class='attention'>温馨提示：病假、婚假、产假、产检假、陪护假请点击上方“上传附件”按钮，上传相关证明文件</p>
+
+    <input type='file' style='visibility: hidden;' id = 'fileInput' multiple="multiple" data-bind="event: {change: uploadFile},visible:ulShow()>0,style:{marginTop:ulShow()>0? '150px': '0px'}">
+
+    <button class='smallbut mt8 mb40' data-bind="event: {click: submitClick},style:{marginTop:ulShow()>0? '150px': '0px'},visible: subok()>=0">提交</button>
+    <button class='smallbut mt8 mb40' style="background-color: #999;" data-bind="style:{marginTop:ulShow()>0? '150px': '0px'},visible: subok()<0">提交</button> 
+    <button class='smallbut mt8 mb40' data-bind="event: {click: cancleClick},style:{marginTop:ulShow()>0? '150px': '0px'}">取消</button>
+
+    <div class="mb40 zjList">
+        <span style="font-weight:bold;color:#FF7F27;" data-bind="text:errorMessage"></span>
+    </div>
+</div>
+
+<style>
+    .oj-component-icon{
+        font-size: 10px;
+    }
+</style>
+
+
+

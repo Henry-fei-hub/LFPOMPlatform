@@ -1,0 +1,91 @@
+
+<div id="cNnavlistcontainer" class="demo-panel-contrast1 oj-contrast-marker">
+    <div class="topHeader" >
+        <button class="buttonIcon2 arrLeft"
+                data-bind=" click: dl.backToClick,
+                               ojComponent: {
+                                   component:'ojButton', 
+                                   icons: {start:'oj-fwk-icon-caret-start oj-fwk-icon'}, 
+                                   label: ''
+                               }">
+        </button>
+        <h3 id="header" class="itemTitle" data-bind="text:specialHeaderTitle"></h3>
+    </div>
+
+    <button class='mar20 mt70 jindu' data-bind="event: {click: jinduClick}">进度</button>
+    <div id='mainmenu' data-bind="ojComponent:{
+                            component:'ojListView',
+                            drillMode:'sliding',
+                            data: dataSource,
+                            item: { template: 'folder_template' }
+                }">
+    </div>
+</div>
+<button class='mar20 jindu mb40' data-bind="event: {click: jinduClick}">进度</button>
+
+<script type="text/html" id="folder_template">
+       <ul class='list'>
+        <li>
+            <span class="title">申 请 人：</span>   <span data-bind="text:dl.getLabelByValue('employees', $data['employeeId'])"></span>
+        </li>
+        <li>
+            <span class="title">公司所在地：</span>   <span data-bind="text:dl.getLabelByValue('areas', $data['companyProvince'])"></span>
+        </li>
+        <li>
+            <span class="title">工号：</span>   <span data-bind="text:$data['employeeNo']"></span>
+        </li>
+        <li>
+            <span class="title">部门：</span>   <span data-bind="text:dl.getLabelByValue('all_departments', $data['departmentId'])"></span>
+        </li>
+        <li>
+            <span class="title">假期类型：</span>   <span data-bind="text:dl.getLabelByValue('leave_types', $data['type'])"></span>
+        </li>
+        <li data-bind='visible: $parent.isshow'>
+            <span class="titlelonger">假期类型明细项：</span>   <span data-bind="text:$data['subTypeStr']"></span>
+        </li>
+        <li>
+            <span class="title">交接人：</span>
+             <span data-bind="text:dl.getLabelByValue('use_employees', $data['nextAuditor'])"></span>
+        </li>
+        <li>
+            <span class="title">开始时间：</span>   <span data-bind="text: dl.datetimeConverter.format(dl.parseValueFromService($data['startDate']))"></span>
+        </li>
+        <li>
+            <span class="title">结束时间：</span>   <span data-bind="text: dl.datetimeConverter.format(dl.parseValueFromService($data['endDate']))"></span>
+        </li>
+        <li data-bind='visible: $parent.isshowTargetProvince'>
+            <span class="title">目标省份：</span>   <span data-bind="text:dl.getLabelByValue('provinces', $data['targetProvince'])"></span>
+        </li>
+        <li data-bind='visible: $parent.isshowBaby'>
+            <span class="title">婴儿数量：</span>   <span data-bind="text: $data['numberOfBaby']"></span>
+        </li>
+        <li data-bind='visible: $parent.isshowUnit'>
+            <span class="title">亲人过世：</span>   <span data-bind="text: $data['unit']"></span>
+        </li>
+        <li data-bind='visible: $parent.isshowCertificationTime'>
+            <span class="title">领证时间：</span>   <span data-bind="text: dl.datetimeConverter.format(dl.parseValueFromService($data['certificationTime']))"></span>
+        </li>
+        <li>
+            <span class="title">请假天数：</span>   <span data-bind="text:$data['days']"></span>
+        </li>
+        <li>
+            <span class="title">申请缘由：</span>   <span data-bind="text:$data['reason']"></span>
+        </li>
+        <li>
+            <span class="title">请假小时数：</span>   <span class="textmany" data-bind="text:$data['hours']"></span>
+        </li>
+        <li>
+            <span class="title">备注信息：</span>   <span class="textmany" data-bind="text:$data['remark']"></span>
+        </li>
+        <li>
+            <span class="title">附件：</span>  
+            <span>
+                <a class='attachment' target='_self' data-bind="attr:{href : $data['attachment']}" >
+                    <i class='link' data-bind="text:dl.isNullOrUndefined($data['attachment']) ? '无':$data['attachment']"></i>
+                </a>
+            </span>
+        </li>
+    </ul>
+</script>
+
+

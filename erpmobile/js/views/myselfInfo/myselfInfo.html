@@ -1,0 +1,96 @@
+
+<div id="oj-hybrid-padding"  >
+    <div id='rBmain-header'>
+        <button class="buttonIcon2 arrLeft"
+                data-bind=" click: dl.backToClick,
+                               ojComponent: {
+                                   component:'ojButton', 
+                                   icons: {start:'oj-fwk-icon-caret-start oj-fwk-icon'}, 
+                                   label: ''
+                               }">
+        </button>
+        <h3 id="header" class="itemTitle" data-bind="text:specialHeaderTitle"></h3>
+    </div> 
+    <div class='picdiv'>
+        <img style="border-radius: 50%;width:125px;height:125px;" data-bind= 'attr:{"src":photo}' >
+    </div>
+<h3 class="navTitle">我的资料</h3>
+<div id='mainmenu' data-bind="ojComponent:{
+        component:'ojListView',
+        drillMode:'sliding',
+        display: display,
+        data: dataSource,
+        navigationLevel: navigationLevel,
+        item: { template: 'folder_template' }
+    }">
+</div>
+
+<h3 class="navTitle">我的项目</h3>
+<div id='mainmenu' data-bind="ojComponent:{
+        component:'ojListView',
+        drillMode:'sliding',
+        display: display,
+        data: dataSource1,
+        navigationLevel: navigationLevel,
+        item: { template: 'folder_template1' }
+    }">
+</div>
+<button class='mar20 jindu' style="background:#00CCFE;" data-bind="event: {click: saveClick}">保存修改</button>
+<button class='jindu mb40' data-bind="event: {click: uploadImgClick}">上传头像</button>
+</div>
+
+<script type="text/html" id="folder_template">
+    <ul class='list' data-bind="attr:{id: $data['employeeId']}">
+        <li>
+            <span class="title t_gray">编号：</span><span data-bind="text : $data['employeeNo']"></span>
+        </li>
+        <li>
+            <span class="title t_gray">姓名：</span><span data-bind="text : $data['employeeName']"></span>
+        </li>
+        <li>
+            <span class="title t_gray">手机：</span><span data-bind="text: $data['mobile']"></span>
+        </li>
+        <li>
+            <span class="title t_gray">座机：</span><span data-bind="text: $data['phone']"></spa>
+        </li>
+        <li>
+            <span class="title t_gray">QQ：</span><input data-bind="value: $data['qq']"/>
+        </li>
+        <li>
+            <span class="title t_gray">私人邮箱：</span><input data-bind="value: $data['email']"/>
+        </li>
+        <li>
+            <span class="title t_gray">我的签名：</span><input data-bind="value: $data['autograph']"/>
+        </li>
+        <li>
+            <span class="title t_gray">出生日期：</span><span data-bind="text : dl.dateConverter.format(dl.parseValueFromService($data['birth'])) "></span>
+        </li>
+        <li>
+            <span class="title t_gray">身份证号：</span><span data-bind="text: $data['card']"></span>
+        </li>
+        <li>
+            <span class="title t_gray">家庭地址：</span><span data-bind="text: $data['address']"></span>
+        </li>
+        <li>
+            <span class="title t_gray">企业邮箱：</span><span data-bind="text: $data['companyEmail']"></span>
+        </li>
+    </ul>
+</script>
+
+<script type="text/html" id="folder_template1">
+    <ul class='list'>
+        <li>
+            <span class="title t_gray">运行项目数：</span><span data-bind="text : $data['runProjectNum']"></span>
+        </li>
+        <li>
+            <span class="title t_gray">完成项目数：</span><span data-bind="text : $data['finishProjectNum']"></span>
+        </li>
+        <li>
+            <span class="title t_gray">计划获得积分：</span><span data-bind="text : $data['planIntegral']"></span>
+        </li>
+        <li>
+            <span class="title t_gray">实际获得积分：</span><span data-bind="text : $data['realIntegral']"></span>
+        </li>
+    </ul>
+</script>
+

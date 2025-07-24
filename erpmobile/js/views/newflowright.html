@@ -1,0 +1,43 @@
+<div style="width:100%; height:100%; max-height:750px;">
+<oj-table 
+    id="table" aria-label="Tasks Table"
+    data="[[dataSource]]"
+    row-renderer='[[oj.KnockoutTemplateUtils.getRenderer("row_template", true)]]'
+    columns='[{"headerText": "部门名称", "sortProperty": "departmentId"}]'
+    >
+</oj-table>
+
+<script type="text/html" id="row_template">
+    <tr style = 'border:none; width:100%;'>
+        <td>
+            <oj-row-expander context="[[$context.rowContext]]"></oj-row-expander>
+            <input type="checkbox" data-bind="attr: {id: departmentId}, click: $parent.testClick, checked:enabled">
+            <span data-bind="attr: {id:departmentId}, text: departmentName"></span>
+            <!--span data-bind="text: deleteFlag"></span>
+            <span data-bind="text: abbreviation"></span>
+            <span data-bind="text: isHeadcount"></span>
+            <span data-bind="text: parentId"></span>
+            <span data-bind="text: title"></span-->
+        </td>
+    </tr>
+</script>
+</div>
+<!--oj-table 
+           id="table" aria-label="Tasks Table"
+           data="[[datasource]]"
+           row-renderer='[[oj.KnockoutTemplateUtils.getRenderer("row_template", true)]]'
+           columns='[{"headerText": "departmentName", "sortProperty": "departmentName"},
+                   {"headerText": "parentId", "sortProperty": "parentId"}]'>
+       </oj-table>
+       
+       <script type="text/html" id="row_template">
+           <tr>
+             <td>
+               <oj-row-expander context="[[$context.rowContext]]"></oj-row-expander>
+               <span data-bind="text: departmentName"></span>
+             </td>
+             <td>
+               <span data-bind="text: parentId"></span>
+             </td>
+           </tr>
+       </script-->

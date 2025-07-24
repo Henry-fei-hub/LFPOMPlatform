@@ -1,0 +1,210 @@
+
+<div id="cNnavlistcontainer" class="demo-panel-contrast1 oj-contrast-marker">
+    <div class="topHeader" >
+        <button class="buttonIcon2 arrLeft"
+                data-bind=" click: dl.backToClick,
+                               ojComponent: {
+                                   component:'ojButton', 
+                                   icons: {start:'oj-fwk-icon-caret-start oj-fwk-icon'}, 
+                                   label: ''
+                               }">
+        </button>
+        <h3 id="header" class="itemTitle" data-bind="text:specialHeaderTitle()"></h3>
+    </div>
+    
+    <div class="disFlex mt70" data-bind='visible: isApproval()'>
+            <button class="button" data-bind="attr: {id : 0}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '同意'}"></button>
+            <button class="button" data-bind="attr: {id : 1}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '驳回'}"></button>
+            <button class="button" data-bind="attr: {id : 2}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '回退'}"></button>
+            <button class="button" data-bind="attr: {id : 3}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '转交'}"></button>
+    </div>   
+     <button class='mar20 jindu' data-bind="event: {click: jinduClick},style:{marginTop:isApproval()? '20px' :'70px'}">进度</button>
+    <div id='mainmenu' data-bind="ojComponent:{
+                            component:'ojListView',
+                            drillMode:'sliding',
+                            data: dataSource,
+                            item: { template: 'folder_template' }
+                }">
+
+    </div>
+
+</div>
+
+<div class=" mar20 zjList" data-bind='visible: isApproval()'>
+    <span class="w75 textR">转交人：</span>
+    <select id="basicSelect" data-bind="ojComponent: {component: 'ojSelect',
+                                value: additionalApprovalment,
+                                placeholder: '',
+                                rootAttributes: {style:'max-width:18em'}, options: dl.getOptionsByName('employees', true)}">
+            </select>
+</div>
+<div class=" mar20 zjList" data-bind='visible: isApproval()'>
+    <span class="w75">审批意见：</span>
+    <textarea id="textarea1" 
+         type="text"
+         class="oj-form-control oj-textarea-nocomp"
+        data-bind="value: processComment">
+
+    </textarea>
+        
+</div>
+<div class="mar20 disFlex" data-bind='visible: isApproval()'>
+            <button class="button" data-bind="attr: {id : 0}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '同意'}"></button>
+            <button class="button" data-bind="attr: {id : 1}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '驳回'}"></button>
+            <button class="button" data-bind="attr: {id : 2}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '回退'}"></button>
+            <button class="button" data-bind="attr: {id : 3}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '转交'}"></button>
+</div>   
+<button class='mar20 jindu mb40' data-bind="event: {click: jinduClick}">进度</button>
+
+<script type="text/html" id="folder_template">
+    <ul class='list'>
+        <li>
+            <span class="titlelong">信息编号：</span>   <span data-bind="text:$data['infoCode']"></span>
+        </li>
+        <li>    
+              <span class='titlelong'>项目名称：</span> <span data-bind="text:$data['projectName']"></span>      
+        </li>
+         <li>
+            <span class='titlelong'>设计预估面积(㎡)：</span><span data-bind="text:$data['estimateTheDesignAreas']"></span> 
+        </li>
+        <li>
+            <span class='titlelong'>预估价格(元)：</span><span data-bind="text:$data['estimatePrice']"></span> 
+        </li>
+         <li>   
+            <span class='titlelong'>业主所属行业：</span><span data-bind="text:dl.getLabelByValue('system_dictionary_177', $data['ownerTypeId'])"></span> 
+        </li>
+        
+         <li>
+            <span class="titlelong">项目地址(省)：</span>   <span data-bind="text:$data['province']"></span>
+        </li>
+        <li>
+            <span class="titlelong">项目地址(市)：</span>  <span data-bind="text:$data['city']"></span>
+        </li>
+        <li>
+            <span class="titlelong">项目详细地址：</span>   <span data-bind="text:$data['detailAddress']"></span>
+        </li>
+        <li>
+            <span class="titlelong">区域：</span>   <span data-bind="text:dl.getLabelByValue('system_dictionary_170', $data['region'])"></span>
+        </li>
+        <li>
+            <span class='titlelong'>客户名称：</span><span data-bind="text:$data['customerName']"></span> 
+        </li>
+        <li>
+            <span class='titlelong'>联系人：</span><span data-bind="text:$data['contactName']"></span> 
+        </li>
+        <li>
+            <span class="titlelong">职位：</span>  <span data-bind="text:$data['grade']"></span>
+        </li>
+        <li>
+            <span class="titlelong">联系电话：</span>   <span data-bind="text:$data['contactPhone']"></span>
+        </li>
+        <li>
+            <span class="titlelong">客户地址：</span>  <span data-bind="text:$data['customerAddress']"></span>
+        </li>
+        <li>
+            <span class="titlelong">项目等级：</span>   <span data-bind="text:dl.getLabelByValue('system_dictionary_2',$data['projectLevel'] )"></span>
+        </li>
+         <li>
+            <span class="titlelong">项目状态：</span>   <span data-bind="text:$data['projectStatus']"></span>
+        </li>
+        <li>
+            <span class="titlelong">业务类别：</span>   <span data-bind="text:$data['businessType']"></span>
+        </li>
+        <li>
+            <span class="titlelong">参与专业：</span>   <span data-bind="text:$data['specialty']"></span>
+        </li>
+        <li>    
+              <span class='titlelong'>项目营销团队：</span><span data-bind="text:$data['projectSalesTeam']"></span>      
+        </li>
+        <li>
+            <span class="titlelong">项目跟进人员：</span>   <span data-bind="text:$data['salePerson']"></span>
+        </li>
+        <li>
+            <span class="titlelong">营销团队负责人：</span>   <span data-bind="text:$data['saleLeader']"></span>
+        </li>
+        <li>
+            <span class="titlelong">项目经理：</span>   <span data-bind="text:$data['projectManage']"></span>
+        </li>
+        <li>
+            <span class="titlelong">项目主管领导：</span>   <span data-bind="text:$data['projectLeader']"></span>
+        </li>
+        <li>
+            <span class='titlelong'>比选形式：</span><span data-bind="text:dl.getLabelByValue('system_dictionary_168', $data['comparisonForm'])"></span> 
+        </li>
+        <li>
+            <span class='titlelong'>项目来源渠道：</span><span data-bind="text:$data['projectOrigination']"></span> 
+        </li>
+        
+
+        <li>
+            <span class="titlelong">来源渠道说明：</span>   <span data-bind="text:$data['projectOriginationRemark']"></span>
+        </li>
+        <li>    
+              <span class='titlelong'>拟签约公司：</span><span data-bind="text:dl.getLabelByValue('company_records', $data['signCompany'])"></span>      
+        </li>
+        <li>
+            <span class='titlelong'>设计资质章：</span><span data-bind="text:$data['designQualification']"></span> 
+        </li>
+        <li>
+            <span class='titlelong'>立项依据：</span><span data-bind="text:dl.getLabelByValue('system_dictionary_28', $data['projectBaseOn'])"></span> 
+        </li>
+        <li>
+            <span class="titlelong">立项时间：</span>  <span data-bind="text:dl.dateConverter.format(dl.parseValueFromService($data['projectApprovalTime']))"></span>
+        </li>
+        <li>
+            <span class="titlelong">主办设计团队：</span>   <span data-bind="text:dl.getLabelByValue('plate_records', $data['designTeam'])"></span>
+        </li>
+        <li>
+            <span class="titlelong">是否高层建筑：</span>  <span data-bind="text:$data['isHighRiseBuilding']? '是':'否'">
+        </li>
+        <li>
+            <span class="titlelong">设计合作单位：</span>   <span data-bind="text:$data['designCooperationName']"></span>
+        </li>
+        <li>
+            <span class="titlelong">建筑设计单位：</span>  <span data-bind="text:$data['architecturalDesignUnits']"></span>
+        </li>
+        <li>
+            <span class="titlelong">项目总投资额(元)：</span>   <span data-bind="text:$data['projectTotalInvestment']"></span>
+        </li>
+        
+          
+        
+        <li>
+            <span class="titlelong">建筑总面积(㎡)：</span>   <span data-bind="text:$data['totalBuildingAreas']"></span>
+        </li>
+        <li>    
+              <span class='titlelong'>耐火等级：</span><span data-bind="text:$data['fireResistanceRating']"></span>      
+        </li>
+       
+        <li>
+            <span class='titlelong'>实际设计面积(㎡)：</span><span data-bind="text:$data['actualDesignAreas']"></span> 
+        </li>
+        <li>
+            <span class="titlelong">建筑高度(m)：</span>  <span data-bind="text:$data['buildingHeight']"></span>
+        </li>
+        <li>
+            <span class="titlelong">建筑楼层(层)：</span>   <span data-bind="text:$data['buildingFloors']"></span>
+        </li>
+        <li>
+            <span class="titlelong">装修造价控制(元)：</span>  <span data-bind="text:$data['decorateMoneyControl']"></span>
+        </li>
+         <li>
+            <span class="titlelong">是否原创：</span>   <span data-bind="text:$data['isOriginal']? '是':'否'"></span>
+        </li>
+        <li>
+            <span class="titlelong">是否建筑院分包项目：</span>  <span data-bind="text:$data['isSubProject']? '是':'否'"></span>
+        </li>
+        <li>
+            <span class="titlelong">是否公开挂网招标：</span>   <span data-bind="text:$data['isPubliclyBidding']? '是':'否'"></span>
+        </li>
+        <li>
+            <span class="titlelong">是否有代理商：</span>  <span data-bind="text:$data['haveAgents']? '是':'否'"></span>
+        </li>
+        <li>
+            <span class="titlelong">备注：</span>  <span data-bind="text:$data['remark']"></span>
+        </li>
+        <li>
+            <span class="titlelong">信息登记时间：</span>  <span data-bind="text:dl.dateConverter.format(dl.parseValueFromService($data['infoRegisterTime']))"></span>
+        </li>
+    </ul>
+</script>

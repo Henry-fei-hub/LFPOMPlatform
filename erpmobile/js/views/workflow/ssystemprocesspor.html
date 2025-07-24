@@ -1,0 +1,318 @@
+<div id="main-ssystemprocesspor">
+    <div id="ssystemprocesspor-form-container" class="oj-flex">
+        <div id="ssystemprocesspor-form-pad" class="oj-flex-item oj-sm-12 oj-md-8" data-bind="ojModule : {name: 'searchssystemprocesspor', params: {data: $data}, cacheKey: 'ssystemprocessporform'}">
+        </div>
+        <div id="ssystemprocesspor-buttons" class="oj-flex-item oj-sm-12 oj-md-4">
+            <div id="ssystemprocesspor-button-container">
+                <div style="width: 100%;"
+                     data-bind="ojComponent: {
+			component: 'ojConveyorBelt', 
+			orientation: 'horizontal'}" > 
+                    <button id="btn-query-ssystemprocesspor" data-bind="event: { click: queryssystemprocessporClick},ojComponent: {
+	component:'ojButton',
+	display: 'all',
+	icons: {start:'bootstrap-icon glyphicon glyphicon-search '}, 
+	label: '查询' }"
+                            style = "margin-left: 10px; width: 100px; " ></button>
+                    <button id="btn-add-ssystemprocesspor" data-bind="event: { click: addssystemprocessporClick},ojComponent: {
+	component:'ojButton',
+	display: 'all',
+	icons: {start:'bootstrap-icon glyphicon glyphicon-plus '}, 
+	label: '添加' }"    
+                            style = "margin-left: 10px; width: 100px; " ></button>
+                    <button id="btn-modify-ssystemprocesspor" data-bind="event: { click: modifyssystemprocessporClick},ojComponent: {
+	component:'ojButton',
+	display: 'all',
+	icons: {start:'bootstrap-icon glyphicon glyphicon-edit '}, 
+	label: '修改' }"
+                            style = "margin-left: 10px; width: 100px; " ></button>
+                    <button id="btn-delete-ssystemprocesspor" data-bind="event: { click: deletessystemprocessporClick},ojComponent: {
+	component:'ojButton',
+	display: 'all',
+	icons: {start:'bootstrap-icon glyphicon glyphicon-trash '}, 
+	label: '删除' }"
+                            style = "margin-left: 10px; width: 100px; " ></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="ssystemprocesspor-container">
+        <div id="ssystemprocesspor-datagrid"
+             style="position:relative;width:100%;margin: auto;height:400px"
+             aria-label="ssystemprocesspor"
+             data-bind="ojComponent:
+			{
+				component: 'ojDataGrid',
+				data: ssystemprocessporDatasource,
+				editMode: editMode,
+				beforeEdit: handleEdit,
+				beforeEditEnd: handleEditEnd,
+				selectionMode: {row: 'single'},
+				header:
+				{
+					column:
+					{
+						style: 'width:150px',
+						template: 'ssystemprocessporHeaderTemplate'
+					}
+				},
+				cell: {
+					template: getCellTemplate,
+					className: getCellClassName
+				}
+			}"
+             >
+        </div>
+        <div id="ssystemprocesspor-paging" data-bind="ojComponent: { component: 'ojPagingControl', data: ssystemprocessporDatasource, pageSize: 15}">
+        </div>
+    </div>
+    <script type="text/html" id="ssystemprocessporHeaderTemplate">
+        <!-- ko if: $headerContext.key === 'processId' -->
+        <span>主键编码</span>
+        <!-- /ko -->
+
+        <!-- ko if: $headerContext.key === 'processTypeId' -->
+        <span>流程类型编码</span>
+        <!-- /ko -->
+
+        <!-- ko if: $headerContext.key === 'departmentId' -->
+        <span>归属部门</span>
+        <!-- /ko -->
+
+        <!-- ko if: $headerContext.key === 'includeDepartmentId' -->
+        <span>归属部门(包括下级部门)</span>
+        <!-- /ko -->
+
+        <!-- ko if: $headerContext.key === 'createEmployeeId' -->
+        <span>创建人</span>
+        <!-- /ko -->
+
+        <!-- ko if: $headerContext.key === 'createTime' -->
+        <span>创建时间</span>
+        <!-- /ko -->
+
+        <!-- ko if: $headerContext.key === 'processName' -->
+        <span>流程名称</span>
+        <!-- /ko -->
+
+        <!-- ko if: $headerContext.key === 'countersign' -->
+        <span>是否会签</span>
+        <!-- /ko -->
+
+        <!-- ko if: $headerContext.key === 'holdDepartmentId' -->
+        <span>归档部门</span>
+        <!-- /ko -->
+
+        <!-- ko if: $headerContext.key === 'holdDutyId' -->
+        <span>归档职务</span>
+        <!-- /ko -->
+
+        <!-- ko if: $headerContext.key === 'description' -->
+        <span>描述</span>
+        <!-- /ko -->
+
+        <!-- ko if: $headerContext.key === 'enable' -->
+        <span>是否可用</span>
+        <!-- /ko -->
+
+    </script>
+    <script type="text/html" id="ssystemprocessporDisplayTemplate">
+        <!-- ko if: $keys.column == 'processId' -->
+        <span data-bind="text: $cell.data"></span>
+        <!-- /ko -->
+
+        <!-- ko if: $keys.column == 'processTypeId' -->
+        <span data-bind="text: dl.getLabelByValue('system_process_types', $cell.data)"></span>
+        <!-- /ko -->
+
+        <!-- ko if: $keys.column == 'departmentId' -->
+        <span data-bind="text: dl.getLabelByValue('departments', $cell.data)"></span>
+        <!-- /ko -->
+
+        <!-- ko if: $keys.column == 'includeDepartmentId' -->
+        <span data-bind="text: $cell.data"></span>
+        <!-- /ko -->
+
+        <!-- ko if: $keys.column == 'createEmployeeId' -->
+        <span data-bind="text: $cell.data"></span>
+        <!-- /ko -->
+
+        <!-- ko if: $keys.column == 'createTime' -->
+        <span data-bind="text: dl.dateConverter.format($cell.data)"></span>
+        <!-- /ko -->
+
+        <!-- ko if: $keys.column == 'processName' -->
+        <span data-bind="text: $cell.data"></span>
+        <!-- /ko -->
+
+        <!-- ko if: $keys.column == 'countersign' -->
+        <span style="width:100%; text-align: center;"><input type="checkbox" checked="$cell.data" disabled ="true"/></span>
+        <!-- /ko -->
+
+        <!-- ko if: $keys.column == 'holdDepartmentId' -->
+        <span data-bind="text: $cell.data"></span>
+        <!-- /ko -->
+
+        <!-- ko if: $keys.column == 'holdDutyId' -->
+        <span data-bind="text: $cell.data"></span>
+        <!-- /ko -->
+
+        <!-- ko if: $keys.column == 'description' -->
+        <span data-bind="text: $cell.data"></span>
+        <!-- /ko -->
+
+        <!-- ko if: $keys.column == 'enable' -->
+        <span style="width:100%; text-align: center;"><input type="checkbox" checked="$cell.data" disabled ="true"/></span>
+        <!-- /ko -->
+
+    </script>
+    <script type="text/html" id="ssystemprocessporEditTemplate">
+        <!-- ko if: $cellContext.keys.column == 'processId' -->
+        <input data-bind="ojComponent:{ 
+			component:'ojInputText',
+			value: $cell.data,
+			rootAttributes: {class: 'oj-helper-text-align-start'}
+		}">
+        <!-- /ko -->
+
+        <!-- ko if: $cellContext.keys.column == 'processTypeId' -->
+        <input data-bind="ojComponent:{ 
+			component:'ojInputText',
+			value: $cell.data,
+			rootAttributes: {class: 'oj-helper-text-align-start'}
+		}">
+        <!-- /ko -->
+
+        <!-- ko if: $cellContext.keys.column == 'departmentId' -->
+        <select data-bind="ojComponent:{
+			component: 'ojSelect',
+			value: $cell.data,
+			options: dl.getOptionsByName('departments', true),
+			rootAttributes: {class: 'oj-helper-text-align-start'}
+			}">
+        </select>
+        <!-- /ko -->
+
+        <!-- ko if: $cellContext.keys.column == 'includeDepartmentId' -->
+        <input data-bind="ojComponent:{ 
+			component:'ojInputText',
+			value: $cell.data,
+			rootAttributes: {class: 'oj-helper-text-align-start'}
+		}">
+        <!-- /ko -->
+
+        <!-- ko if: $cellContext.keys.column == 'createEmployeeId' -->
+        <input data-bind="ojComponent:{ 
+			component:'ojInputText',
+			value: $cell.data,
+			rootAttributes: {class: 'oj-helper-text-align-start'}
+		}">
+        <!-- /ko -->
+
+        <!-- ko if: $cellContext.keys.column == 'createTime' -->
+        <input data-bind="ojComponent:{ 
+			component:'ojInputDate',
+			value: $cell.data,
+			converter: dl.dateConverter
+		}">
+        <!-- /ko -->
+
+        <!-- ko if: $cellContext.keys.column == 'processName' -->
+        <input data-bind="ojComponent:{ 
+			component:'ojInputText',
+			value: $cell.data,
+			rootAttributes: {class: 'oj-helper-text-align-start'}
+		}">
+        <!-- /ko -->
+
+        <!-- ko if: $cellContext.keys.column == 'countersign' -->
+        <div data-bind="attr:{
+			'aria-label': ($cell.data == 'checked' ? 'checked':'unchecked')
+			}, ojComponent:{
+				component:'ojCheckboxset',
+				value: $cell.data,
+				rootAttributes:{class:'oj-checkboxset-no-chrome'}
+			}">
+            <span class="oj-choice-item oj-helper-justify-content-center">
+                <input data-bind="attr:{
+					id: 'cbssystemprocesspor' + $cellContext.indexes.row}"
+                       ype="checkbox" value="checked" aria-label="checkbox"></input>
+            </span>
+        </div>
+        <!-- /ko -->
+
+        <!-- ko if: $cellContext.keys.column == 'holdDepartmentId' -->
+        <input data-bind="ojComponent:{ 
+			component:'ojInputText',
+			value: $cell.data,
+			rootAttributes: {class: 'oj-helper-text-align-start'}
+		}">
+        <!-- /ko -->
+
+        <!-- ko if: $cellContext.keys.column == 'holdDutyId' -->
+        <input data-bind="ojComponent:{ 
+			component:'ojInputText',
+			value: $cell.data,
+			rootAttributes: {class: 'oj-helper-text-align-start'}
+		}">
+        <!-- /ko -->
+
+        <!-- ko if: $cellContext.keys.column == 'description' -->
+        <input data-bind="ojComponent:{ 
+			component:'ojInputText',
+			value: $cell.data,
+			rootAttributes: {class: 'oj-helper-text-align-start'}
+		}">
+        <!-- /ko -->
+
+        <!-- ko if: $cellContext.keys.column == 'enable' -->
+        <div data-bind="attr:{
+			'aria-label': ($cell.data == 'checked' ? 'checked':'unchecked')
+			}, ojComponent:{
+				component:'ojCheckboxset',
+				value: $cell.data,
+				rootAttributes:{class:'oj-checkboxset-no-chrome'}
+			}">
+            <span class="oj-choice-item oj-helper-justify-content-center">
+                <input data-bind="attr:{
+					id: 'cbssystemprocesspor' + $cellContext.indexes.row}"
+                       ype="checkbox" value="checked" aria-label="checkbox"></input>
+            </span>
+        </div>
+        <!-- /ko -->
+
+    </script>
+</div>
+<div style="display: none; width: 100%; height: 400px; min-height: 200px;" id="ssystemprocessporDialog" title="流程定义"
+     data-bind="ojComponent:{ component: 'ojDialog', initialVisibility: 'hide', rootAttributes: { style: 'width: 100%;  height:auto; min-height:900px;'}}">
+    <div class="oj-dialog-body">
+        <div id="ssystemprocesspor-body" data-bind="ojModule: currentEditPage">
+        </div>
+    </div>
+    <div class="oj-dialog-footer">
+        <button id="btn-previous" data-bind="event: { click: previousClick},ojComponent: {
+	component:'ojButton',
+	display: 'all',
+	icons: {start:'oj-fwk-icon-back oj-fwk-icon'}, 
+	label: '上一页' }"
+                style = "margin-left: 10px; width: 100px; " ></button>
+        <button id="btn-next" data-bind="event: { click: nextClick},ojComponent: {
+	component:'ojButton',
+	display: 'all',
+	icons: {end:'oj-fwk-icon-next oj-fwk-icon'}, 
+	label: '下一页' }"
+                style = "margin-left: 10px; width: 100px; " ></button>
+        <button id="btn-ok" data-bind="event: { click: okClick},ojComponent: {
+	component:'ojButton',
+	display: 'all',
+	icons: {start:'oj-fwk-icon-status-confirmation oj-fwk-icon'}, 
+	label: '确定' }"
+                style = "margin-left: 10px; width: 100px; " ></button>
+        <button id="btn-cancel" data-bind="event: { click: cancelClick},ojComponent: {
+	component:'ojButton',
+	display: 'all',
+	icons: {start:'oj-fwk-icon-status-error oj-fwk-icon'}, 
+	label: '取消' }"
+                style = "margin-left: 10px; width: 100px; " ></button>
+    </div>
+</div>

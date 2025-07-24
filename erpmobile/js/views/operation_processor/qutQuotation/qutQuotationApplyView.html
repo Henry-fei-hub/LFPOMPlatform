@@ -1,0 +1,130 @@
+<div id="cNnavlistcontainer" class="demo-panel-contrast1 oj-contrast-marker">
+    <div class="topHeader" >
+        <button class="buttonIcon2 arrLeft"
+                data-bind=" click: dl.backToClick,
+                               ojComponent: {
+                                   component:'ojButton', 
+                                   icons: {start:'oj-fwk-icon-caret-start oj-fwk-icon'}, 
+                                   label: ''
+                               }">
+        </button>
+        <h3 id="header" class="itemTitle" data-bind="text:specialHeaderTitle"></h3>
+    </div>
+  <div class=" disFlex mt70" data-bind="visible:isApproval()"> 
+        <button class="button" data-bind="attr: {id : 0}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '同意'}"></button>
+        <button class="button" data-bind="attr: {id : 1}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '驳回'}"></button>
+        <button class="button" data-bind="attr: {id : 2}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '回退'}"></button>
+        <button class="button" data-bind="attr: {id : 3}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '转交'}"></button>
+    </div>   
+   <button class='mar20 jindu' data-bind="event: {click: jinduClick},style:{marginTop:isApproval()? '20px' :'70px'}">进度</button>
+    <div id='mainmenu' data-bind="ojComponent:{
+                            component:'ojListView',
+                            drillMode:'sliding',
+                            data: dataSource,
+                            item: { template: 'qq-folder_template' }
+                }">
+    </div>
+    <h3 class="navTitle">合同报价单表</h3>
+    <div id="navlistcontainer3" class="demo-panel-contrast1 oj-contrast-marker">
+        <div id='mainmenu' data-bind="ojComponent:{
+                            component:'ojListView',
+                            drillMode:'sliding',
+                            data: dataSource1,
+                            item: { template: 'qq-folder_template1' }
+                }">
+        </div>
+    </div>
+        <h3 class="navTitle">产值单表</h3>
+    <div id="navlistcontainer3" class="demo-panel-contrast1 oj-contrast-marker">
+        <div id='mainmenu' data-bind="ojComponent:{
+                            component:'ojListView',
+                            drillMode:'sliding',
+                            data: dataSource2,
+                            item: { template: 'qq-folder_template2' }
+                }">
+        </div>
+    </div>
+<div class=" mar20 zjList" data-bind='visible:isApproval()'>
+    <span class="w75 textR">转交人：</span>
+    <select id="basicSelect" data-bind="ojComponent: {component: 'ojSelect',
+                                value: additionalApprovalment,
+                                placeholder: '',
+                                rootAttributes: {style:'max-width:18em'}, options: dl.getOptionsByName('employees', true)}">
+            </select>
+</div>
+<div class=" mar20 zjList" data-bind='visible:isApproval()'>
+    <span class="w75">审批意见：</span>
+    <textarea id="textarea1" 
+         type="text"
+         class="oj-form-control oj-textarea-nocomp"
+        data-bind="value: processComment">
+    </textarea>        
+</div>
+    <div class="mar20 disFlex mt40" data-bind='visible:isApproval()'>
+        <button class="button" data-bind="attr: {id : 0}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '同意'}"></button>
+        <button class="button" data-bind="attr: {id : 1}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '驳回'}"></button>
+        <button class="button" data-bind="attr: {id : 2}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '回退'}"></button>
+        <button class="button" data-bind="attr: {id : 3}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '转交'}"></button>
+    </div>   
+    <button class='mar20 jindu mb40' data-bind="event: {click: jinduClick}">进度</button>
+</div>
+
+<script type="text/html" id="qq-folder_template">
+    <ul class='list'>
+        <li>
+            <span class="title">报价单编号：</span>   <span data-bind="text:$data['quotationNumber']"></span>
+        </li>
+        <li>
+            <span class="title">报价单名称：</span>   <span data-bind="text:$data['quotationName']"></span>
+        </li>
+        <li>
+            <span class="title">起草时间：</span>    <span data-bind="text: dl.datetimeConverter.format(dl.parseValueFromService($data['createTime']))"></span>
+        </li>
+        <li>
+            <span class="title">信息编号：</span>   <span data-bind="text:$data['infoCode']"></span>
+        </li>
+        <li>
+            <span class="title">项目编号：</span>   <span data-bind="text:$data['projectCode']"></span>
+        </li>
+        <li>
+            <span class="titlelong">报价单的状态：</span> <span data-bind="text: $parent.chooseStatus($data['quotationStatus'])" ></span>
+        </li>
+        <li>
+            <span class="title">申请人：</span>  <span data-bind="text:dl.getLabelByValue('employees', $data['employeeId'])" ></span>
+        </li>
+        <li>
+            <span class="title">修改时间：</span>    <span data-bind="text: dl.datetimeConverter.format(dl.parseValueFromService($data['updateTime']))"></span>
+        </li>
+    </ul>
+</script>
+<script type="text/html" id="qq-folder_template1">
+    <ul class='list'>
+        <li>
+            <span class="title">业务类型：</span> <span data-bind="text: $data['mainDesignAreaName']"></span>
+        </li>
+        <li>
+            <span class="title">面积：</span>   <span data-bind="text:$data['designArea']"></span>
+        </li>
+        <li>
+            <span class="title">单价：</span>   <span data-bind="text:$data['designUnitPrice']"></span>
+        </li>
+        <li>
+            <span class="title">总价：</span>   <span data-bind="text:$data['moneySum']"></span>
+        </li>
+        <h3 ></h3>
+    </ul>
+</script>
+<script type="text/html" id="qq-folder_template2">
+    <ul class='list'>
+        <li>
+            <span class="title">业务类别：</span> <span data-bind="text:dl.getLabelByValue('production_value_coefficient_type', $data['businessType'])" readonly></span>
+        </li>
+        <li>
+            <span class="title">面积：</span>   <span data-bind="text:$data['area']"></span>
+        </li>
+        <li>
+            <span class="title">产值：</span>   <span data-bind="text:$data['outputValue']"></span>
+        </li>
+        <h3 ></h3>
+    </ul>
+</script>

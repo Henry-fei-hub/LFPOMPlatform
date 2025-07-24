@@ -1,0 +1,105 @@
+
+<div id="cNnavlistcontainer" class="demo-panel-contrast1 oj-contrast-marker">
+    <div class="topHeader" >
+        <button class="buttonIcon2 arrLeft"
+                data-bind=" click: dl.backToClick,
+                               ojComponent: {
+                                   component:'ojButton', 
+                                   icons: {start:'oj-fwk-icon-caret-start oj-fwk-icon'}, 
+                                   label: ''
+                               }">
+        </button>
+        <h3 id="header" class="itemTitle" data-bind="text:specialHeaderTitle"></h3>
+    </div>
+
+    <button class='mar20 mt70 jindu ' data-bind="event: {click: jinduClick}">进度</button>
+    <div id='mainmenu' data-bind="ojComponent:{
+                            component:'ojListView',
+                            drillMode:'sliding',
+                            data: dataSource,
+                            item: { template: 'bm-folder_template' }
+                }">
+
+    </div>
+
+
+    <h3 class="navTitle">收款信息</h3>
+
+    <div id="navlistcontainer3" class="demo-panel-contrast1 oj-contrast-marker">
+        <div id='mainmenu' data-bind="ojComponent:{
+                            component:'ojListView',
+                            drillMode:'sliding',
+                            data: dataSource3,
+                            item: { template: 'bm-folder_template3' }
+                }">
+
+        </div>
+    </div>
+    <button class='mar20 mt70 jindu mb40' data-bind="event: {click: jinduClick}">进度</button>
+
+</div>
+
+<script type="text/html" id="bm-folder_template">
+
+    <ul class='list'>
+        <li>
+            <span class="title">报销编号：</span>   <span data-bind="text:$data['code']" readonly></span>
+        </li>
+        <li>
+            <span class="title">归属公司：</span>   <span data-bind="text:dl.getLabelByValue('system_dictionary_26', $data['companyId'])" readonly></span>
+        </li>
+        <li>
+            <span class="title">申请人：</span> <span data-bind="text:dl.getLabelByValue('employees', $data['employeeId'])" readonly></span>
+        </li>
+        <li>
+            <span class="title">部门：</span>   <span data-bind="text:dl.getLabelByValue('all_departments', $data['departmentId'])" readonly></span>
+        </li>
+        <li>
+            <span class="title">借款金额：</span>   <span data-bind="text: $data['borrowMoney']"></span>
+        </li>
+        <li>
+            <span class="title">借款日期：</span>   <span data-bind="text: dl.datetimeConverter.format(dl.parseValueFromService($data['borrowDate']))" readonly></span>
+        </li>
+        <li>
+            <span class="title">预计还款日期：</span>   <span data-bind="text: dl.datetimeConverter.format(dl.parseValueFromService($data['anticipatedDate']))" readonly></span>
+        </li>
+        <li>
+            <span class="title">主题名称：</span>   <span data-bind="text:$data['titleName']" readonly></span>
+        </li>
+
+        <li>
+            <span class="title">借款事由：</span>   <span data-bind="text: $data['reason']"></span>
+        </li>
+        <li>
+            <span class="title">操作人：</span> <span data-bind="text :dl.getLabelByValue('employees', $data['operateEmployeeId'])" readonly></span>
+        </li>
+        <li>
+            <span class="title">操作时间：</span>   <span data-bind="text :dl.datetimeConverter.format(dl.parseValueFromService($data['operateTime']))" readonly></span>
+        </li>
+    </ul>
+</script>
+
+
+<script type="text/html" id="bm-folder_template3">
+    <ul class='list'>
+        <li>
+            <span class="title">收款方：</span>   <span data-bind="text:$data['payeeName']"></span>
+        </li>
+        <li>
+            <span class="title flex1_5">银行名称（收款方）：</span>   <span data-bind="text:$data['selfBankName']"></span>
+        </li>
+        <li>
+            <span class="title flex1_5">银行账号（收款方）：</span>   <span data-bind="text:$data['selfBankAccount']"></span>
+        </li>
+        <li>
+            <span class="title">付款金额：</span>   <span data-bind="text:dl.numberConverter.format(dl.parseValueFromService($data['payMoney']))"></span>
+        </li>
+        <li>
+            <span class="title">冲账金额：</span>   <span data-bind="text:dl.numberConverter.format(dl.parseValueFromService($data['balanceAmount']))"></span>
+        </li>
+        <li>
+            <span class="textmany title">备注：</span>   <span data-bind="text:$data['remark']"></span>
+        </li>
+        <h3 ></h3>
+    </ul>
+</script>

@@ -1,0 +1,70 @@
+
+<div id="oj-hybrid-padding"  style='position:relative;'>
+    <div id='rBmain-header'>
+        <button class="buttonIcon2 arrLeft"
+                data-bind=" click: dl.backToClick,
+                               ojComponent: {
+                                   component:'ojButton', 
+                                   icons: {start:'oj-fwk-icon-caret-start oj-fwk-icon'}, 
+                                   label: ''
+                               }">
+        </button>
+        
+        <h3 id="header" class="itemTitle" data-bind="text:dl.headerTitle"></h3>
+    </div> 
+    <div id='mainmenu'>
+     <ul class='list' style="margin-top: 70px">
+        <li>
+            <span class="title">申 请 人：</span></br>   <span data-bind="text:dl.getLabelByValue('employees', __employeeId())"></span>
+        </li>
+        <li>
+            <span class="title">工号：</span>   <span data-bind="text: __employeeNo()"></span>
+        </li>
+        <li>
+            <span class="title">部门：</span>   <span data-bind="text:dl.getLabelByValue('all_departments', __departmentId())"></span>
+        </li>
+        <li>
+            <span class="title">开始日期：</span>   
+            <input id="projecttest-completed_time" data-bind="ojComponent: {component: 'ojInputDateTime', value: __startDate, converter: dl.datetimeConverter}"/>
+        </li>
+        <li>
+            <span class="title">结束日期：</span>   
+            <input id="projecttest-completed_time" data-bind="ojComponent: {component: 'ojInputDateTime', value: __endDate, converter: dl.datetimeConverter}"/>
+        </li>
+        <li>
+            <span class="title">加班类型：</span> 
+            <select id="basicSelect2" data-bind="ojComponent: {component: 'ojSelect',value: __projectType,placeholder:'',rootAttributes: {style:'flex:2;max-width:none;'}, optionsKeys: {value : 'overtimeType', label : 'overtimeTypeName'}, options: overtimeTypes}">
+            </select>
+        </li>
+        <li data-bind="visible :__projectType()==1">
+            <span class="title">请选择项目：</span> 
+            <select id="basicSelect2" data-bind="ojComponent: {component: 'ojSelect',value: projectSelect, placeholder: '', rootAttributes: {style:'flex:2;max-width:none;'}, optionsKeys: {value : 'projectId', label : 'title'}, options: subTypes}">
+            </select>
+        </li>
+        <li data-bind="visible: __projectType()==2">
+               <span class="titlelong"><i class="star">*</i>请选择前期项目：</span>
+               <input class="cont" data-bind="ojComponent: {component: 'ojSelect', value: preProjectSelect, placeholder: '',  rootAttributes: {style:'flex:2;max-width:none;'},optionsKeys: {value : 'preProjectReimbursementNumberId', label : 'preTitle'}, options: preSubTypes}"/>
+        </li>
+        <li data-bind="visible: __projectType()==2">              
+               <span class="titlelong"><i class="star">*</i>项目经理：</span>
+               <input class="cont" data-bind="ojComponent: {component: 'ojSelect', value: __nextAuditor,  placeholder: '', optionsKeys: {value : 'employeeId', label : 'employeeName'}, options: nextAuditors}"/>
+        </li>
+        <li>
+            <span class="title">小时数：</span>   <input data-bind="value: __hours" />
+        </li>
+        <li>
+            <span class="title">申请缘由：</span>   <input data-bind="value: __reason" />
+        </li>
+        <li>
+            <span class="title">备注：</span>   <input class="textmany" data-bind="value: __remark" />
+        </li>
+     </ul>
+    </div>
+</div>
+
+
+<div class=" mar20 zjList">
+    <span style="font-weight:bold;color:#FF7F27;" data-bind="text:errorMessage"></span>
+</div>
+<button class='mar20 jindu mb40' data-bind="event: {click: submitClick}">提交</button>
+

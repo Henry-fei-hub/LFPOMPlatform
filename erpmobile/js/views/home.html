@@ -1,0 +1,32 @@
+
+<div id="homeNavlistcontainer" class="demo-panel-contrast1 oj-contrast-marker">
+    <div id='homeMainmenu' data-bind="ojComponent:{
+                            component:'ojNavigationList',
+                            drillMode:'sliding',
+                            display: display,
+                            data: dataSource,
+                            item: { template: 'folder_template' },
+                            rootLabel: 'ERP',
+                            selection: selectedItem
+                }">
+
+    </div>
+</div>
+
+
+<script type="text/html" id="folder_template">
+    <li data-bind="attr: {id: $data['id']}, style: {'margin-bottom': $data['marginBottom']+'px' ,'margin-top':$data['marginTop']+'px'} ,event:{click:$parent.itemClicked}" >
+        <div class="container homeList">
+            <div class="list-name" data-bind="style:{'width':$data['width'] ,'display':$data['display'],'text-align':$data['textalign']}">      
+                <span data-bind="attr: {class: $parent.processString($data['iconName'])} ,style:{'color':$data['iconColor']}" ></span>
+                <div class="list-title">
+                    <span  data-bind="text: $data['title']" class="oj-navigationlist-item-title">  </span> 
+                    <span data-bind="attr: {class : $parent.returnClass($data)}, text: $parent.returnCount($data)"></span>
+                    <!--实时更改待审批的值   红色样式-->
+                </div>
+            </div>    
+        </div>
+        <!--给其他列加’>‘-->
+          <span role="presentation" data-bind="attr: {class : $parent.returnOtherClass($data['executePageName'])}"></span>
+    </li>
+</script>

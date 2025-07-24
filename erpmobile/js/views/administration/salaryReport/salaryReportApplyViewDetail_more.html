@@ -1,0 +1,284 @@
+
+<!--<div id="cNnavlistcontainer" class="demo-panel-contrast1 oj-contrast-marker">-->
+    <div class="topHeader" >
+        <button class="buttonIcon2 arrLeft"
+                data-bind=" click: dl.backToClick,
+                               ojComponent: {
+                                   component:'ojButton', 
+                                   icons: {start:'oj-fwk-icon-caret-start oj-fwk-icon'}, 
+                                   label: ''
+                               }">
+        </button>
+        <h3 id="header" class="itemTitle" data-bind="text:specialHeaderTitle"></h3>
+    </div>
+    
+<!--    二级部门列表  根据业务部门查看部门奖金数据列表  全部来自奖金分表-->
+    <h3 class="navTitle" style='margin-top: 50px;background: #f5f5f5;position: fixed;z-index: 2000;height: 43px;width: 100%;margin-top: -47px;' data-bind="visible: isBonus()&&haveBonusPlate()" >部门个人奖金详细</h3>
+        <div class='titletr' style='    margin-top: 93px;margin-left: 0; width: 100%; box-sizing: border-box;' data-bind="visible: isBonus()&&haveBonusPlate()">
+            <span class='thcommon'>姓名</span><span class='thcommon'>应发奖金</span><span class='thcommon'>应纳个税</span><span class='thcommon'>实付奖金</span><span class='thcommon'>备注</span>
+        </div>
+    <div id='mainmenu' style='width:100%;border:3px solid #cecece; ' data-bind="visible: isBonus()&&haveBonusPlate(), ojComponent:{
+                            component:'ojListView',
+                            drillMode:'sliding',
+                            data: dataSource2,
+                            item: { template: 'folder_template2' }
+                }">
+
+    </div>
+        
+<!--    二级部门列表  根据业务部门查看部门工资数据列表  全部来自工资分表-->
+    <h3 class="navTitle"  style='margin-top: 14px;background: #f5f5f5;position: fixed;z-index: 2000; height: 40px;width: 100%;' data-bind="visible: isSalary()" >部门个人工资详细</h3>
+    <oj-data-grid id="developerlist-datagrid" 
+            style="width:100%;height:500px;margin-top:56px;" 
+            aria-label="Data Grid with Gauge Demo"
+            data="[[datasource]]"
+            selection-mode.cell="single"
+            banding-interval.row="1"
+            header.column.renderer="[[oj.KnockoutTemplateUtils.getRenderer('developerlistHeaderTemplate')]]"
+            scroll-policy="loadMoreOnScroll"
+            header.column.style="width:80px"
+            header.column.resizable.width="enable"
+            header.column.resizable.height="enable"
+            header.row.style="width:60px;"
+            cell.renderer="[[oj.KnockoutTemplateUtils.getRenderer('developerlistDisplayTemplate')]]"
+            data-bind="visible: isSalary()"
+        ></oj-data-grid>
+    
+    <h3 class="navTitle"  style='margin-top: 14px;background: #f5f5f5;position: fixed;z-index: 2000; height: 40px;width: 100%;' data-bind="visible: isYearBonus()" >部门个人年终奖详细</h3>
+    <oj-data-grid 
+            style="width:100%;height:500px;margin-top:56px;" 
+            aria-label="Data Grid with Gauge Demo"
+            data="[[yearBonusDatasource]]"
+            selection-mode.cell="single"
+            banding-interval.row="1"
+            header.column.renderer="[[oj.KnockoutTemplateUtils.getRenderer('yearBonusHeaderTemplate')]]"
+            scroll-policy="loadMoreOnScroll"
+            header.column.style="width:80px"
+            header.column.resizable.width="enable"
+            header.column.resizable.height="enable"
+            header.row.style="width:60px;"
+            cell.renderer="[[oj.KnockoutTemplateUtils.getRenderer('yearBonuslistDisplayTemplate')]]"
+            data-bind="visible: isYearBonus()"
+        ></oj-data-grid>
+
+<script type="text/html" id="folder_template2">
+    <ul class='table' style="width: 100%;box-sizing: border-box; ">
+        <li class='tr'>
+           <span class='tdcommon'  data-bind="text:dl.getLabelByValue('employees', $data['employeeId'])"></span>
+           <span class="tdcommon"  data-bind="text:dl.numberConverter.format($data['shouldBonus'])"></span>
+           <span class='tdcommon'data-bind="text:dl.numberConverter.format($data['shouldTax'])"></span>
+           <span class="tdcommon" data-bind="text:dl.numberConverter.format($data['factBonus'])"></span>
+           <span class='tdcommon'data-bind="text:dl.numberConverter.format($data['remark'])"></span>
+        </li>
+    </ul>
+</script>
+
+   <script type="text/html" id="developerlistHeaderTemplate">
+            <!-- ko if: $context.key=='employeeName' -->
+                <span data-bind="text: '姓名'"></span>
+            <!-- /ko -->
+            <!-- ko if: $context.key=='attendanceDeduct' -->
+                <span data-bind="text: '考勤扣款'"></span>
+            <!-- /ko -->
+            <!-- ko if: $context.key=='fillSendDeduct' -->
+                <span data-bind="text: '异动补发'"></span>
+            <!-- /ko -->
+            <!-- ko if: $context.key=='jobSubsidy' -->
+                <span data-bind="text: '岗位补贴'"></span>
+            <!-- /ko -->
+            <!-- ko if: $context.key=='shouldSalary' -->
+                <span data-bind="text: '应发工资'"></span>
+            <!-- /ko -->
+            <!-- ko if: $context.key=='shouldBonus' -->
+                <span data-bind="text: '应发奖金'"></span>
+            <!-- /ko -->
+              <!-- ko if: $context.key=='shouldTotal' -->            
+                <span data-bind="text: '应发合计'"></span>
+            <!-- /ko -->
+            <!-- ko if: $context.key=='shouldTax' -->
+                <span data-bind="text: '应纳个税'"></span>
+            <!-- /ko -->
+            <!-- ko if: $context.key=='totalInsurance' -->
+                <span data-bind="text: '社保'"></span>
+            <!-- /ko -->
+            <!-- ko if: $context.key=='totalFund' -->
+                <span data-bind="text: '公积金'"></span>
+            <!-- /ko -->
+            <!-- ko if: $context.key=='leaveNoDeductTax' -->
+                <span data-bind="text: '离职补偿'"></span>
+            <!-- /ko -->
+            <!-- ko if: $context.key=='factSalary' -->
+                <span data-bind="text: '实付工资'"></span>
+            <!-- /ko -->
+            <!-- ko if: $context.key=='factBonus' -->
+                <span data-bind="text: '备注'"></span>
+            <!-- /ko -->
+        </script>
+        
+         <script type="text/html" id="developerlistDisplayTemplate">
+            <!-- ko if: $context.keys.column == 'employeeName' -->
+		<span data-bind="text:$context.data"></span>
+            <!-- /ko -->
+
+            <!-- ko if: $context.keys.column == 'attendanceDeduct' -->
+                    <span data-bind="text: dl.numberConverter.format($context.data)"></span>
+            <!-- /ko -->
+
+            <!-- ko if: $context.keys.column == 'fillSendDeduct' -->
+                    <span data-bind="text: dl.numberConverter.format($context.data)"></span>
+            <!-- /ko -->
+             <!-- ko if: $context.keys.column == 'jobSubsidy' -->
+		<span data-bind="text: dl.numberConverter.format($context.data)"></span>
+            <!-- /ko -->
+
+            <!-- ko if: $context.keys.column == 'shouldSalary' -->
+                    <span data-bind="text: dl.numberConverter.format($context.data)"></span>
+            <!-- /ko -->
+
+            <!-- ko if: $context.keys.column == 'shouldBonus' -->
+                    <span data-bind="text: dl.numberConverter.format($context.data)"></span>
+            <!-- /ko -->   
+            <!-- ko if: $context.keys.column == 'shouldTotal' -->
+		<span data-bind="text:dl.numberConverter.format($context.data)"></span>
+            <!-- /ko -->
+
+            <!-- ko if: $context.keys.column == 'shouldTax' -->
+                    <span data-bind="text: dl.numberConverter.format($context.data)"></span>
+            <!-- /ko -->
+
+            <!-- ko if: $context.keys.column == 'totalInsurance' -->
+                    <span data-bind="text: dl.numberConverter.format($context.data)"></span>
+            <!-- /ko -->
+               <!-- ko if: $context.keys.column == 'totalFund' -->
+                    <span data-bind="text: dl.numberConverter.format($context.data)"></span>
+            <!-- /ko -->
+
+            <!-- ko if: $context.keys.column == 'leaveNoDeductTax' -->
+                    <span data-bind="text: dl.numberConverter.format($context.data)"></span>
+            <!-- /ko -->   
+            <!-- ko if: $context.keys.column == 'factSalary' -->
+		<span data-bind="text: dl.numberConverter.format($context.data)"></span>
+            <!-- /ko -->
+
+            <!-- ko if: $context.keys.column == 'remark' -->
+                    <span data-bind="text: dl.numberConverter.format($context.data)"></span>
+            <!-- /ko -->
+
+        </script>
+
+        <script type="text/html" id="yearBonusHeaderTemplate">
+            <!-- ko if: $context.key=='employeeName' -->
+                <span data-bind="text: '姓名'"></span>
+            <!-- /ko -->
+            <!-- ko if: $context.key=='shouldTotal' -->
+                <span data-bind="text: '应发合计'"></span>
+            <!-- /ko -->
+            <!-- ko if: $context.key=='shouldTax' -->
+                <span data-bind="text: '应纳个税'"></span>
+            <!-- /ko -->
+             <!-- ko if: $context.key=='insteadDeduct' -->
+                <span data-bind="text: '代扣款项'"></span>
+            <!-- /ko -->
+            <!-- ko if: $context.key=='factBonus' -->
+                <span data-bind="text: '实发奖金'"></span>
+            <!-- /ko -->
+            <!-- ko if: $context.key=='alreadyBonus' -->
+                <span data-bind="text: '已发奖金'"></span>
+            <!-- /ko -->
+            <!-- ko if: $context.key=='shouldBonus' -->
+                <span data-bind="text: '应发奖金'"></span>
+            <!-- /ko -->
+            <!-- ko if: $context.key=='yearPerformanceBonus' -->
+                <span data-bind="text: '应发年度绩效工资'"></span>
+            <!-- /ko -->
+            <!-- ko if: $context.key=='programBonus' -->
+                <span data-bind="text: '本次应发奖金'"></span>
+            <!-- /ko -->
+            <!-- ko if: $context.key=='salaryDiffDeduct' -->
+                <span data-bind="text: '汇率工资差额'"></span>
+            <!-- /ko -->
+            <!-- ko if: $context.key=='transferAccountMoney' -->
+                <span data-bind="text: '调户押金返还'"></span>
+            <!-- /ko -->
+            <!-- ko if: $context.key=='depositDeduct' -->
+                <span data-bind="text: '调户押金扣除'"></span>
+            <!-- /ko -->
+            <!-- ko if: $context.key=='reimbursementDeduct' -->
+                <span data-bind="text: '报销扣款'"></span>
+            <!-- /ko -->
+            
+             <!-- ko if: $context.key=='oneToThreeRest' -->
+                <span data-bind="text: '1-3季度剩余奖金'"></span>
+            <!-- /ko -->
+             <!-- ko if: $context.key=='housingSubsidy' -->
+                <span data-bind="text: '住房补贴'"></span>
+            <!-- /ko -->
+             <!-- ko if: $context.key=='deductPerformanceBonus' -->
+                <span data-bind="text: '年度绩效扣款'"></span>
+            <!-- /ko -->
+            <!-- ko if: $context.key=='remark' -->
+                <span data-bind="text: '备注'"></span>
+            <!-- /ko -->
+        </script>
+        
+         <script type="text/html" id="yearBonuslistDisplayTemplate">
+            <!-- ko if: $context.keys.column == 'employeeName' -->
+		<span data-bind="text:$context.data"></span>
+            <!-- /ko -->
+
+            <!-- ko if: $context.keys.column == 'shouldTotal' -->
+                    <span data-bind="text: dl.numberConverter.format($context.data)"></span>
+            <!-- /ko -->
+
+            <!-- ko if: $context.keys.column == 'shouldTax' -->
+                    <span data-bind="text: dl.numberConverter.format($context.data)"></span>
+            <!-- /ko -->
+            <!-- ko if: $context.keys.column == 'insteadDeduct' -->
+                    <span data-bind="text: dl.numberConverter.format($context.data)"></span>
+            <!-- /ko -->
+            
+             <!-- ko if: $context.keys.column == 'factBonus' -->
+		<span data-bind="text: dl.numberConverter.format($context.data)"></span>
+            <!-- /ko -->
+
+            <!-- ko if: $context.keys.column == 'alreadyBonus' -->
+                    <span data-bind="text: dl.numberConverter.format($context.data)"></span>
+            <!-- /ko -->
+
+            <!-- ko if: $context.keys.column == 'shouldBonus' -->
+                    <span data-bind="text: dl.numberConverter.format($context.data)"></span>
+            <!-- /ko -->   
+            <!-- ko if: $context.keys.column == 'yearPerformanceBonus' -->
+                    <span data-bind="text: dl.numberConverter.format($context.data)"></span>
+            <!-- /ko -->
+
+            <!-- ko if: $context.keys.column == 'programBonus' -->
+                    <span data-bind="text: dl.numberConverter.format($context.data)"></span>
+            <!-- /ko -->
+               <!-- ko if: $context.keys.column == 'salaryDiffDeduct' -->
+                    <span data-bind="text: dl.numberConverter.format($context.data)"></span>
+            <!-- /ko -->
+
+            <!-- ko if: $context.keys.column == 'transferAccountMoney' -->
+                    <span data-bind="text: dl.numberConverter.format($context.data)"></span>
+            <!-- /ko -->   
+            <!-- ko if: $context.keys.column == 'depositDeduct' -->
+		<span data-bind="text: dl.numberConverter.format($context.data)"></span>
+            <!-- /ko -->
+            <!-- ko if: $context.keys.column == 'reimbursementDeduct' -->
+		<span data-bind="text: dl.numberConverter.format($context.data)"></span>
+            <!-- /ko -->
+            <!-- ko if: $context.keys.column == 'oneToThreeRest' -->
+                    <span data-bind="text: dl.numberConverter.format($context.data)"></span>
+            <!-- /ko -->
+            <!-- ko if: $context.keys.column == 'housingSubsidy' -->
+                    <span data-bind="text: dl.numberConverter.format($context.data)"></span>
+            <!-- /ko -->
+            <!-- ko if: $context.keys.column == 'deductPerformanceBonus' -->
+                    <span data-bind="text: dl.numberConverter.format($context.data)"></span>
+            <!-- /ko -->
+            <!-- ko if: $context.keys.column == 'remark' -->
+                    <span data-bind="text: dl.numberConverter.format($context.data)"></span>
+            <!-- /ko -->
+
+        </script>

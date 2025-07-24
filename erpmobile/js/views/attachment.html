@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div id="cNnavlistcontainer" class="demo-panel-contrast1 oj-contrast-marker">
+            <div class="topHeader" >
+                <button class="buttonIcon2 arrLeft"
+                        data-bind=" click: dl.backToClick,
+                                       ojComponent: {
+                                           component:'ojButton', 
+                                           icons: {start:'oj-fwk-icon-caret-start oj-fwk-icon'}, 
+                                           label: ''
+                                       }">
+                </button>
+                <h3 id="header" class="itemTitle" data-bind="text:' 预览'"></h3>
+            </div>
+            <div id="pdf_preview" style='margin-top: 60px;'>
+                <!--<frame  id='media' data-bind="attr:{src :'js/files/40cc279359094373972f54bed7d6d316.pdf'}"></frame >-->
+                <a id='media' data-bind="attr:{href : src()}" target="_blank"></a>
+                <!--<embed id='media' data-bind="attr:{src : '/js/files/40cc279359094373972f54bed7d6d316.pdf'}"/>-->
+                 <!--<a class='media' data-bind="attr:{href :src()}"></a>-->
+            </div>
+        </div>
+
+    </body>
+</html>
+<style>
+    #pdf_preview{
+        width: 100%;
+        height: 600px;
+        display: inline-block;
+        padding: 10px;
+        background: #333;
+        -webkit-overflow-scrolling: touch; /* 当手指从触摸屏上移开，会保持一段时间的滚动 */
+        overflow-y: scroll;
+    }
+    #media{
+        width: 100%;
+        height: 100%;
+        display: inline-block;
+    }
+</style>

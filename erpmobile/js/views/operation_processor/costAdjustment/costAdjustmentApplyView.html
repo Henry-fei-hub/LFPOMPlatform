@@ -1,0 +1,121 @@
+
+<div id="cNnavlistcontainer" class="demo-panel-contrast1 oj-contrast-marker">
+    <div class="topHeader" >
+        <button  class="buttonIcon2 arrLeft"
+                 data-bind=" click: dl.backToClick,
+                               ojComponent: {
+                                   component:'ojButton', 
+                                   icons: {start:'oj-fwk-icon-caret-start oj-fwk-icon'}, 
+                                   label: ''
+                               }">
+        </button>
+        <h3 id="header" class="itemTitle" data-bind="text:specialHeaderTitle"></h3>
+    </div>
+
+    <div class="disFlex mt70" data-bind='visible: isApproval()'>
+        <button class="button" data-bind="attr: {id : 0}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '同意'}"></button>
+        <button class="button" data-bind="attr: {id : 1}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '驳回'}"></button>
+        <button class="button" data-bind="attr: {id : 2}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '回退'}"></button>
+        <button class="button" data-bind="attr: {id : 3}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '转交'}"></button>
+    </div>   
+    <button class='mar20 jindu' data-bind="event: {click: jinduClick},style:{marginTop:isApproval()? '20px' :'70px'}">进度</button>
+    <div id='mainmenu' data-bind="ojComponent:{
+                            component:'ojListView',
+                            drillMode:'sliding',
+                            data: dataSource,
+                            item: { template: 'folder_template' }
+                }">
+
+    </div>
+    <h3 class="navTitle">详细</h3>
+    <div id='othermenu' style='border-top:2px solid #ccc;' data-bind="ojComponent:{
+                            component:'ojListView',
+                            drillMode:'sliding',
+                            data: dataSource1,
+                            item: { template: 'folder_template1' }
+                }">
+
+    </div>
+</div>
+
+<div class=" mar20 zjList" data-bind='visible: isApproval()'>
+    <span class="w75 textR">转交人：</span>
+    <select id="basicSelect" data-bind="ojComponent: {component: 'ojSelect',
+                                value: additionalApprovalment,
+                                placeholder: '',
+                                rootAttributes: {style:'max-width:18em'}, options: dl.getOptionsByName('employees', true)}">
+    </select>
+</div>
+<div class=" mar20 zjList" data-bind='visible: isApproval()'>
+    <span class="w75">审批意见：</span>
+    <textarea id="textarea1" 
+              type="text"
+              class="oj-form-control oj-textarea-nocomp"
+              data-bind="value: processComment">
+
+    </textarea>
+
+</div>
+<div class="mar20 disFlex" data-bind='visible: isApproval()'>
+    <button class="button" data-bind="attr: {id : 0}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '同意'}"></button>
+    <button class="button" data-bind="attr: {id : 1}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '驳回'}"></button>
+    <button class="button" data-bind="attr: {id : 2}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '回退'}"></button>
+    <button class="button" data-bind="attr: {id : 3}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '转交'}"></button>
+</div>   
+<button class='mar20 jindu mb40' data-bind="event: {click: jinduClick}">进度</button>
+
+
+<script type="text/html" id="folder_template">
+    <ul class='list'>
+        <li>
+            <span class="title">起草人：</span>   <span data-bind="text:dl.getLabelByValue('employees', $data['drafter'])"></span>
+        </li>
+        <li>
+            <span class="title">原成本类型：</span>  <span data-bind="text:dl.getLabelByValue('system_dictionary_121', $data['costType'])"></span>
+        </li>
+        <li>
+            <span class="title" style="flex:2;">原承担的费用业务部门：</span>   <span data-bind="text:dl.getLabelByValue('plate_records', $data['plateId'])"></span>
+        </li>
+        <li>
+            <span class="title">编号：</span>   <span data-bind="text: $data['code']"></span>
+        </li>
+        <li>
+            <span class="title">费用承担主体：</span>   <span data-bind="text: $data['name']"></span>
+        </li>
+        <li>
+            <span class="title">成本：</span>   <span data-bind="text: $data['cost']"></span>
+        </li>
+        <li>
+            <span class="title">货币种类：</span>   <span data-bind="text:dl.getLabelByValue('system_dictionary_40', $data['currency'])"></span>
+        </li>
+        <li>
+            <span class="title">汇率：</span>   <span data-bind="text:$data['exchangeRate']"></span>
+        </li>
+        <li>
+            <span class="title">创建时间：</span>   <span data-bind="text: dl.datetimeConverter.format(dl.parseValueFromService($data['createTime']))"></span>
+        </li>
+        <li>
+            <span class="title">申请缘由：</span>   <span data-bind="text:$data['reason']"></span>
+        </li>
+    </ul>
+</script>
+
+<script type="text/html" id="folder_template1">
+    <ul class='list'  style='border-bottom:2px solid #ccc;'>
+        <li>
+            <span class="title" style="flex:2;">部门或项目编码：</span>   <span data-bind="text: $data['id']"></span>
+        </li>
+        <li>  
+            <span class="title">成本类型：</span>   <span data-bind="text:dl.getLabelByValue('system_dictionary_121', $data['type'])"></span>
+        </li>
+        <li>
+            <span class="title">编号：</span>   <span data-bind="text:$data['code']"></span>
+        </li>
+        <li>
+            <span class="title">费用承担主体：</span>   <span data-bind="text:$data['name']"></span>
+        </li>
+        <li>
+            <span class="title">成本：</span>   <span data-bind="text:$data['cost']"></span>
+        </li>
+    </ul>
+</script>

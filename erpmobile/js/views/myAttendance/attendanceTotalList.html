@@ -1,0 +1,85 @@
+<div id='rBmain-header'>
+    <button class="buttonIcon2 arrLeft"
+            data-bind=" click: dl.backToClick,
+                               ojComponent: {
+                                   component:'ojButton', 
+                                   icons: {start:'oj-fwk-icon-caret-start oj-fwk-icon'}
+                               }">
+    </button>
+    <h3 id="header" class="itemTitle" data-bind="text:dl.headerTitle"></h3>
+</div>
+<div class='place'>
+    <div class='item'>
+        <span class="title">出勤日期：</span>   
+        <input id="projecttest-completed_time" data-bind="ojComponent: {component: 'ojInputDate', value: startDate, converter: dl.dateConverter}"/>
+    </div>
+    <div class='item'>
+        <span class="title">业务部门：</span>   
+        <select id="basicSelect2" data-bind="ojComponent: {component: 'ojSelect',placeholder: '',value: plateId,rootAttributes: {style:'flex:2;max-width:none;'}, options: dl.getOptionsByName('system_dictionary_1', false)}">
+        </select>
+    </div>
+</div>
+
+<h3 class="navTitle" >出勤率</h3>
+<div id='attennormal_approvalment' data-bind="ojComponent:{
+                            component:'ojListView',
+                            data: dataSource,
+                            item: { template: 'folder_template' },
+                            selection: selectedItem
+                }">
+
+</div>
+<div class="disFlex mt30 mb40">
+    <button class="button1" data-bind="attr: {id : 1}, event: {click: onClick}, ojComponent: {component: 'ojButton', label: '今日出勤'}"></button>
+    <button class="button1" data-bind="attr: {id : 2}, event: {click: onClick}, ojComponent: {component: 'ojButton', label: '明日出勤'}"></button>
+    <button class="button1" data-bind="attr: {id : 3}, event: {click: onClick}, ojComponent: {component: 'ojButton', label: '后日出勤'}"></button>
+</div>  
+<script type="text/html" id="folder_template">
+    <li class="appList" data-bind="attr: {id: $data['plateId']}, event:{click:$parent.iClicked}">
+        <div class="oj-flex-bar">
+            <div style='color: lightskyblue;' data-bind="attr: {class: 'oj-flex-bar-start oj-flex-bar '+'oj-navigationlist-item-icon demo-home-icon-24 demo-icon-font-24'}">
+            </div>
+            <div class="oj-flex-bar-middle oj-flex-bar">
+                <div class="oj-flex-bar-middle oj-flex-bar dhsl">       
+                    <span class='first' data-bind="text: $data['name']+'(出勤率:'+$data['percent']+')'"></span>
+                </div>
+            </div>
+            <div class="oj-flex-bar-end oj-sm-align-items-end">
+                <div role="presentation" class="oj-flex-item oj-fwk-icon oj-listview-drill-icon"></div>
+            </div>     
+        </div>
+
+    </li>
+</script>
+
+
+
+
+<style>
+    .place {
+        width: 100%;
+        margin-top: 70px;
+        overflow-y: hidden;
+    }
+    .item{
+        list-style: none;
+        height: 45px;
+        line-height: 45px;
+        background: #fff;
+        border-bottom: 1px solid #f5f5f5;
+        display: flex;
+    }
+    .place .item input{
+        flex: 2;
+        max-width: none;
+    }
+    #attennormal_approvalment{
+        width: 100%;
+        margin-top: 0;
+    }
+    .item .title{
+        flex: 0.8;
+        text-align: right;
+        color: #333;
+    }
+</style>

@@ -1,0 +1,175 @@
+<div style=" width: 10%; height: 100%; float: left;border:1px solid #d6dfe6;">
+    <div style="color: #535353; font-weight: bolder;">Diagram A</div>
+    <!--div id="diagram1" data-bind="ojComponent: {
+            component: 'ojDiagram',
+            layout: gridLayout,
+            data: data1,
+            nodeProperties:function(data){return data},
+            dnd: {
+                drag: {nodes: {dataTypes: ['text/nodes1']}},
+                drop: {background: {dataTypes: ['text/nodes1','text/nodes2'], drop: onDrop1}}
+            },
+            rootAttributes:{style: 'max-width:100%; width:100%'}
+          }"
+         >
+    </div-->  
+    <oj-diagram id='diagram1'
+                data = '[[data1]]'
+                layout = '[[gridLayout]]'
+                node-properties = '[[function(data){return data;}]]'
+                dnd.drag.nodes.data-types = '["text/nodes1"]'
+                dnd.drop.background.data-types = '["text/nodes1", "text/nodes2"]'
+                dnd.drop.background.drop = '[[onDrop1]]'
+                style='max-width:100%; width:100%; height: 770px;'>
+    </oj-diagram>
+</div>
+<div style=" width: 88%; height: 100%; float: right;border:1px solid #d6dfe6;">
+    <div style="color: #535353; font-weight: bolder;">Diagram B</div>
+    <oj-diagram id='diagram2'
+                data = '[[data2]]'
+                layout = '[[dropLayout]]'
+                node-properties = '[[function(data){return data;}]]'
+                link-properties = '[[function(data){return data;}]]'
+                dnd.drag.nodes.data-types = '["text/nodes2"]'
+                dnd.drop.background.data-types = '["text/nodes1", "text/nodes2"]'
+                dnd.drop.background.drop = '[[onDrop2]]'
+                dnd.drop.nodes.data-types = '["text/nodes1", "text/nodes2"]'
+                dnd.drop.nodes.drop = '[[onDrop2]]'
+                dnd.drop.links.data-types = '["text/nodes1", "text/nodes2"]'
+                dnd.drop.links.drop = '[[onLinkDrop]]'
+                panning = 'auto'
+                min-zoom = '1'
+                max-zoom = '1'
+                style='max-width: 100%; width:100%; height: 770px;'>
+        <oj-menu slot="contextMenu" style="display:none" aria-label="Edit" 
+                 on-oj-action="[[menuItemAction]]"
+                 on-oj-before-open="[[beforeOpenFunction]]">
+            <oj-option id="action1" value="action1">删除</oj-option>
+            <oj-option id="action2" value="action2">属性</oj-option>
+        </oj-menu>
+    </oj-diagram>
+    <!--                animation-on-data-change='auto'
+                    renderer = '[[nodeRendererFunc]]'
+                    hover-renderer = '[[nodeRendererFunc]]'
+                    selection-renderer = '[[nodeRendererFunc]]'
+                    selection-mode = 'multiple'-->
+    <!--div id="diagram2" data-bind="ojComponent: {
+            component: 'ojDiagram',
+            layout: dropLayout,
+            data: data2,
+            nodeProperties:function(data){return data},
+            linkProperties:function(data){return data},
+            minZoom:1, maxZoom:1,
+            panning:'auto',
+            dnd: {
+                drag: {nodes: {dataTypes: ['text/nodes2']}},
+                drop: {
+                    background: {dataTypes: ['text/nodes1','text/nodes2'], drop: onDrop2},
+                    nodes:    {dataTypes: ['text/nodes1','text/nodes2'], drop: onDrop2},
+                    links:    {dataTypes: ['text/nodes1','text/nodes2'], drop: onLinkDrop}
+                }
+            },
+            rootAttributes:{style: 'max-width:100%; width:100%'}
+          }"
+         >
+    </div-->
+    <div id="dialogWrapper">
+        <oj-dialog style="display:none" id="dialogLink" title="条件" modality="modeless" drag-affordance="title-bar">
+            <div slot="body">
+                <div>请输入条件：</div>
+                <input type='text' data-bind="value:condition"/>
+            </div>
+            <div slot="footer">
+                <div class="smallbut" id="okButton" data-bind="click: linkOKHandle">确定</div>
+                <div class="smallbut" id="cancleButton" data-bind="click: linkCancleHandle">取消</div>
+            </div>
+        </oj-dialog>
+        <oj-dialog style="display:none; width:800px; height:600px;" id="dialogNode" title="属性" modality="modeless" drag-affordance="title-bar">
+            <div slot="body">
+                <div style = "font-weight: bold; font-size: 16px; line-height: 22px;"  >基础属性设置模块：</div>
+                <div style="margin-top: 5px; height: 45px;">
+                    <div style="width:48%; padding-right:5px; float:left;">节点名称：<input type="text" style="width:100%" data-bind = "value: activityName"/></div>
+                    <div style="width:48%; padding-right:5px; float:right;">处理名称：<input type="text" style="width:100%" data-bind="value: executeName"/></div>
+                    <br/>
+                </div>
+                <div style="margin-top: 5px; height: 55px;">
+                    <div style="width:49%; padding-right:5px; float:left;">任务池类型：<br/>
+                        <select id="newflowleft-process_type_id" data-bind="ojComponent:{
+                                                component: 'ojSelect',
+                                                value: poolType,
+                                                options: dl.getOptionsByName('poolTypes', true),
+                                                rootAttributes: {class: 'oj-helper-text-align-start', style: 'max-width:100%; width:100%; padding-right:3px;'}
+                                                }">
+                        </select>
+                    </div>
+                    <div style="width:48%; padding-right:5px; float:left;"><input type = "checkbox" style="margin-left:21px; margin-top:29px;" data-bind="checked: ifAllowOver">是否允许跳过</input></div>
+                </div>
+                <div style = "font-weight: bold; font-size: 16px; margin-top:5px; line-height: 22px; clear: both;"  >审核对象设置模块：</div>
+                <div style="width:100%; margin-top: 5px;">
+                    <div style="float: left; line-height: 27px; margin-right: 10px;">审核对象：</div>
+                    <oj-radioset id="radiosetBasicDemoId" value="{{auditObject}}" style="float: left;" option-change="[[tttt]]" class="oj-choice-direction-row">
+                        <oj-option value="指定人员">指定人员</oj-option>
+                        <oj-option value="指定角色">指定角色</oj-option>
+                        <oj-option value="指定部门下角色">指定部门下角色</oj-option>
+                    </oj-radioset>
+                </div>
+                <div style="width:100%; margin-top: 5px; height: auto; clear: both;">
+                    <div id="flowdetail-employeeId-div" style="width:49%; float:left;">指定人：<br/>
+                        <select id="flowdetail-employeeId" data-bind="ojComponent:{
+                                                component: 'ojSelect',
+                                                value: employeeId,
+                                                options: dl.getOptionsByName('employees', true),
+                                                placeholder:'',
+                                                rootAttributes: {class: 'oj-helper-text-align-start', style: 'max-width:100%; width:100%; padding-right:3px;'}
+                                                }">
+                        </select>
+                    </div>
+                </div>
+                <br/>
+                <div style="width:100%; height: auto; clear: both;">
+                    <div id="flowdetail-departmentId-div" style="width:49%; float:left; display:none; margin-right: 15px;">指定部门：<br/>
+                        <select id="flowdetail-departmentId" data-bind="ojComponent:{
+                                                component: 'ojSelect',
+                                                value: departmentId,
+                                                options: dl.getOptionsByName('departments', true),
+                                                placeholder:'',
+                                                rootAttributes: {class: 'oj-helper-text-align-start', style: 'max-width:100%; width:100%; padding-right:3px;'}
+                                                }">
+                        </select>
+                    </div>
+                    <div id="flowdetail-roleId-div" style="width:49%; float:left; display:none;">指定角色：<br/>
+                        <select id="flowdetail-roleId" data-bind="ojComponent:{
+                                                component: 'ojSelect',
+                                                value: roleId,
+                                                options: dl.getOptionsByName('roles', true),
+                                                placeholder:'',
+                                                rootAttributes: {class: 'oj-helper-text-align-start', style: 'max-width:100%; width:100%; padding-right:3px;'}
+                                                }">
+                        </select>
+                    </div>
+                </div> 
+                <div style = "font-weight: bold; font-size: 16px; margin-top:5px; line-height: 22px; clear: both;"  >活动时限设置模块：</div>
+                <div style="width:100%; margin-top: 5px;">
+                    <div style="float: left; line-height: 27px; margin-right: 10px;">时限类型：</div>
+                    <oj-radioset id="radiosetBasicDemoId" value="{{timeOut}}" style="float: left;" class="oj-choice-direction-row">
+                        <oj-option value="小时">小时</oj-option>
+                        <oj-option value="天">天</oj-option>
+                        <oj-option value="周">周</oj-option>
+                    </oj-radioset>
+                </div>
+                <div style="margin-top: 5px; height: 45px; clear: both;">
+                    <div style="width:48%; padding-right:5px; float:left;">活动时限：<input type="text" style="width:100%" data-bind = "value: timeOutAction"/></div>
+                    <br/>
+                </div>
+            </div>
+            <div slot="footer">
+                <div class="smallbut" id="okButton" data-bind="click: nodeOKHandle">确定</div>
+                <div class="smallbut" id="cancleButton" data-bind="click: nodeCancleHandle">取消</div>
+            </div>
+        </oj-dialog>
+    </div>
+</div>
+<br style="clear:both;"/>
+<!--p>Last selected menu item:
+             <span id="results" class="italic" style="font-weight:bold" data-bind='text: selectedMenuItem'></span>
+         </p-->

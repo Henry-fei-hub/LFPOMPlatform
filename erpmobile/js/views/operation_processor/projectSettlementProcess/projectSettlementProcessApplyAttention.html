@@ -1,0 +1,83 @@
+<div id="cNnavlistcontainer" class="demo-panel-contrast1 oj-contrast-marker">
+    <div class="topHeader" >
+        <button class="buttonIcon2 arrLeft"
+                data-bind=" click: dl.backToClick,
+                               ojComponent: {
+                                   component:'ojButton', 
+                                   icons: {start:'oj-fwk-icon-caret-start oj-fwk-icon'}, 
+                                   label: ''
+                               }">
+        </button>
+        <h3 id="header" class="itemTitle" data-bind="text:dl.headerTitle()"></h3>
+    </div>
+
+    <button class='mar20 mt70 jindu' data-bind="event: {click: jinduClick}">进度</button>
+    <div id='mainmenu' data-bind="ojComponent:{
+                            component:'ojListView',
+                            drillMode:'sliding',
+                            data: dataSource,
+                           item: { template: 'ps-folder_template' }
+                }">
+    </div>
+    <h3 class="navTitle">明细</h3>
+    <div id="navlistcontainer3" class="demo-panel-contrast1 oj-contrast-marker">
+        <div id='mainmenu' data-bind="ojComponent:{
+                            component:'ojListView',
+                            drillMode:'sliding',
+                            data: dataSource1,
+                           item: { template: 'ps-folder_template1' }
+                }">
+        </div>
+    </div>
+    <button class='mar20 jindu mb40' data-bind="event: {click: jinduClick}">进度</button>
+    <script type="text/html" id="ps-folder_template">
+        <ul class='list'>
+            <li>
+                <span class="title">申请人：</span>  <span data-bind="text:dl.getLabelByValue('employees', $data['employeeId'])" ></span>
+            </li>
+            <li>
+                <span class="title">结算原因：</span>   <span data-bind="text:$data['remark']"></span>
+            </li>
+            <li>
+                <span class="title">结算日期：</span>    <span data-bind="text: dl.dateConverter.format(dl.parseValueFromService($data['settlementDate']))"></span>
+            </li>
+            <li>
+                <span class="title">确认积分：</span>   <span data-bind="text:$data['totalAmount']"></span>
+            </li>
+            <li>
+                <span class="title">项目成本：</span>    <span data-bind="text: $data['totalCost']"></span>
+            </li>
+            <li>
+                <span class="title">项目积分：</span>   <span data-bind="text:$data['projectAmount']"></span>
+            </li>
+            <li>
+                <span class="titlelong">项目结余积分：</span>   <span data-bind="text:$data['leftAmount']"></span>
+            </li>
+        </ul>
+    </script>
+    <script type="text/html" id="ps-folder_template1">
+        <ul class='list'>
+            <li>
+                <span class="title">员工名称：</span> <span data-bind="text:dl.getLabelByValue('employees', $data['employeeId'])"></span>
+            </li>
+            <li>
+                <span class="title">结算日期：</span>    <span data-bind="text: dl.dateConverter.format(dl.parseValueFromService($data['settlementDate']))"></span>
+            </li>
+            <li>
+                <span class="title">最终获得：</span>   <span data-bind="text:$data['finalAmount']"></span>
+            </li>
+            <li>
+                <span class="title">实际分配：</span>   <span data-bind="text:$data['realAmount']"></span>
+            </li>
+            <li>
+                <span class="title">分摊费用：</span>   <span data-bind="text:$data['projectCost']"></span>
+            </li>
+            <li>
+                <span class="titlelonger">本次确认比例占比：</span>   <span data-bind="text:$data['finishPercent']"></span>
+            </li>
+            <li>
+                <span class="title">工作内容：</span>   <span data-bind="text:$data['workContent']"></span>
+            </li>
+            <h3 ></h3>
+        </ul>
+    </script>

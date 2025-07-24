@@ -1,0 +1,19 @@
+<div class="oj-hybrid-padding">
+    <div id="div1">
+        <div class="loginList">
+            <label for="text-input">用户名：</label>
+            <input class="inputWid" id="text-input" 
+                   type="text"
+                   data-bind="ojComponent: {component: 'ojInputText', 
+                                     value: nameValue}"/>
+        </div>
+        <div class="loginList">
+            <label for="password">密码：</label>
+            <input class="inputWid" type="password" 
+                   id="password"
+                   data-bind="ojComponent: {component: 'ojInputPassword', 
+                                     value: passwordsValue}"/>
+        </div>
+    </div>
+    <button class="mar20 jindu" data-bind="event:{click:loginClicked}">登 录</button>
+</div>

@@ -1,0 +1,70 @@
+<div id='rBmain-header'>
+    <button class="buttonIcon2 arrLeft"
+            data-bind=" click: dl.backToClick,
+                               ojComponent: {
+                                   component:'ojButton', 
+                                   icons: {start:'oj-fwk-icon-caret-start oj-fwk-icon'}
+                               }">
+    </button>
+    <h3 id="header" class="itemTitle" data-bind="text:dl.headerTitle"></h3>
+</div>
+<div id='chart-container' style='margin-top:70px;'>
+    <div id="legend1" 
+         aria-controls="barChart1"
+         data-bind="ojComponent: {
+            component: 'ojLegend', 
+            orientation: 'horizontal',
+            sections: legendSections,
+            halign: 'center', valign: 'middle'
+            }"
+         style="width:100%; height:25px;">
+    </div>
+    <div class="oj-flex">
+        <div class="oj-flex-item oj-lg-6">
+            <div id="barChart1" data-bind="ojComponent: {
+                component: 'ojChart', 
+                type: 'bar', 
+                series: categoricalSeriesValue, 
+                groups: categoricalGroupsValue, 
+                animationOnDisplay: 'auto',
+                animationOnDataChange: 'auto',
+                legend: {rendered: 'off'}}"
+                 style="width:100%;height:225px;float:left;">
+            </div>
+        </div>    
+        <div id="legend2" 
+             aria-controls="barChart2"
+             data-bind="ojComponent: {
+            component: 'ojLegend', 
+            orientation: 'horizontal',
+            sections: legend2Sections,
+            halign: 'center', valign: 'middle'
+            }"
+             style="width:100%; height:25px;">
+        </div>
+        <div class="oj-flex-item oj-lg-6">
+            <div id="barChart2" data-bind="ojComponent: {
+                component: 'ojChart', 
+                type: 'bar', 
+                series: timeSeriesValue, 
+                groups: timeGroupsValue, 
+                animationOnDisplay: 'auto',
+                animationOnDataChange: 'auto',
+                legend: {rendered: 'off'}}"
+                 style="width:100%;height:225px;float:left;">
+            </div>
+        </div>
+        <div class="oj-flex-item oj-lg-6">
+            <div id="pieChart" data-bind="ojComponent: {
+                component: 'ojChart', 
+                type: 'pie', 
+                series: pieSeriesValue, 
+                animationOnDisplay: 'auto',
+                animationOnDataChange: 'auto',
+                legend: {rendered: 'off'}}"
+                 style="width:100%;height:225px;float:left;">
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,217 @@
+
+<div id="cNnavlistcontainer" class="demo-panel-contrast1 oj-contrast-marker">
+    <div class="topHeader" >
+        <button class="buttonIcon2 arrLeft"
+                data-bind=" click: dl.backToClick,
+                               ojComponent: {
+                                   component:'ojButton', 
+                                   icons: {start:'oj-fwk-icon-caret-start oj-fwk-icon'}, 
+                                   label: ''
+                               }">
+        </button>
+        <h3 id="header" class="itemTitle" data-bind="text:dl.headerTitle()"></h3>
+    </div>
+    
+    <button class='mar20 mt70 jindu' data-bind="event: {click: jinduClick}">进度</button>
+   <div id='mainmenu' data-bind="ojComponent:{
+                            component:'ojListView',
+                            drillMode:'sliding',
+                            data: dataSource,
+                            item: { template: 'folder_template' }
+                }">
+
+    </div>
+    <h3 class="navTitle">确认函与合同阶段</h3>
+    <div id='othermenu' style='border-top:2px solid #ccc;' data-bind="ojComponent:{
+                            component:'ojListView',
+                            drillMode:'sliding',
+                            data: dataSource1,
+                            item: { template: 'folder_template1' }
+                }">
+
+    </div>
+     <h3 class="navTitle">确认函与联系人</h3>
+    <div id='othermenu' style='border-top:2px solid #ccc;' data-bind="ojComponent:{
+                            component:'ojListView',
+                            drillMode:'sliding',
+                            data: dataSource2,
+                            item: { template: 'folder_template2' }
+                }">
+
+    </div>
+      <h3 class="navTitle">确认函与发票</h3>
+    <div id='othermenu' style='border-top:2px solid #ccc;' data-bind="ojComponent:{
+                            component:'ojListView',
+                            drillMode:'sliding',
+                            data: dataSource3,
+                            item: { template: 'folder_template3' }
+                }">
+
+    </div>
+</div>
+<button class='mar20 jindu mb40' data-bind="event: {click: jinduClick}">进度</button>
+
+<script type="text/html" id="folder_template">
+      <ul class='list'>
+        <li>
+            <span class="title">申请人：</span> <span data-bind="text:dl.getLabelByValue('employees', $data['employeeId'])" readonly></span>
+        </li>
+        <li>
+            <span class="title">工号：</span>   <span data-bind="text:$data['employeeNo']" readonly></span>
+        </li>
+        <li>
+            <span class="title">部门：</span>  <span data-bind="text:dl.getLabelByValue('all_departments', $data['departmentId'])" readonly></span>
+            <!--部分部门在departments里删除了， 要想显示全部用 all_departments-->
+        </li>
+        <li>
+            <span class="title">归属公司：</span>   <span data-bind="text:dl.getLabelByValue('system_dictionary_26', $data['companyId'])" readonly></span>
+        </li>
+        <li>
+            <span class="title">附件名称：</span>   <span data-bind="text:$data['employeeNo']" readonly></span>
+        </li>
+        <li>
+            <span class="title">附件路径：</span>  
+            <a class='attachment' target='_self' data-bind="attr:{href : $data['attachment']}" >
+                <i class='link' data-bind="text:dl.isNullOrUndefined($data['attachment']) ? '无':$data['attachment']"></i>
+                <span class='attachmentWarning'>（附件可打开预览）</span>
+            </a>
+        </li> 
+        <li>
+            <span class="title">选择合同：</span>   <span data-bind="text:dl.getLabelByValue('system_dictionary_26', $data['companyId'])" readonly></span>
+        </li>
+        <li>
+            <span class="title">确定函金额：</span>   <span data-bind="text: $data['borrowMoney']"></span>
+        </li>
+        <li>
+            <span class="title">被绑定收款阶段总金额：</span>   <span data-bind="text: $data['borrowMoney']"></span>
+        </li>
+         <li>
+            <span class="title">被绑定发票的总金额：</span>   <span data-bind="text: $data['borrowMoney']"></span>
+        </li>
+        <li>
+            <span class="title">备注(提示给财务部的消息)：</span>   <span data-bind="text: $data['reason']"></span>
+        </li>
+        <li>
+            <span class="title">收款阶段描述(EP:商业方案/动线/概念 等等)：</span>   <span data-bind="text: $data['reason']"></span>
+        </li>
+        <li>
+            <span class="title">特殊事项备注(该备注会在下次申请确认函(同一个合同)显示)：</span>   <span data-bind="text: $data['reason']"></span>
+        </li>
+    </ul>
+</script>
+
+<script type="text/html" id="folder_template1">
+    <ul class='list'  style='border-bottom:2px solid #ccc;'>
+        <li>
+            <span class="title">阶段名称：</span>   <span data-bind="text: $data['id']"></span>
+        </li>
+        <li>  
+            <span class="title">收款百分比：</span>   <span data-bind="text:dl.getLabelByValue('system_dictionary_121', $data['type'])"></span>
+        </li>
+        <li>
+            <span class="title">收款金额：</span>   <span data-bind="text:$data['code']"></span>
+        </li>
+        <li>
+            <span class="title">绑定状态：</span>   <span data-bind="text:$data['name']"></span>
+        </li>
+        <li>
+            <span class="title">绑定确认函：</span>   <span data-bind="text:$data['cost']"></span>
+        </li>
+    </ul>
+</script>
+<script type="text/html" id="folder_template2">
+    <ul class='list'  style='border-bottom:2px solid #ccc;'>
+        <li>
+            <span class="title">申请人：</span> <span data-bind="text:dl.getLabelByValue('employees', $data['employeeId'])" readonly></span>
+        </li>
+        <li>  
+            <span class="title">开票类型：</span>   <span data-bind="text:dl.getLabelByValue('system_dictionary_121', $data['type'])"></span>
+        </li>
+        <li>
+            <span class="title">单位名称：</span>   <span data-bind="text:$data['code']"></span>
+        </li>
+        <li>
+            <span class="title">税号：</span>   <span data-bind="text:$data['name']"></span>
+        </li>
+        <li>
+            <span class="title">邮寄人名称：</span>   <span data-bind="text:$data['cost']"></span>
+        </li>
+         <li>
+            <span class="title">邮寄人电话：</span>   <span data-bind="text: $data['id']"></span>
+        </li>
+        <li>  
+            <span class="title">注册地址：</span>   <span data-bind="text:dl.getLabelByValue('system_dictionary_121', $data['type'])"></span>
+        </li>
+        <li>
+            <span class="title">银行名称：</span>   <span data-bind="text:$data['code']"></span>
+        </li>
+        <li>
+            <span class="title">银行账号：</span>   <span data-bind="text:$data['name']"></span>
+        </li>
+        <li>
+            <span class="title">邮寄人地址：</span>   <span data-bind="text:$data['cost']"></span>
+        </li>
+          <li>
+            <span class="title">操作备注：</span>   <span data-bind="text: $data['id']"></span>
+        </li>
+        <li>
+            <span class="title">绑定状态：</span>   <span data-bind="text:$data['code']"></span>
+        </li>
+        <li>
+            <span class="title">绑定确认函：</span>   <span data-bind="text:$data['name']"></span>
+        </li>
+        <li>
+            <span class="title">删除状态：</span>   <span data-bind="text:$data['cost']"></span>
+        </li>
+        <li>
+            <span class="title">固定电话：</span>   <span data-bind="text:$data['cost']"></span>
+        </li>
+    </ul>
+</script>
+<script type="text/html" id="folder_template3">
+    <ul class='list'  style='border-bottom:2px solid #ccc;'>
+        <li>  
+            <span class="title">开票类型：</span>   <span data-bind="text:dl.getLabelByValue('system_dictionary_121', $data['type'])"></span>
+        </li>
+        <li>
+            <span class="title">发票代码：</span>   <span data-bind="text:$data['code']"></span>
+        </li>
+        <li>
+            <span class="title">发票号码：</span>   <span data-bind="text:$data['name']"></span>
+        </li>
+        <li>
+            <span class="title">购票公司：</span>   <span data-bind="text:$data['cost']"></span>
+        </li>
+         <li>
+            <span class="title">客户名称：</span>   <span data-bind="text: $data['id']"></span>
+        </li>
+        <li>  
+            <span class="title">开票金额：</span>   <span data-bind="text:dl.getLabelByValue('system_dictionary_121', $data['type'])"></span>
+        </li>
+        <li>
+            <span class="title">税率：</span>   <span data-bind="text:$data['code']"></span>
+        </li>
+        <li>
+            <span class="title">不含税金额：</span>   <span data-bind="text:$data['name']"></span>
+        </li>
+        <li>
+            <span class="title">销项税：</span>   <span data-bind="text:$data['cost']"></span>
+        </li>
+          <li>
+            <span class="title">开票日期：</span>   <span data-bind="text: $data['id']"></span>
+        </li>
+        <li>  
+            <span class="title">发票状态：</span>   <span data-bind="text:dl.getLabelByValue('system_dictionary_121', $data['type'])"></span>
+        </li>
+        <li>
+            <span class="title">绑定状态：</span>   <span data-bind="text:$data['code']"></span>
+        </li>
+        <li>
+            <span class="title">绑定确认函：</span>   <span data-bind="text:$data['name']"></span>
+        </li>
+        <li>
+            <span class="title">是否被负数：</span>   <span data-bind="text:$data['cost']"></span>
+        </li>
+    </ul>
+</script>
+

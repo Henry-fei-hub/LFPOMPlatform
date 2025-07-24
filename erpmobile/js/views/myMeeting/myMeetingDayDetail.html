@@ -1,0 +1,59 @@
+  <div id='rBmain-header'>
+        <button class="buttonIcon2 arrLeft"
+                data-bind=" click: dl.backToClick,
+                               ojComponent: {
+                                   component:'ojButton', 
+                                   icons: {start:'oj-fwk-icon-caret-start oj-fwk-icon'}, 
+                                   label: ''
+                               }">
+        </button>
+        <h3 id="header" class="itemTitle" data-bind="text:dl.headerTitle"></h3>
+    </div> 
+    <div id='mainmenu' data-bind="ojComponent:{
+        component:'ojListView',
+        drillMode:'sliding',
+        data: dataSource,
+        item: { template: 'folder_template' }
+    }">
+    </div>
+
+<script type="text/html" id="folder_template">
+    <ul class='list'style="margin-top: 70px" data-bind="attr:{id: $data['activitieId']}">
+        <li>
+            <span class="title t_gray">客户名称：</span><span data-bind="text : $data['customerName']"></span>
+        </li>
+        <li>
+            <span class="title t_gray">项目名称：</span><span data-bind="text : $data['projectName']"></span>
+        </li>
+        <li>
+            <span class="title t_gray">会议类型：</span><span data-bind="text : dl.getLabelByValue('system_dictionary_150', $data['meetType'])"></span>
+        </li>
+        <li>
+            <span class="title t_gray">会议时间：</span><span data-bind="text : dl.datetimeConverter.format(dl.parseValueFromService($data['meetTime']))"></span>
+        </li>
+        <li>
+            <span class="title t_gray">会议地址：</span><span data-bind="text : $data['meetAddress'] "></span>
+        </li>
+        <li>
+            <span class="title t_gray">会议主题：</span><span data-bind="text : $data['meetTitle'] "></span>
+        </li>
+        <li>
+            <span class="title t_gray">会议目标：</span><span data-bind="text :  $data['meetTarget']"></span>
+        </li>
+        <li>
+            <span class="title t_gray">联系人：</span><span data-bind="text : $data['contactName']"></span>
+        </li>
+        <li>
+            <span class="title t_gray">甲方要求：</span><span data-bind="text : $data['theirRequire']"></span>
+        </li>
+        <li>
+            <span class="title t_gray">甲方出席人员：</span><span data-bind="text :$data['theirEmployees']"></span>
+        </li>
+        <li>
+            <span class="title t_gray">我方出席人员：</span><span data-bind="text :$data['ourEmployees']"></span>
+        </li>
+        <li>
+            <span class="title t_gray">备注：</span><span data-bind="text : $data['remark']"></span>
+        </li>
+    </ul>
+</script>

@@ -1,0 +1,56 @@
+
+<div id="oj-hybrid-padding"  style='position:relative;'>
+    <div id='rBmain-header'>
+        <button class="buttonIcon2 arrLeft"
+                data-bind=" click: dl.backToClick,
+                               ojComponent: {
+                                   component:'ojButton', 
+                                   icons: {start:'oj-fwk-icon-caret-start oj-fwk-icon'}, 
+                                   label: ''
+                               }">
+        </button>
+        
+        <h3 id="header" class="itemTitle" data-bind="text:dl.headerTitle"></h3>
+    </div> 
+    <div id='mainmenu'>
+     <ul class='list' style="margin-top: 70px">
+        <li>
+            <span class="title">申 请 人：</span></br>   <span data-bind="text:dl.getLabelByValue('employees', __employeeId())"></span>
+        </li>
+        <li>
+            <span class="title">工号：</span>   <span data-bind="text: __employeeNo()"></span>
+        </li>
+        <li>
+            <span class="title">部门：</span>   <span data-bind="text:dl.getLabelByValue('all_departments', __departmentId())"></span>
+        </li>
+        <li>
+            <span class="title">证 明 人：</span>   
+            <input id="basicSelect1" data-bind="ojComponent: {component: 'ojInputSearch',value: __nextAuditor,placeholder: '',rootAttributes: {style:'flex:2;max-width:none;'}, options: dl.getOptionsByName('employees', false)}"/>
+        </li>
+        <li>
+            <span class="title">漏打卡日期：</span>   
+            <input id="projecttest-completed_time" data-bind="ojComponent: {component: 'ojInputDate', value: __startDate, converter: dl.dateConverter}"/>
+        </li>
+        <li>
+            <span class="title">签到签退：</span> 
+            <select id="basicSelect2" data-bind="ojComponent: {component: 'ojSelect',value: __type,rootAttributes: {style:'flex:2;max-width:none;'}, options: dl.getOptionsByName('system_dictionary_74', false)}">
+            </select>
+        </li>
+        <li>
+            <span class="title">申请缘由：</span>   <input data-bind="value: __reason" />
+        </li>
+        <li>
+            <span class="title">备注信息：</span>   <input class="textmany" data-bind="value: __remark" />
+        </li>
+     </ul>
+    </div>
+    
+</div>
+
+
+<div class=" mar20 zjList">
+    <!--<span style="font-weight:bold;color:#FF7F27;">♥ 温馨提示：自漏打卡之日起，<span style="color:red">7个自然日内</span>可以发起补卡申请，逾期无法申请！</span>-->
+    <span style="font-weight:bold;color:#FF7F27;" data-bind="text:errorMessage"></span>
+</div>
+<button class='mar20 jindu mb40' data-bind="event: {click: submitClick}">提交</button>
+

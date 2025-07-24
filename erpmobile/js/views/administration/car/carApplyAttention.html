@@ -1,0 +1,168 @@
+
+<div id="cNnavlistcontainer" class="demo-panel-contrast1 oj-contrast-marker">
+    <div class="topHeader" >
+        <button class="buttonIcon2 arrLeft"
+                data-bind=" click: dl.backToClick,
+                               ojComponent: {
+                                   component:'ojButton', 
+                                   icons: {start:'oj-fwk-icon-caret-start oj-fwk-icon'}, 
+                                   label: ''
+                               }">
+        </button>
+        <h3 id="header" class="itemTitle" data-bind="text:specialHeaderTitle"></h3>
+    </div>
+    
+    <button class='mar20 mt70 jindu' data-bind="event: {click: jinduClick}">进度</button>
+    <div id='mainmenu' data-bind="ojComponent:{
+                            component:'ojListView',
+                            drillMode:'sliding',
+                            data: dataSource,
+                            item: { template: 'folder_template' }
+                }">
+    </div>
+    <h3 class="navTitle">费用分摊</h3>
+        <div id='mainmenu' data-bind="ojComponent:{
+                            component:'ojListView',
+                            drillMode:'sliding',
+                            data: dataSource1,
+                            item: { template: 'folder_template1' }
+                }">
+    </div>
+</div>
+<button class='mar20 jindu mb40' data-bind="event: {click: jinduClick}">进度</button>
+
+
+<script type="text/html" id="folder_template">
+    <ul class='list'>
+        <li>
+            <span class="title">申请人：</span>   <span data-bind="text:dl.getLabelByValue('employees', $data['employeeId'])"></span>
+        </li>
+         <li>
+            <span class="title">归属公司：</span>   <span data-bind="text:dl.getLabelByValue('system_dictionary_26', $data['companyId'])"></span>
+        </li>
+        <li>
+            <span class="title">工号：</span>   <span data-bind="text:$data['employeeNo']"></span>
+        </li>
+        <li>
+            <span class="title">部门：</span>   <span data-bind="text:dl.getLabelByValue('all_departments', $data['departmentId'])"></span>
+        </li>
+        <li>
+            <span class="title">手机号码：</span>   <span class="textmany" data-bind="text:$data['card']"></span>
+        </li>
+          <li>
+            <span class="title">同行人数：</span>   <span class="textmany" data-bind="text:$data['unit']"></span>
+        </li>
+        <li>
+            <span class="title">用车开始时间：</span>   <span data-bind="text: dl.datetimeConverter.format(dl.parseValueFromService($data['startDate']))"></span>
+        </li>
+        <li>
+            <span class="title">预计结束时间：</span>   <span data-bind="text: dl.datetimeConverter.format(dl.parseValueFromService($data['endDate']))"></span>
+        </li>  
+        <li>
+            <span class="title">用车类型：</span>   <span data-bind="text:dl.getLabelByValue('system_dictionary_119', $data['startDateDetail'])"></span>
+        </li>
+         <li>
+            <span class="title">用车范围：</span>   <span data-bind="text:dl.getLabelByValue('system_dictionary_104', $data['type'])"></span>
+        </li>
+       <li>
+            <span class="title">申请用车类型：</span>   <span data-bind="text:dl.getLabelByValue('system_dictionary_122', $data['address'])"></span>
+        </li>          
+        <li>
+            <span class="title">出发地：</span>   <span class="textmany" data-bind="text:$data['projectName']"></span>
+        </li>
+        <li>
+            <span class="titlelong">目的地所在区域：</span>  <span data-bind="text:dl.getLabelByValue('use_car_to_area', $data['endDateDetail'])"></span>
+        </li>
+         <li>
+            <span class="titlelong">目的地详细地址：</span>   <span data-bind="text:$data['projectCode']"></span>
+        </li>
+        <li>
+            <span class="title">用车费用：</span>   <span data-bind="text:$data['fee']"></span>
+        </li>
+          <li>
+            <span class="title">开车目的：</span>   <span data-bind="text:$data['reason']"></span>
+        </li>
+          <li>         
+                <span class="titlelong"><i class="star"></i>内部派车/外部派车：</span>  
+                <span data-bind="text:dl.getLabelByValue('system_dictionary_105', $data['subType'])"></span>
+            </li>
+            <li>         
+                <span class="title"><i class="star"></i>车辆信息：</span> 
+                <span data-bind="text:dl.getLabelByValue('system_dictionary_106', $data['targetProvince'])"></span>
+            </li>
+            <li>         
+                <span class="title"><i class="star"></i>司机：</span>  
+                <span data-bind="text:dl.getLabelByValue('employees',$data['contactPerson'])"></span>
+            </li>
+            <li>   
+                <span class="title">行程安排：</span>   <span class="textmany" data-bind="text:$data['plan']"></span>
+            </li>
+            <li>   
+                <span class="title">实际公里数：</span>   <span class="textmany" data-bind="text:$data['transportation']"></span>
+            </li>
+            <li>   
+                <span class="titlelonger">修改用车成本的原因：</span>   <span class="textmany" data-bind="text:$data['subTypeStr']"></span>
+            </li>
+
+        <li>
+            <span class="title">备注：</span>   <span class="textmany" data-bind="text:$data['remark']"></span>
+        </li>
+    </ul>
+</script>
+<script type="text/html" id="folder_template1">
+    <ul class='list' data-bind='visible: $parent.isShow()===1' style='border-top: 2px solid #ccc;'>
+        <li>
+            <span class="title">订单：</span>    <span data-bind="text: $data['id']"></span>
+        </li>
+         <li>
+            <span class="title">订单编号：</span>   <span data-bind="text:$data['code']"></span>
+        </li>
+        <li>
+            <span class="title">订单名称：</span>   <span data-bind="text:$data['name']"></span>
+        </li>
+        <li>
+            <span class="title">总用车费用：</span>   <span data-bind="text:$data['cost']"></span>
+        </li>      
+        <li>
+            <span class="titlelong">成本分摊比例(%)：</span>   <span data-bind="text:$data['percent']"></span>
+        </li>
+        <li>
+            <span class="title">成本分摊：</span>   <span data-bind="text:$data['costAllocation']"></span>
+        </li>  
+    </ul>
+    <ul class='list' data-bind='visible: $parent.isShow()===2' style='border-top: 2px solid #ccc;'>
+        <li>
+            <span class="titlelong">请选择前期项目：</span>   <span data-bind="text: $data['id']"></span>
+        </li>
+         <li>
+            <span class="title">前期项目编号：</span>     <span data-bind="text:$data['code']"></span>
+        </li>
+        <li>
+            <span class="titlelong">前期项目名称：</span>    <span data-bind="text:$data['name']"></span>
+        </li>
+        <li>
+            <span class="title">总用车费用：</span>   <span data-bind="text:$data['cost']"></span>
+        </li>   
+        <li>
+            <span class="titlelong">成本分摊比例(%)：</span>   <span data-bind="text:$data['percent']"></span>
+        </li>
+        <li>
+            <span class="title">成本分摊：</span>  <span data-bind="text:$data['costAllocation']"></span>
+        </li>  
+    </ul>
+    <ul class='list' data-bind='visible: $parent.isShow()===3' style='border-top: 2px solid #ccc;'>
+        <li>
+            <span class="title">部门：</span>   <span data-bind="text:$data['name']"></span>
+        </li>
+         <li>
+            <span class="title">总用车费用：</span>   <span data-bind="text:$data['cost']"></span>
+        </li>
+        <li>
+            <span class="titlelong">成本分摊比例(%)：</span>  <span data-bind="text:$data['percent']"></span>
+        </li>
+        <li>
+            <span class="title">成本分摊：</span>   <span data-bind="text:$data['costAllocation']"></span>
+        </li>      
+    </ul>
+</script>
+

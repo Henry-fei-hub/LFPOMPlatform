@@ -1,0 +1,119 @@
+
+<div id="cNnavlistcontainer" class="demo-panel-contrast1 oj-contrast-marker">
+    <div class="topHeader" >
+        <button class="buttonIcon2 arrLeft"
+                data-bind=" click: dl.backToClick,
+                               ojComponent: {
+                                   component:'ojButton', 
+                                   icons: {start:'oj-fwk-icon-caret-start oj-fwk-icon'}, 
+                                   label: ''
+                               }">
+        </button>
+        <h3 id="header" class="itemTitle" data-bind="text:specialHeaderTitle()"></h3>
+    </div>
+
+    <div class="disFlex mt70" data-bind='visible: isApproval()'>
+        <button class="button" data-bind="attr: {id : 0}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '同意'}"></button>
+        <button class="button" data-bind="attr: {id : 1}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '驳回'}"></button>
+        <button class="button" data-bind="attr: {id : 2}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '回退'}"></button>
+        <button class="button" data-bind="attr: {id : 3}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '转交'}"></button>
+    </div>   
+    <button class='mar20 jindu' data-bind="event: {click: jinduClick},style:{marginTop:isApproval()? '20px' :'70px'}">进度</button>
+    <div id='mainmenu' data-bind="ojComponent:{
+                            component:'ojListView',
+                            drillMode:'sliding',
+                            data: dataSource,
+                            item: { template: 'folder_template' }
+                }">
+
+    </div>
+
+</div>
+
+<div class=" mar20 zjList" data-bind='visible: isApproval()'>
+    <span class="w75 textR">转交人：</span>
+    <select id="basicSelect" data-bind="ojComponent: {component: 'ojSelect',
+                                value: additionalApprovalment,
+                                placeholder: '',
+                                rootAttributes: {style:'max-width:18em'}, options: dl.getOptionsByName('employees', true)}">
+    </select>
+</div>
+<div class=" mar20 zjList" data-bind='visible: isApproval()'>
+    <span class="w75">审批意见：</span>
+    <textarea id="textarea1" 
+              type="text"
+              class="oj-form-control oj-textarea-nocomp"
+              data-bind="value: processComment">
+
+    </textarea>
+
+</div>
+<div class="mar20 disFlex" data-bind='visible: isApproval()'>
+    <button class="button" data-bind="attr: {id : 0}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '同意'}"></button>
+    <button class="button" data-bind="attr: {id : 1}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '驳回'}"></button>
+    <button class="button" data-bind="attr: {id : 2}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '回退'}"></button>
+    <button class="button" data-bind="attr: {id : 3}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '转交'}"></button>
+</div>   
+<button class='mar20 jindu mb40' data-bind="event: {click: jinduClick}">进度</button>
+
+<script type="text/html" id="folder_template">
+    <ul class='list'>
+        <li>
+            <span class="title">报备人：</span>  <span data-bind="text:dl.getLabelByValue('employees',$data['applyEmployeeId'])"></span>
+        </li>
+        <li>
+            <span class="titlelong">报备登记时间：</span>   <span data-bind="text: dl.datetimeConverter.format(dl.parseValueFromService($data['createTime']))"></span>
+        </li>
+        <li>
+            <span class="title">信息编号：</span>   <span data-bind="text:$data['infoCode']"></span>
+        </li>
+        <li>
+            <span class="title">客户名称：</span>   <span data-bind="text:$data['customerName']"></span>
+        </li>
+        <li>
+            <span class="title">项目名称：</span>   <span data-bind="text:$data['projectName']"></span>
+        </li>
+        <li>    
+            <span class='titlelong'>(项目地址)省：</span><span data-bind="text:$data['province']"></span>      
+        </li>
+        <li>
+            <span class='titlelong'>(项目地址)市：</span><span data-bind="text:$data['city']"></span> 
+        </li>
+        <li>
+            <span class='title'>区域：</span><span data-bind="text:dl.getLabelByValue('system_dictionary_170', $data['region'])"></span> 
+        </li>
+        <li>
+            <span class='title'>详细地址：</span><span data-bind="text:$data['detailAddress']"></span> 
+        </li>
+        <li>
+            <span class="title">联系人：</span>   <span data-bind="text:$data['contactName']"></span>
+        </li>
+        <li>
+            <span class="title">职位：</span>  <span data-bind="text:$data['grade']"></span>
+        </li>
+        <li>
+            <span class="title">联系电话：</span>  <span data-bind="text:$data['contactPhone']"></span>
+        </li>
+        <li>
+            <span class="title">业务类别：</span>  <span data-bind="text: $parent.businessTypeName()"></span> 
+        </li>
+        <li>
+            <span class="titlelong">建筑面积(㎡)：</span>   <span data-bind="text:$data['totalBuildingAreas']"></span>
+        </li>
+        <li>
+            <span class="titlelong">设计面积(㎡)：</span>   <span data-bind="text:$data['estimateTheDesignAreas']"></span>
+        </li>
+        <li>
+            <span class="title">项目来源：</span>  <span data-bind="text:$data['projectOrigination']"></span>
+        </li>
+        <li>
+            <span class="title">比选形式：</span>  <span data-bind="text:dl.getLabelByValue('system_dictionary_168', $data['comparisonForm'] )"></span>
+        </li>
+        <li>
+            <span class="titlelong">运营组分配项目：</span>  <span data-bind="text: $data['isOperationDepartment'] == 'true' ? '是':'否'"></span>
+        </li>
+        <li>
+            <span class="title">备注：</span>  <span data-bind="text:$data['remark']"></span>
+        </li>
+    </ul>
+</script>

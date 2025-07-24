@@ -1,0 +1,125 @@
+
+<div id="cNnavlistcontainer" class="demo-panel-contrast1 oj-contrast-marker">
+    <div class="topHeader" >
+        <button class="buttonIcon2 arrLeft"
+                data-bind=" click: dl.backToClick,
+                               ojComponent: {
+                                   component:'ojButton', 
+                                   icons: {start:'oj-fwk-icon-caret-start oj-fwk-icon'}, 
+                                   label: ''
+                               }">
+        </button>
+        <h3 id="header" class="itemTitle" data-bind="text:specialHeaderTitle"></h3>
+    </div>
+    <div class="disFlex mt70">
+        <button class="button" data-bind="attr: {id : 0}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '同意'}"></button>
+        <button class="button" data-bind="attr: {id : 1}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '驳回'}"></button>
+        <button class="button" data-bind="attr: {id : 2}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '回退'}"></button>
+        <button class="button" data-bind="attr: {id : 3}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '转交'}"></button>
+    </div> 
+    <button class='mar20 jindu' data-bind="event: {click: jinduClick}">进度</button>    
+    <div id='mainmenu' data-bind="ojComponent:{
+                            component:'ojListView',
+                            drillMode:'sliding',
+                            data: dataSource,
+                            item: { template: 'pp-folder_template' }
+                }">
+
+    </div>
+
+
+    <h3 class="navTitle">账单流水</h3>
+
+    <div id="navlistcontainer3" class="demo-panel-contrast1 oj-contrast-marker">
+        <div id='mainmenu' data-bind="ojComponent:{
+                            component:'ojListView',
+                            drillMode:'sliding',
+                            data: dataSource3,
+                            item: { template: 'pp-folder_template3' }
+                }">
+
+        </div>
+    </div>
+
+    <div class="mar20 disFlex ">
+        <button class="button" data-bind="attr: {id : 0}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '同意'}"></button>
+        <button class="button" data-bind="attr: {id : 1}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '驳回'}"></button>
+        <button class="button" data-bind="attr: {id : 2}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '回退'}"></button>
+        <button class="button" data-bind="attr: {id : 3}, event: {click: submitClick}, ojComponent: {component: 'ojButton', label: '转交'}"></button>
+    </div>
+    <button class='mar20 jindu mb40' data-bind="event: {click: jinduClick}">进度</button>
+
+</div>
+
+<script type="text/html" id="pp-folder_template">
+
+    <ul class='list'>
+        <li>
+            <span class="title">报销编号：</span>   <input data-bind="value:$data['code']" readonly />
+        </li>
+        <li>
+            <span class="title">归属公司：</span>   <input data-bind="value:dl.getLabelByValue('system_dictionary_26', $data['companyId'])" readonly/>
+        </li>
+        <li>
+            <span class="title">收款单位：</span>   <input data-bind="value:$data['receiveUnit']" readonly/>
+        </li>
+        <li>
+            <span class="title">银行账号：</span>   <input data-bind="value:$data['bankAccount']"/>
+        </li>
+        <li>
+            <span class="title">开户行：</span>   <input data-bind="value:$data['bankName']" readonly/>
+        </li>
+        <li>
+            <span class="title">付款金额：</span>   <input data-bind="value:  dl.numberConverter.format(dl.parseValueFromService($data['payAmount']))"/>
+        </li>
+        <li>
+            <span class="title">申请人：</span> <input data-bind="value:dl.getLabelByValue('employees', $data['employeeId'])" readonly/>
+        </li>
+        <li>
+            <span class="title">部门：</span>   <input data-bind="value:dl.getLabelByValue('departments', $data['departmentId'])" readonly/>
+        </li>
+        <li>
+            <span class="title">附件：</span> 
+            <span>
+              <a class='attachment' target='_self' data-bind="attr:{href : $data['attachmentFile']}" >
+                    <i class='link' data-bind="text:dl.isNullOrUndefined($data['attachmentFile']) ? '无':$data['attachmentFile']"></i>
+                    <span class='attachmentWarning'>（附件可打开预览）</span>
+                </a>
+            </span>
+        </li>
+        <li>
+            <span class="title">付款原因：</span>   <input data-bind="value: $data['reason']"/>
+        </li>
+        <li>
+            <span class="title">操作人：</span> <input data-bind="value:dl.getLabelByValue('employees', $data['operateEmployeeId'])" readonly/>
+        </li>
+        <li>
+            <span class="title">操作时间：</span>   <input data-bind="value:dl.datetimeConverter.format(dl.parseValueFromService($data['operateTime']))" readonly/>
+        </li>
+    </ul>
+</script>
+
+
+<script type="text/html" id="pp-folder_template3">
+    <ul class='list'>
+        <li>
+            <span class="title">收款方：</span>   <input data-bind="value:$data['payeeName']"/>
+        </li>
+        <li>
+            <span class="title flex1_5">银行名称（收款方）：</span>   <input data-bind="value:$data['selfBankName']"/>
+        </li>
+        <li>
+            <span class="title flex1_5">银行账号（收款方）：</span>   <input data-bind="value:$data['selfBankAccount']"/>
+        </li>
+        <li>
+            <span class="title">付款金额：</span>   <input data-bind="value:dl.numberConverter.format(dl.parseValueFromService($data['payMoney']))"/>
+        </li>
+        <li>
+            <span class="title">冲账金额：</span>   <input data-bind="value:dl.numberConverter.format(dl.parseValueFromService($data['balanceAmount']))"/>
+        </li>
+        <li>
+            <span class="textmany title">备注：</span>   <input data-bind="value:$data['remark']"/>
+        </li>
+        <h3 ></h3>
+    </ul>
+</script>
