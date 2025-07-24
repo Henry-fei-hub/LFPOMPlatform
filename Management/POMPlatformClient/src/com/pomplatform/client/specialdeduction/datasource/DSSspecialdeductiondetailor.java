@@ -1,0 +1,428 @@
+package com.pomplatform.client.specialdeduction.datasource;
+
+import com.smartgwt.client.data.fields.*;
+import com.smartgwt.client.data.DataSourceField;
+import com.smartgwt.client.types.FieldType;
+import com.delicacy.client.data.KeyValueManager;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import com.delicacy.client.data.DBDataSource;
+
+public class DSSspecialdeductiondetailor extends DBDataSource
+{
+
+
+	public static DSSspecialdeductiondetailor instance = null;
+
+	public static DSSspecialdeductiondetailor getInstance() {
+		if(instance == null) {
+			instance = new DSSspecialdeductiondetailor("DSSspecialdeductiondetailor");
+		}
+		return instance;
+	}
+
+	private final DataSourceIntegerField specialDeductionDetailIdField;
+	private final DataSourceIntegerField parentIdField;
+	private final DataSourceTextField nameField;
+	private final DataSourceIntegerField otherDocumentTypeField;
+	private final DataSourceTextField otherIdentificationNumberField;
+	private final DataSourceDateField brithdateField;
+	private final DataSourceTextField nationalityRegionField;
+	private final DataSourceIntegerField schoolingField;
+	private final DataSourceDateField startDateField;
+	private final DataSourceDateField endDateField;
+	private final DataSourceDateField schoolingTerminationDateField;
+	private final DataSourceTextField schoolingRegionField;
+	private final DataSourceTextField schoolField;
+	private final DataSourceFloatField deductionPercentageField;
+	private final DataSourceFloatField amountField;
+	private final DataSourceIntegerField numField;
+	private final DataSourceIntegerField educationTypeField;
+	private final DataSourceIntegerField educationStageField;
+	private final DataSourceDateField issueDateField;
+	private final DataSourceTextField credentialField;
+	private final DataSourceTextField credentialNumberField;
+	private final DataSourceTextField issuingAuthorityField;
+	private final DataSourceTextField houseAddressField;
+	private final DataSourceIntegerField houseBorrowerField;
+	private final DataSourceIntegerField houseTypeField;
+	private final DataSourceTextField houseNumberField;
+	private final DataSourceIntegerField houseFirstField;
+	private final DataSourceIntegerField loanTypeField;
+	private final DataSourceTextField creditorBankField;
+	private final DataSourceTextField creditorContractNumberField;
+	private final DataSourceDateField repaymentFirstDateField;
+	private final DataSourceIntegerField repaymentField;
+	private final DataSourceFloatField houseAmountField;
+	private final DataSourceTextField provinceField;
+	private final DataSourceTextField cityField;
+	private final DataSourceIntegerField leaseTypeField;
+	private final DataSourceTextField leaseAddressField;
+	private final DataSourceTextField leaseContractNumberField;
+	private final DataSourceIntegerField singleChildField;
+	private final DataSourceTextField allocationWayField;
+	private final DataSourceFloatField allocationAmountField;
+	private final DataSourceIntegerField changeTypeField;
+	private final DataSourceFloatField hospitalizationTotalCostField;
+	private final DataSourceFloatField hospitalizationPersonalCostField;
+	private final DataSourceIntegerField relationshipField;
+	private final DataSourceTextField fileIdField;
+	private final DataSourceLinkField fileUrlField;
+	private final DataSourceIntegerField yearField;
+	private final DataSourceIntegerField specialDeductionTypeIdField;
+	private final DataSourceDateTimeField createDateField;
+	private final DataSourceTextField alternateField1Field;
+	private final DataSourceTextField alternateField2Field;
+
+	public DSSspecialdeductiondetailor(String dataSourceID) {
+
+		super();
+		setID(dataSourceID);
+		setActionMode(ACTION_MODE_QUERY);
+		setActionName("Sspecialdeductiondetailor");
+
+
+		specialDeductionDetailIdField = new DataSourceIntegerField("specialDeductionDetailId", "id");
+		specialDeductionDetailIdField.setLength(11);
+		specialDeductionDetailIdField.setPrimaryKey(true);
+		specialDeductionDetailIdField.setRequired(true);
+		specialDeductionDetailIdField.setHidden(true);
+
+
+		parentIdField = new DataSourceIntegerField("parentId", "父id");
+		parentIdField.setLength(11);
+		parentIdField.setRequired(true);
+		parentIdField.setHidden(true);
+
+
+		nameField = new DataSourceTextField("name", "姓名");
+		nameField.setLength(64);
+		nameField.setRequired(false);
+		nameField.setHidden(false);
+
+
+		otherDocumentTypeField = new DataSourceIntegerField("otherDocumentType", "身份证件类型");
+		otherDocumentTypeField.setLength(11);
+		otherDocumentTypeField.setRequired(false);
+		otherDocumentTypeField.setHidden(false);
+		otherDocumentTypeField.setValueMap(KeyValueManager.getValueMap("system_dictionary_222"));
+		
+
+		otherIdentificationNumberField = new DataSourceTextField("otherIdentificationNumber", "身份证件号码");
+		otherIdentificationNumberField.setLength(64);
+		otherIdentificationNumberField.setRequired(false);
+		otherIdentificationNumberField.setHidden(false);
+
+
+		brithdateField = new DataSourceDateField("brithdate", "出生日期");
+		brithdateField.setRequired(false);
+		brithdateField.setHidden(false);
+
+
+		nationalityRegionField = new DataSourceTextField("nationalityRegion", "国籍");
+		nationalityRegionField.setLength(64);
+		nationalityRegionField.setRequired(false);
+		nationalityRegionField.setHidden(false);
+
+
+		schoolingField = new DataSourceIntegerField("schooling", "当前受教育阶段");
+		schoolingField.setLength(11);
+		schoolingField.setRequired(false);
+		schoolingField.setHidden(false);
+		schoolingField.setValueMap(KeyValueManager.getValueMap("system_dictionary_218"));
+
+		startDateField = new DataSourceDateField("startDate", "起始时间");
+		startDateField.setRequired(false);
+		startDateField.setHidden(false);
+
+
+		endDateField = new DataSourceDateField("endDate", "结束时间");
+		endDateField.setRequired(false);
+		endDateField.setHidden(false);
+
+
+		schoolingTerminationDateField = new DataSourceDateField("schoolingTerminationDate", "教育终止时间");
+		schoolingTerminationDateField.setRequired(false);
+		schoolingTerminationDateField.setHidden(false);
+
+
+		schoolingRegionField = new DataSourceTextField("schoolingRegion", "当前就读国家地区");
+		schoolingRegionField.setLength(64);
+		schoolingRegionField.setRequired(false);
+		schoolingRegionField.setHidden(false);
+
+
+		schoolField = new DataSourceTextField("school", "当前就读学校");
+		schoolField.setLength(64);
+		schoolField.setRequired(false);
+		schoolField.setHidden(false);
+
+
+		deductionPercentageField = new DataSourceFloatField("deductionPercentage", "本人扣除比例");
+		deductionPercentageField.setLength(10);
+		deductionPercentageField.setDecimalPad(2);
+		deductionPercentageField.setFormat("##,###,##0.00");
+		deductionPercentageField.setRequired(false);
+		deductionPercentageField.setHidden(false);
+//		deductionPercentageField.setValueMap(KeyValueManager.getValueMap("system_dictionary_224"));
+
+		amountField = new DataSourceFloatField("amount", "每月抵扣金额");
+		amountField.setLength(10);
+		amountField.setDecimalPad(2);
+		amountField.setFormat("##,###,##0.00");
+		amountField.setRequired(false);
+		amountField.setHidden(false);
+
+		numField = new DataSourceIntegerField("num", "个数");
+		numField.setLength(11);
+		numField.setRequired(false);
+		numField.setHidden(false);
+
+
+		educationTypeField = new DataSourceIntegerField("educationType", "继续教育类型");
+		educationTypeField.setLength(11);
+		educationTypeField.setRequired(false);
+		educationTypeField.setHidden(false);
+		educationTypeField.setValueMap(KeyValueManager.getValueMap("system_dictionary_221"));
+
+		educationStageField = new DataSourceIntegerField("educationStage", "教育阶段");
+		educationStageField.setLength(11);
+		educationStageField.setRequired(false);
+		educationStageField.setHidden(false);
+		educationStageField.setValueMap(KeyValueManager.getValueMap("system_dictionary_218"));
+
+		issueDateField = new DataSourceDateField("issueDate", "发证日期");
+		issueDateField.setRequired(false);
+		issueDateField.setHidden(false);
+
+
+		credentialField = new DataSourceTextField("credential", "证书名称");
+		credentialField.setLength(64);
+		credentialField.setRequired(false);
+		credentialField.setHidden(false);
+
+
+		credentialNumberField = new DataSourceTextField("credentialNumber", "证书编号");
+		credentialNumberField.setLength(64);
+		credentialNumberField.setRequired(false);
+		credentialNumberField.setHidden(false);
+
+
+		issuingAuthorityField = new DataSourceTextField("issuingAuthority", "发证机关");
+		issuingAuthorityField.setLength(64);
+		issuingAuthorityField.setRequired(false);
+		issuingAuthorityField.setHidden(false);
+
+
+		houseAddressField = new DataSourceTextField("houseAddress", "房屋坐落地址");
+		houseAddressField.setLength(64);
+		houseAddressField.setRequired(false);
+		houseAddressField.setHidden(false);
+
+
+		houseBorrowerField = new DataSourceIntegerField("houseBorrower", "是否房屋贷款借款人");
+		houseBorrowerField.setLength(11);
+		houseBorrowerField.setRequired(false);
+		houseBorrowerField.setHidden(false);
+		houseBorrowerField.setValueMap(KeyValueManager.getValueMap("system_dictionary_200"));
+
+
+		houseTypeField = new DataSourceIntegerField("houseType", "房屋证书类型");
+		houseTypeField.setLength(11);
+		houseTypeField.setRequired(false);
+		houseTypeField.setHidden(false);
+		houseTypeField.setValueMap(KeyValueManager.getValueMap("system_dictionary_219"));
+
+		houseNumberField = new DataSourceTextField("houseNumber", "房屋证书编号");
+		houseNumberField.setLength(64);
+		houseNumberField.setRequired(false);
+		houseNumberField.setHidden(false);
+
+
+		houseFirstField = new DataSourceIntegerField("houseFirst", "是否婚前各自首套贷款且婚后分别扣除50%");
+		houseFirstField.setLength(11);
+		houseFirstField.setRequired(false);
+		houseFirstField.setHidden(false);
+		houseFirstField.setValueMap(KeyValueManager.getValueMap("system_dictionary_200"));
+
+		
+		loanTypeField = new DataSourceIntegerField("loanType", "贷款类型");
+		loanTypeField.setLength(11);
+		loanTypeField.setRequired(false);
+		loanTypeField.setHidden(false);
+		Map map =new HashMap<Integer,String>();
+		map.put(0, "公积金贷款");
+		map.put(1, "商业贷款");
+		loanTypeField.setValueMap(map);
+
+		creditorBankField = new DataSourceTextField("creditorBank", "贷款银行");
+		creditorBankField.setLength(64);
+		creditorBankField.setRequired(false);
+		creditorBankField.setHidden(false);
+
+
+		creditorContractNumberField = new DataSourceTextField("creditorContractNumber", "贷款合同编号");
+		creditorContractNumberField.setLength(64);
+		creditorContractNumberField.setRequired(false);
+		creditorContractNumberField.setHidden(false);
+
+
+		repaymentFirstDateField = new DataSourceDateField("repaymentFirstDate", "首次还款日期");
+		repaymentFirstDateField.setRequired(false);
+		repaymentFirstDateField.setHidden(false);
+
+
+		repaymentField = new DataSourceIntegerField("repayment", "贷款期数（月数）");
+		repaymentField.setLength(11);
+		repaymentField.setRequired(false);
+		repaymentField.setHidden(false);
+
+
+		houseAmountField = new DataSourceFloatField("houseAmount", "贷款抵扣金额");
+		houseAmountField.setLength(10);
+		houseAmountField.setDecimalPad(2);
+		houseAmountField.setFormat("##,###,##0.00");
+		houseAmountField.setRequired(false);
+		houseAmountField.setHidden(false);
+
+
+		provinceField = new DataSourceTextField("province", "省份");
+		provinceField.setLength(64);
+		provinceField.setRequired(false);
+		provinceField.setHidden(false);
+
+
+		cityField = new DataSourceTextField("city", "城市");
+		cityField.setLength(64);
+		cityField.setRequired(false);
+		cityField.setHidden(false);
+		cityField.setValueMap(KeyValueManager.getValueMap("system_dictionary_228"));
+
+
+		leaseTypeField = new DataSourceIntegerField("leaseType", "租赁类型");
+		leaseTypeField.setLength(11);
+		leaseTypeField.setRequired(false);
+		leaseTypeField.setHidden(false);
+		Map map2 =new HashMap<Integer,String>();
+		map2.put(0, "个人");
+		map2.put(1, "组织");
+		leaseTypeField.setValueMap(map2);
+
+		
+		leaseAddressField = new DataSourceTextField("leaseAddress", "住房坐落地址");
+		leaseAddressField.setLength(64);
+		leaseAddressField.setRequired(false);
+		leaseAddressField.setHidden(false);
+
+
+		leaseContractNumberField = new DataSourceTextField("leaseContractNumber", "住房租赁合同编号");
+		leaseContractNumberField.setLength(64);
+		leaseContractNumberField.setRequired(false);
+		leaseContractNumberField.setHidden(false);
+
+
+		singleChildField = new DataSourceIntegerField("singleChild", "是否独生");
+		singleChildField.setLength(11);
+		singleChildField.setRequired(false);
+		singleChildField.setHidden(false);
+		singleChildField.setValueMap(KeyValueManager.getValueMap("system_dictionary_200"));
+
+		allocationWayField = new DataSourceTextField("allocationWay", "分摊方式");
+		allocationWayField.setLength(64);
+		allocationWayField.setRequired(false);
+		allocationWayField.setHidden(false);
+		
+
+		allocationAmountField = new DataSourceFloatField("allocationAmount", "本年度月扣除金额");
+		allocationAmountField.setLength(10);
+		allocationAmountField.setDecimalPad(2);
+		allocationAmountField.setFormat("##,###,##0.00");
+		allocationAmountField.setRequired(false);
+		allocationAmountField.setHidden(false);
+
+
+		changeTypeField = new DataSourceIntegerField("changeType", "较上次报送信息是否发生变化");
+		changeTypeField.setLength(11);
+		changeTypeField.setRequired(false);
+		changeTypeField.setHidden(false);
+		Map map3 =new HashMap<Integer,String>();
+		map3.put(0, "首次报送");
+		map3.put(1, "无变化");
+		map3.put(2, "有变化");
+		changeTypeField.setValueMap(map3);
+
+		hospitalizationTotalCostField = new DataSourceFloatField("hospitalizationTotalCost", "医药费用总金额");
+		hospitalizationTotalCostField.setLength(10);
+		hospitalizationTotalCostField.setDecimalPad(2);
+		hospitalizationTotalCostField.setFormat("##,###,##0.00");
+		hospitalizationTotalCostField.setRequired(false);
+		hospitalizationTotalCostField.setHidden(false);
+
+
+		hospitalizationPersonalCostField = new DataSourceFloatField("hospitalizationPersonalCost", "个人负担金额");
+		hospitalizationPersonalCostField.setLength(10);
+		hospitalizationPersonalCostField.setDecimalPad(2);
+		hospitalizationPersonalCostField.setFormat("##,###,##0.00");
+		hospitalizationPersonalCostField.setRequired(false);
+		hospitalizationPersonalCostField.setHidden(false);
+
+
+		relationshipField = new DataSourceIntegerField("relationship", "与本人关系");
+		relationshipField.setLength(11);
+		relationshipField.setRequired(false);
+		relationshipField.setHidden(false);
+		Map map4 =new HashMap<Integer,String>();
+		map4.put(0, "父母");
+		map4.put(1, "其他");
+		relationshipField.setValueMap(map4);
+
+		fileIdField = new DataSourceTextField("fileId", "fileId");
+		fileIdField.setLength(11);
+		fileIdField.setRequired(false);
+		fileIdField.setHidden(true);
+
+
+		fileUrlField = new DataSourceLinkField("fileUrl", "附件");
+		fileUrlField.setLength(11);
+		fileUrlField.setRequired(false);
+		fileUrlField.setHidden(false);
+
+
+		yearField = new DataSourceIntegerField("year", "扣除年度");
+		yearField.setLength(11);
+		yearField.setRequired(false);
+		yearField.setHidden(false);
+
+
+		specialDeductionTypeIdField = new DataSourceIntegerField("specialDeductionTypeId", "专项类型");
+		specialDeductionTypeIdField.setLength(11);
+		specialDeductionTypeIdField.setRequired(false);
+		specialDeductionTypeIdField.setHidden(false);
+		specialDeductionTypeIdField.setValueMap(KeyValueManager.getValueMap("system_dictionary_223"));
+		specialDeductionTypeIdField.setCanEdit(true);
+		
+		createDateField = new DataSourceDateTimeField("createDate", "创建时间");
+		createDateField.setRequired(false);
+		createDateField.setHidden(false);
+
+
+		alternateField1Field = new DataSourceTextField("alternateField1", "备用字段1");
+		alternateField1Field.setLength(512);
+		alternateField1Field.setRequired(false);
+		alternateField1Field.setHidden(true);
+
+
+		alternateField2Field = new DataSourceTextField("alternateField2", "备用字段2");
+		alternateField2Field.setLength(512);
+		alternateField2Field.setRequired(false);
+		alternateField2Field.setHidden(true);
+
+
+		setFields(specialDeductionDetailIdField, parentIdField,specialDeductionTypeIdField, yearField, nameField, otherDocumentTypeField, otherIdentificationNumberField, brithdateField, nationalityRegionField, schoolingField, startDateField, endDateField, schoolingTerminationDateField, schoolingRegionField, schoolField, deductionPercentageField, amountField, numField, educationTypeField, educationStageField, issueDateField, credentialField, credentialNumberField, issuingAuthorityField, houseAddressField, houseBorrowerField, houseTypeField, houseNumberField, houseFirstField, loanTypeField, creditorBankField, creditorContractNumberField, repaymentFirstDateField, repaymentField, houseAmountField, provinceField, cityField, leaseTypeField, leaseAddressField, leaseContractNumberField, singleChildField, allocationWayField, allocationAmountField, changeTypeField, hospitalizationTotalCostField, hospitalizationPersonalCostField, relationshipField, fileIdField, fileUrlField, createDateField, alternateField1Field, alternateField2Field);
+	}
+
+
+}
+

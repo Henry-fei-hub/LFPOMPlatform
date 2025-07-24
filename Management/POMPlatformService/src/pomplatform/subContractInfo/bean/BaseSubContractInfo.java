@@ -1,0 +1,437 @@
+package pomplatform.subContractInfo.bean;
+
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Objects;
+import delicacy.common.GenericBase;
+import delicacy.common.BaseFactory;
+
+public class BaseSubContractInfo extends GenericBase implements BaseFactory<BaseSubContractInfo>, Comparable<BaseSubContractInfo> 
+{
+
+
+	public static BaseSubContractInfo newInstance(){
+		return new BaseSubContractInfo();
+	}
+
+	@Override
+	public BaseSubContractInfo make(){
+		BaseSubContractInfo b = new BaseSubContractInfo();
+		return b;
+	}
+
+	public final static java.lang.String CS_SUB_CONTRACT_ID = "sub_contract_id" ;
+	public final static java.lang.String CS_PARENT_ID = "parent_id" ;
+	public final static java.lang.String CS_SUB_CONTRACT_CODE = "sub_contract_code" ;
+	public final static java.lang.String CS_PROJECT_CODE = "project_code" ;
+	public final static java.lang.String CS_BUSINESS_TYPE = "business_type" ;
+	public final static java.lang.String CS_PROJECT_TYPE = "project_type" ;
+	public final static java.lang.String CS_DEPARTMENT_ID = "department_id" ;
+	public final static java.lang.String CS_COMMON_AREA = "common_area" ;
+	public final static java.lang.String CS_LOGISTICS_AREA = "logistics_area" ;
+	public final static java.lang.String CS_MONEY_SUM = "money_sum" ;
+	public final static java.lang.String CS_CREATE_TIME = "create_time" ;
+	public final static java.lang.String CS_SUB_CONTRACT_NAME = "sub_contract_name" ;
+	public final static java.lang.String CS_UPDATE_TIME = "update_time" ;
+	public final static java.lang.String CS_PROJECT_ID = "project_id" ;
+	public final static java.lang.String CS_SHEET_TOTAL_INTEGRAL = "sheet_total_integral" ;
+	public final static java.lang.String CS_DESIGN_AREA = "design_area" ;
+	public final static java.lang.String CS_COMPLAINT_PERCENTAGE = "complaint_percentage" ;
+	public final static java.lang.String CS_COMPLAINT_INTEGRAL = "complaint_integral" ;
+	public final static java.lang.String CS_SHEET_INTEGRAL = "sheet_integral" ;
+	public final static java.lang.String CS_PERCENTAGE = "percentage" ;
+
+	public final static java.lang.String ALL_CAPTIONS = "子合同编码,主合同编码,子合同编号,项目编号,业务类型,项目类型,承接部门,公区面积,后勤面积,小计 子订单总金额,创建时间,子合同名称  充当了区域,修改时间,项目编码,项目总积分,设计面积,投诉保证金比例,投诉保证金,订单积分,占比";
+
+	public java.lang.Integer getSubContractId() {
+		return this.__sub_contract_id;
+	}
+
+	public void setSubContractId( java.lang.Integer value ) {
+		this.__sub_contract_id = value;
+	}
+
+	public java.lang.Integer getParentId() {
+		return this.__parent_id;
+	}
+
+	public void setParentId( java.lang.Integer value ) {
+		this.__parent_id = value;
+	}
+
+	public java.lang.String getSubContractCode() {
+		return this.__sub_contract_code;
+	}
+
+	public void setSubContractCode( java.lang.String value ) {
+		this.__sub_contract_code = value;
+	}
+
+	public java.lang.String getProjectCode() {
+		return this.__project_code;
+	}
+
+	public void setProjectCode( java.lang.String value ) {
+		this.__project_code = value;
+	}
+
+	public java.lang.Integer getBusinessType() {
+		return this.__business_type;
+	}
+
+	public void setBusinessType( java.lang.Integer value ) {
+		this.__business_type = value;
+	}
+
+	public java.lang.Integer getProjectType() {
+		return this.__project_type;
+	}
+
+	public void setProjectType( java.lang.Integer value ) {
+		this.__project_type = value;
+	}
+
+	public java.lang.Integer getDepartmentId() {
+		return this.__department_id;
+	}
+
+	public void setDepartmentId( java.lang.Integer value ) {
+		this.__department_id = value;
+	}
+
+	public java.math.BigDecimal getCommonArea() {
+		return this.__common_area;
+	}
+
+	public void setCommonArea( java.math.BigDecimal value ) {
+		this.__common_area = value;
+	}
+
+	public java.math.BigDecimal getLogisticsArea() {
+		return this.__logistics_area;
+	}
+
+	public void setLogisticsArea( java.math.BigDecimal value ) {
+		this.__logistics_area = value;
+	}
+
+	public java.math.BigDecimal getMoneySum() {
+		return this.__money_sum;
+	}
+
+	public void setMoneySum( java.math.BigDecimal value ) {
+		this.__money_sum = value;
+	}
+
+	public java.util.Date getCreateTime() {
+		return this.__create_time;
+	}
+
+	public void setCreateTime( java.util.Date value ) {
+		this.__create_time = value;
+	}
+
+	public java.lang.String getSubContractName() {
+		return this.__sub_contract_name;
+	}
+
+	public void setSubContractName( java.lang.String value ) {
+		this.__sub_contract_name = value;
+	}
+
+	public java.util.Date getUpdateTime() {
+		return this.__update_time;
+	}
+
+	public void setUpdateTime( java.util.Date value ) {
+		this.__update_time = value;
+	}
+
+	public java.lang.Integer getProjectId() {
+		return this.__project_id;
+	}
+
+	public void setProjectId( java.lang.Integer value ) {
+		this.__project_id = value;
+	}
+
+	public java.math.BigDecimal getSheetTotalIntegral() {
+		return this.__sheet_total_integral;
+	}
+
+	public void setSheetTotalIntegral( java.math.BigDecimal value ) {
+		this.__sheet_total_integral = value;
+	}
+
+	public java.math.BigDecimal getDesignArea() {
+		return this.__design_area;
+	}
+
+	public void setDesignArea( java.math.BigDecimal value ) {
+		this.__design_area = value;
+	}
+
+	public java.math.BigDecimal getComplaintPercentage() {
+		return this.__complaint_percentage;
+	}
+
+	public void setComplaintPercentage( java.math.BigDecimal value ) {
+		this.__complaint_percentage = value;
+	}
+
+	public java.math.BigDecimal getComplaintIntegral() {
+		return this.__complaint_integral;
+	}
+
+	public void setComplaintIntegral( java.math.BigDecimal value ) {
+		this.__complaint_integral = value;
+	}
+
+	public java.math.BigDecimal getSheetIntegral() {
+		return this.__sheet_integral;
+	}
+
+	public void setSheetIntegral( java.math.BigDecimal value ) {
+		this.__sheet_integral = value;
+	}
+
+	public java.math.BigDecimal getPercentage() {
+		return this.__percentage;
+	}
+
+	public void setPercentage( java.math.BigDecimal value ) {
+		this.__percentage = value;
+	}
+
+	public void cloneCopy(BaseSubContractInfo __bean){
+		__bean.setSubContractId(getSubContractId());
+		__bean.setParentId(getParentId());
+		__bean.setSubContractCode(getSubContractCode());
+		__bean.setProjectCode(getProjectCode());
+		__bean.setBusinessType(getBusinessType());
+		__bean.setProjectType(getProjectType());
+		__bean.setDepartmentId(getDepartmentId());
+		__bean.setCommonArea(getCommonArea());
+		__bean.setLogisticsArea(getLogisticsArea());
+		__bean.setMoneySum(getMoneySum());
+		__bean.setCreateTime(getCreateTime());
+		__bean.setSubContractName(getSubContractName());
+		__bean.setUpdateTime(getUpdateTime());
+		__bean.setProjectId(getProjectId());
+		__bean.setSheetTotalIntegral(getSheetTotalIntegral());
+		__bean.setDesignArea(getDesignArea());
+		__bean.setComplaintPercentage(getComplaintPercentage());
+		__bean.setComplaintIntegral(getComplaintIntegral());
+		__bean.setSheetIntegral(getSheetIntegral());
+		__bean.setPercentage(getPercentage());
+	}
+
+	public java.lang.String toCSVString() {
+
+
+		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat(DATE_FORMAT);
+		StringBuilder sb = new StringBuilder();
+		sb.append(getSubContractId() == null ? "" : getSubContractId());
+		sb.append(",");
+		String strParentId = delicacy.system.executor.SelectValueCache.getSelectValue("contracts_1", String.valueOf(getParentId()));
+		sb.append(strParentId == null ? "" : strParentId);
+		sb.append(",");
+		sb.append(getSubContractCode() == null ? "" : getSubContractCode());
+		sb.append(",");
+		sb.append(getProjectCode() == null ? "" : getProjectCode());
+		sb.append(",");
+		String strBusinessType = delicacy.system.executor.SelectValueCache.getSelectValue("production_value_coefficient_type", String.valueOf(getBusinessType()));
+		sb.append(strBusinessType == null ? "" : strBusinessType);
+		sb.append(",");
+		String strProjectType = delicacy.system.executor.SelectValueCache.getSelectValue("system_dictionary_32", String.valueOf(getProjectType()));
+		sb.append(strProjectType == null ? "" : strProjectType);
+		sb.append(",");
+		String strDepartmentId = delicacy.system.executor.SelectValueCache.getSelectValue("departments", String.valueOf(getDepartmentId()));
+		sb.append(strDepartmentId == null ? "" : strDepartmentId);
+		sb.append(",");
+		sb.append(getCommonArea() == null ? "" : getCommonArea());
+		sb.append(",");
+		sb.append(getLogisticsArea() == null ? "" : getLogisticsArea());
+		sb.append(",");
+		sb.append(getMoneySum() == null ? "" : getMoneySum());
+		sb.append(",");
+		sb.append(getCreateTime() == null ? "" : sdf.format(getCreateTime()));
+		sb.append(",");
+		sb.append(getSubContractName() == null ? "" : getSubContractName());
+		sb.append(",");
+		sb.append(getUpdateTime() == null ? "" : sdf.format(getUpdateTime()));
+		sb.append(",");
+		sb.append(getProjectId() == null ? "" : getProjectId());
+		sb.append(",");
+		sb.append(getSheetTotalIntegral() == null ? "" : getSheetTotalIntegral());
+		sb.append(",");
+		sb.append(getDesignArea() == null ? "" : getDesignArea());
+		sb.append(",");
+		sb.append(getComplaintPercentage() == null ? "" : getComplaintPercentage());
+		sb.append(",");
+		sb.append(getComplaintIntegral() == null ? "" : getComplaintIntegral());
+		sb.append(",");
+		sb.append(getSheetIntegral() == null ? "" : getSheetIntegral());
+		sb.append(",");
+		sb.append(getPercentage() == null ? "" : getPercentage());
+		return sb.toString();
+	}
+
+	@Override
+	public int compareTo(BaseSubContractInfo o) {
+		return __sub_contract_id == null ? -1 : __sub_contract_id.compareTo(o.getSubContractId());
+	}
+
+	@Override
+	public int hashCode() {
+		int hash = 7;
+		hash = 97 * hash + Objects.hashCode(this.__sub_contract_id);
+		hash = 97 * hash + Objects.hashCode(this.__parent_id);
+		hash = 97 * hash + Objects.hashCode(this.__sub_contract_code);
+		hash = 97 * hash + Objects.hashCode(this.__project_code);
+		hash = 97 * hash + Objects.hashCode(this.__business_type);
+		hash = 97 * hash + Objects.hashCode(this.__project_type);
+		hash = 97 * hash + Objects.hashCode(this.__department_id);
+		hash = 97 * hash + Objects.hashCode(this.__common_area);
+		hash = 97 * hash + Objects.hashCode(this.__logistics_area);
+		hash = 97 * hash + Objects.hashCode(this.__money_sum);
+		hash = 97 * hash + Objects.hashCode(this.__create_time);
+		hash = 97 * hash + Objects.hashCode(this.__sub_contract_name);
+		hash = 97 * hash + Objects.hashCode(this.__update_time);
+		hash = 97 * hash + Objects.hashCode(this.__project_id);
+		hash = 97 * hash + Objects.hashCode(this.__sheet_total_integral);
+		hash = 97 * hash + Objects.hashCode(this.__design_area);
+		hash = 97 * hash + Objects.hashCode(this.__complaint_percentage);
+		hash = 97 * hash + Objects.hashCode(this.__complaint_integral);
+		hash = 97 * hash + Objects.hashCode(this.__sheet_integral);
+		hash = 97 * hash + Objects.hashCode(this.__percentage);
+		return hash;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if(obj == null) return false;
+		if(getClass() != obj.getClass()) return false;
+		final BaseSubContractInfo o = (BaseSubContractInfo)obj;
+		if(!Objects.equals(this.__sub_contract_id, o.getSubContractId())) return false;
+		if(!Objects.equals(this.__parent_id, o.getParentId())) return false;
+		if(!Objects.equals(this.__sub_contract_code, o.getSubContractCode())) return false;
+		if(!Objects.equals(this.__project_code, o.getProjectCode())) return false;
+		if(!Objects.equals(this.__business_type, o.getBusinessType())) return false;
+		if(!Objects.equals(this.__project_type, o.getProjectType())) return false;
+		if(!Objects.equals(this.__department_id, o.getDepartmentId())) return false;
+		if(!Objects.equals(this.__common_area, o.getCommonArea())) return false;
+		if(!Objects.equals(this.__logistics_area, o.getLogisticsArea())) return false;
+		if(!Objects.equals(this.__money_sum, o.getMoneySum())) return false;
+		if(!Objects.equals(this.__create_time, o.getCreateTime())) return false;
+		if(!Objects.equals(this.__sub_contract_name, o.getSubContractName())) return false;
+		if(!Objects.equals(this.__update_time, o.getUpdateTime())) return false;
+		if(!Objects.equals(this.__project_id, o.getProjectId())) return false;
+		if(!Objects.equals(this.__sheet_total_integral, o.getSheetTotalIntegral())) return false;
+		if(!Objects.equals(this.__design_area, o.getDesignArea())) return false;
+		if(!Objects.equals(this.__complaint_percentage, o.getComplaintPercentage())) return false;
+		if(!Objects.equals(this.__complaint_integral, o.getComplaintIntegral())) return false;
+		if(!Objects.equals(this.__sheet_integral, o.getSheetIntegral())) return false;
+		if(!Objects.equals(this.__percentage, o.getPercentage())) return false;
+		return true;
+	}
+
+	@Override
+	public java.lang.String toJSONString() {
+
+		StringBuilder sb = new StringBuilder();
+		int count = 0;
+		if(getSubContractId() != null) sb.append(__wrapNumber(count++, "subContractId", getSubContractId()));
+		if(getParentId() != null) sb.append(__wrapNumber(count++, "parentId", getParentId()));
+		if(getSubContractCode() != null) sb.append(__wrapString(count++, "subContractCode", getSubContractCode()));
+		if(getProjectCode() != null) sb.append(__wrapString(count++, "projectCode", getProjectCode()));
+		if(getBusinessType() != null) sb.append(__wrapNumber(count++, "businessType", getBusinessType()));
+		if(getProjectType() != null) sb.append(__wrapNumber(count++, "projectType", getProjectType()));
+		if(getDepartmentId() != null) sb.append(__wrapNumber(count++, "departmentId", getDepartmentId()));
+		if(getCommonArea() != null) sb.append(__wrapDecimal(count++, "commonArea", getCommonArea()));
+		if(getLogisticsArea() != null) sb.append(__wrapDecimal(count++, "logisticsArea", getLogisticsArea()));
+		if(getMoneySum() != null) sb.append(__wrapDecimal(count++, "moneySum", getMoneySum()));
+		if(getCreateTime() != null) sb.append(__wrapDate(count++, "createTime", getCreateTime()));
+		if(getSubContractName() != null) sb.append(__wrapString(count++, "subContractName", getSubContractName()));
+		if(getUpdateTime() != null) sb.append(__wrapDate(count++, "updateTime", getUpdateTime()));
+		if(getProjectId() != null) sb.append(__wrapNumber(count++, "projectId", getProjectId()));
+		if(getSheetTotalIntegral() != null) sb.append(__wrapDecimal(count++, "sheetTotalIntegral", getSheetTotalIntegral()));
+		if(getDesignArea() != null) sb.append(__wrapDecimal(count++, "designArea", getDesignArea()));
+		if(getComplaintPercentage() != null) sb.append(__wrapDecimal(count++, "complaintPercentage", getComplaintPercentage()));
+		if(getComplaintIntegral() != null) sb.append(__wrapDecimal(count++, "complaintIntegral", getComplaintIntegral()));
+		if(getSheetIntegral() != null) sb.append(__wrapDecimal(count++, "sheetIntegral", getSheetIntegral()));
+		if(getPercentage() != null) sb.append(__wrapDecimal(count++, "percentage", getPercentage()));
+		return sb.toString();
+	}
+
+	public Map<String, Object> toMap() {
+		Map<String, Object> res = new HashMap<>();
+		if(getSubContractId() != null) res.put("subContractId", getSubContractId());
+		if(getParentId() != null) res.put("parentId", getParentId());
+		if(getSubContractCode() != null) res.put("subContractCode", getSubContractCode());
+		if(getProjectCode() != null) res.put("projectCode", getProjectCode());
+		if(getBusinessType() != null) res.put("businessType", getBusinessType());
+		if(getProjectType() != null) res.put("projectType", getProjectType());
+		if(getDepartmentId() != null) res.put("departmentId", getDepartmentId());
+		if(getCommonArea() != null) res.put("commonArea", getCommonArea());
+		if(getLogisticsArea() != null) res.put("logisticsArea", getLogisticsArea());
+		if(getMoneySum() != null) res.put("moneySum", getMoneySum());
+		if(getCreateTime() != null) res.put("createTime", getCreateTime());
+		if(getSubContractName() != null) res.put("subContractName", getSubContractName());
+		if(getUpdateTime() != null) res.put("updateTime", getUpdateTime());
+		if(getProjectId() != null) res.put("projectId", getProjectId());
+		if(getSheetTotalIntegral() != null) res.put("sheetTotalIntegral", getSheetTotalIntegral());
+		if(getDesignArea() != null) res.put("designArea", getDesignArea());
+		if(getComplaintPercentage() != null) res.put("complaintPercentage", getComplaintPercentage());
+		if(getComplaintIntegral() != null) res.put("complaintIntegral", getComplaintIntegral());
+		if(getSheetIntegral() != null) res.put("sheetIntegral", getSheetIntegral());
+		if(getPercentage() != null) res.put("percentage", getPercentage());
+		return res;
+	}
+
+	@Override
+	public void setDataFromMap(Map<String, Object> values){
+		Object val;
+		if((val = values.get("subContractId")) != null) setSubContractId(__getInt(val)); 
+		if((val = values.get("parentId")) != null) setParentId(__getInt(val)); 
+		if((val = values.get("subContractCode")) != null) setSubContractCode(__getString(val));
+		if((val = values.get("projectCode")) != null) setProjectCode(__getString(val));
+		if((val = values.get("businessType")) != null) setBusinessType(__getInt(val)); 
+		if((val = values.get("projectType")) != null) setProjectType(__getInt(val)); 
+		if((val = values.get("departmentId")) != null) setDepartmentId(__getInt(val)); 
+		if((val = values.get("commonArea")) != null) setCommonArea(__getDecimal(val));  
+		if((val = values.get("logisticsArea")) != null) setLogisticsArea(__getDecimal(val));  
+		if((val = values.get("moneySum")) != null) setMoneySum(__getDecimal(val));  
+		if((val = values.get("createTime")) != null) setCreateTime(__getDate(val)); 
+		if((val = values.get("subContractName")) != null) setSubContractName(__getString(val));
+		if((val = values.get("updateTime")) != null) setUpdateTime(__getDate(val)); 
+		if((val = values.get("projectId")) != null) setProjectId(__getInt(val)); 
+		if((val = values.get("sheetTotalIntegral")) != null) setSheetTotalIntegral(__getDecimal(val));  
+		if((val = values.get("designArea")) != null) setDesignArea(__getDecimal(val));  
+		if((val = values.get("complaintPercentage")) != null) setComplaintPercentage(__getDecimal(val));  
+		if((val = values.get("complaintIntegral")) != null) setComplaintIntegral(__getDecimal(val));  
+		if((val = values.get("sheetIntegral")) != null) setSheetIntegral(__getDecimal(val));  
+		if((val = values.get("percentage")) != null) setPercentage(__getDecimal(val));  
+	}
+
+	protected java.lang.Integer  __sub_contract_id ;
+	protected java.lang.Integer  __parent_id ;
+	protected java.lang.String  __sub_contract_code ;
+	protected java.lang.String  __project_code ;
+	protected java.lang.Integer  __business_type ;
+	protected java.lang.Integer  __project_type ;
+	protected java.lang.Integer  __department_id ;
+	protected java.math.BigDecimal  __common_area ;
+	protected java.math.BigDecimal  __logistics_area ;
+	protected java.math.BigDecimal  __money_sum ;
+	protected java.util.Date  __create_time ;
+	protected java.lang.String  __sub_contract_name ;
+	protected java.util.Date  __update_time ;
+	protected java.lang.Integer  __project_id ;
+	protected java.math.BigDecimal  __sheet_total_integral ;
+	protected java.math.BigDecimal  __design_area ;
+	protected java.math.BigDecimal  __complaint_percentage ;
+	protected java.math.BigDecimal  __complaint_integral ;
+	protected java.math.BigDecimal  __sheet_integral ;
+	protected java.math.BigDecimal  __percentage ;
+}

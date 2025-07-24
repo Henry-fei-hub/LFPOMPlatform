@@ -1,0 +1,457 @@
+/** Add css rules here for your application. */
+
+
+/** Example rules used by the template application (remove for your app) */
+/*body, table td, select, input {
+  font-family: 仿宋;
+  font-size: medium;
+}*/
+
+.appclass {
+  font-family: 仿宋;
+  font-size: 32px;
+  font-weight: bold;
+  color: #000000;
+  margin: 5px 0px 5px;
+  text-align: left;
+}
+
+
+h1 {
+  font-family: 仿宋;
+  font-size: 32px;
+  font-weight: bold;
+  color: #000000;
+  margin: 5px 0px 5px;
+  text-align: center;
+}
+
+.sendButton {
+  display: block;
+  font-size: 16pt;
+}
+
+.needToAttentionText {
+    color: red;
+    font-size: 11px;
+}
+.needToAttentionTextFocused {
+    color: red;
+    font-size: 11px;
+}
+
+/** Most GWT widgets already have a style name defined */
+.gwt-DialogBox {
+  width: 400px;
+}
+
+.dialogVPanel {
+  margin: 5px;
+}
+
+.serverResponseLabelError {
+  color: red;
+}
+
+/** Set ids using widget.getElement().setId("idOfElement") */
+#closeButton {
+  margin: 15px 6px 6px;
+}
+
+
+
+
+.myHighGridCell,
+.myHighGridCellDark {
+    font-family:FangSong; font-size:medium; text-overflow:ellipsis;
+    color:black;
+    border-bottom:1px solid #ffc0c0; border-top:1px solid #ffc0c0;
+    background-color:#ffc0c0;
+}
+.myHighGridCellOver,
+.myHighGridCellOverDark {
+    font-family:FangSong; font-size:medium; text-overflow:ellipsis;
+    color:black;
+    border-bottom:1px solid #c0c0c0; border-top:1px solid #c0c0c0;
+    background-color:#ffe0e0;
+}
+.myHighGridCellSelected,
+.myHighGridCellSelectedDark {
+    font-family:FangSong; font-size:medium; text-overflow:ellipsis;
+    color:black;
+    border-bottom:1px solid #ffc0ff; border-top:1px solid #ffc0ff;
+    background-color:#ffc0ff;
+}
+.myHighGridCellSelectedOver,
+.myHighGridCellSelectedOverDark {
+    font-family:FangSong; font-size:medium; text-overflow:ellipsis;
+    color:black;
+    border-bottom:1px solid #a0a0a0; border-top:1px solid #a0a0a0;
+    background-color:#ffe0ff;
+}
+.myHighGridCellDisabled,
+.myHighGridCellDisabledDark {
+    font-family:FangSong; font-size:medium; text-overflow:ellipsis;
+    color:#808080;
+    border-bottom:1px solid #ffc0c0; border-top:1px solid #ffc0c0;
+    background-color:#ffc0c0;
+}
+
+
+.myLowGridCell,
+.myLowGridCellDark {
+    font-family:FangSong; font-size:medium; text-overflow:ellipsis;
+    color:black;
+    border-bottom:1px solid #c0ffc0; border-top:1px solid #c0ffc0;
+    background-color:#c0ffc0;
+}
+.myLowGridCellOver,
+.myLowGridCellOverDark {
+    font-family:FangSong; font-size:medium; text-overflow:ellipsis;
+    color:black;
+    border-bottom:1px solid #c0c0c0; border-top:1px solid #c0c0c0;
+    background-color:#e0ffe0;
+}
+.myLowGridCellSelected,
+.myLowGridCellSelectedDark {
+    font-family:FangSong; font-size:medium; text-overflow:ellipsis;
+    color:black;
+    border-bottom:1px solid #c0ffff; border-top:1px solid #c0ffff;
+    background-color:#c0ffff;
+}
+.myLowGridCellSelectedOver,
+.myLowGridCellSelectedOverDark {
+    font-family:FangSong; font-size:medium; text-overflow:ellipsis;
+    color:black;
+    border-bottom:1px solid #a0a0a0; border-top:1px solid #a0a0a0;
+    background-color:#e0ffff;
+}
+.myLowGridCellDisabled,
+.myLowGridCellDisabledDark {
+    font-family:FangSong; font-size:medium; text-overflow:ellipsis;
+    color:#808080;
+    border-bottom:1px solid #c0ffc0; border-top:1px solid #c0ffc0;
+    background-color:#c0ffc0;
+}
+.mytab{border-collapse:collapse; margin:0px auto; padding:0px; font-family:FangSong; font-size:middle; text-overflow:ellipsis; border:1px solid #ffc0c0}
+.myt1{border:1px solid #ffc0c0;  margin-top:0px;}
+.tablestyle {
+	border-collapse:collapse; margin:0px auto; padding:0px; font-family:FangSong; font-size:middle; text-overflow:ellipsis; border:1px solid #808080;
+}
+.tablestyle TD {
+    border:1px solid #808080;  margin-top:0px;
+}
+.loginWindow {
+	background-position:0 0!important;
+}
+/*#isc_6{
+    background-color: #706c6d!important;
+}*/
+.contentFont {
+	font-family:FangSong; font-size:medium;
+	line-height: 3;
+}
+
+.colorField {
+    font-family:FangSong; font-size:medium; text-overflow:ellipsis;
+    color:#000000;
+    border-right:1px solid #000000;
+    border-bottom:1px solid #000000;
+    background-color:#C0C0C0;
+}
+.colorFieldOver,
+.colorFieldSelected,
+.colorFieldSelectedOver {
+    font-family:FangSong; font-size:medium; text-overflow:ellipsis;
+    color:#000000;
+    border-right: 1px solid #000000;
+    border-bottom:1px solid #000000;
+    background-color:#C0C0C0;
+}
+
+.colorLabel{
+	font-family:FangSong; font-size:1em; text-overflow:ellipsis; font-weight: bold;
+}
+
+.LabelViewTitle{
+	font-family:FangSong; font-size:1em; text-overflow:ellipsis;
+}
+
+.LabelViewValueDefault{
+	font-family:FangSong; font-size:1em; text-overflow:ellipsis; font-weight: bold;
+}
+.LabelViewValue{
+	font-family:FangSong; font-size:1em; text-overflow:ellipsis; font-weight: bold;
+	color:red;
+}
+.layoutGroupTitle{
+	font-family:FangSong; font-size:1em; text-overflow:ellipsis; font-weight: bold;
+}
+
+.layoutGroupBorder{
+	color:#e2e2e2;
+	background-color: #e2e2e2;
+	text-align: center;
+}
+
+.loadingStyle{
+	color:#e2e2e2;
+	background-color: #e2e2e2;
+	border-bottom-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+}
+
+.gridCellBorderStyle{
+    color: #000;
+    background-color: #4fabff;
+    border-left: none;
+    border-bottom: 1px solid rgb(191, 191, 191);
+    border-left: 1px solid rgb(250, 250, 250);
+    border-right: 1px solid rgb(204, 204, 204);
+}
+
+.gridCellBorderStyleTwo{
+    color: #000;
+    background-color: #FF7C80;
+    border-left: none;
+    border-right: 1px solid #fff;
+}
+
+.gridCellStyleFirst{
+    color: #000;
+    background-color: #FFCC99;
+    border-left: none;
+    border-right: 1px solid #fff;
+}
+.gridCellStyleTwo{
+    color: #000;
+    background-color: #CCCCFF;
+    border-left: none;
+    border-right: 1px solid #fff;
+}
+.gridCellStyleThree{
+    color: #000;
+    background-color: #A9D08E;
+    border-left: none;
+    border-right: 1px solid #fff;
+}
+.gridCellStyleFour{
+    color: #000;
+    background-color: #FFD966;
+    border-left: none;
+    border-right: 1px solid #fff;
+}
+.gridCellStyleFive{
+    color: #000;
+    background-color: #FF7C80;
+    border-left: none;
+    border-right: 1px solid #fff;
+}
+.gridCellStyleSex{
+    color: #000;
+    background-color: #8EA9DB;
+    border-left: none;
+    border-right: 1px solid #fff;
+}
+.colorRed{
+	color:red;
+}
+.right0{
+	position:absolute;
+	right:0px;
+}
+
+.groupTitleStyle {
+    font-family:FangSong; font-size:0.8em; text-overflow:ellipsis; font-weight: bold;
+    color:#FF0000;
+    background-color:#f2f2f2;
+}
+
+.groupTitleStyleClick {
+    font-family:FangSong; font-size:1em; text-overflow:ellipsis; font-weight: bold;
+    color:blue;
+    background-color:#f2f2f2;
+}
+
+.labelTitleStyleClick {
+    font-family:FangSong; font-size:1em; text-overflow:ellipsis; font-weight: bold;
+    color:blue;
+}
+
+.layoutGroupTitleStyle {
+	border-radius:5px;
+    font-family:FangSong; font-size:0.8em; text-overflow:ellipsis; font-weight: bold;
+    color:#FFF;
+}
+.keepOnRecord{
+	height : 50px;
+	color: #FFF;
+}
+.customTextAreaStyle{
+	background:rgba(255,255,255,0);
+    border: 1px solid #ababab;	
+}
+.customInputTextStyle{
+	background:rgba(255,255,255,0);
+    border-left: none;
+    border-top:none;
+    border-right:none;
+    border-bottom: 1px solid #ababab;
+}
+.customInputTextStyleDisabled{
+	background:rgba(255,255,255,0);
+	color:#ABABBA;
+    border-left: none;
+    border-top:none;
+    border-right:none;
+    border-bottom: 1px solid #ababab;
+}
+
+.customInputTextStyleFocused, .customInputTextStyleOver, .customInputTextStyleFocusedOver, .customInputTextStyle:hover, .customTextAreaStyle:hover, .customTextAreaStyleFocused, .customTextAreaStyleOver, .customTextAreaStyleFocusedOver{
+	background-color: #fff;
+    border: 1px solid #f60;
+    border-radius: 4px;
+    
+    transition:border linear .2s,box-shadow linear .5s;
+    -moz-transition:border linear .2s,-moz-box-shadow linear .5s;
+    -webkit-transition:border linear .2s,-webkit-box-shadow linear .5s;
+    outline:none;border-color:#66AFE9;
+    box-shadow:0 0 8px #66AFE9;
+    -moz-box-shadow:0 0 8px #66AFE9;
+    -webkit-box-shadow:0 0 8px #66AFE9;
+}
+
+.customTextAreaStyleDisabled{
+	background:rgba(255,255,255,0);
+	color:#ABABBA;
+    border-radius: 4px;
+}
+
+
+.customBackground{
+	background: url(/images/backgrounds/1.jpg) no-repeat;
+	background-size: 100%;
+	overflow:scroll;
+	/*opacity:0.5;*/
+}
+.customButton{
+	outline:none;
+	background: #FF7F27;
+    border: 1px solid #FF7F27;
+    border-radius: 14px;
+    color: #fff;
+    font-family: microsoft yahei;
+    font-size: 11px;
+}
+.customButtonOver, .customButtonDown{
+	outline:none;
+	background: #fff;
+    border: 1px solid #FF7F27;
+    border-radius: 14px;
+    color: #FF7F27;
+    font-family: microsoft yahei;
+    font-size: 11px;
+}
+.customButtonDisabled{
+	outline:none;
+	background: #BFBCBC;
+    border: 1px solid #BFBCBC;
+    border-radius: 14px;
+    color: #fff;
+    font-family: microsoft yahei;
+    font-size: 11px;
+}
+
+.customlabelView {
+    font-family:FangSong; font-size:1em; text-overflow:ellipsis; font-weight: bold;
+    color:#5E9FFB;margin-left: 10px;margin-top: 10px;
+}
+.customlabelViewVisible {
+    font-family:FangSong; font-size:1em; text-overflow:ellipsis; font-weight: bold;
+    margin-left: 10px;margin-top: 10px;
+}
+
+.customRadioTitle {
+    font-family:FangSong; font-size:1em; text-overflow:ellipsis; font-weight: bold;
+    padding-left: 10px;
+}
+
+.layoutGroupTitleStyleBlack {
+	border-radius:200px;
+    font-family:FangSong; font-size:1em; text-overflow:ellipsis; font-weight: bold;
+    color:#000;
+}
+
+.customRadioTitleOne {
+    font-family:FangSong; font-size:18px; text-overflow:ellipsis;
+    color:#FFF;font-style:normal;
+}
+
+.customRadioTitleTwo {
+    font-family: Microsoft YaHei, Tahoma, SimSun, Verdana; font-size:18px; text-overflow:ellipsis;
+    color:#FFF;font-style:normal;letter-spacing:1px;
+}
+
+.customRadioTitleThree {
+    font-family: Microsoft YaHei, Tahoma, SimSun, Verdana; font-size:40px; text-overflow:ellipsis;
+    color:#FFF;font-style:normal;letter-spacing:7px;
+}
+
+.customBackgroundTwo{
+	background: linear-gradient(rgb(6, 69, 140), rgb(160, 236, 249));
+}
+
+.customRadioTitleFour {
+    font-family:FangSong; font-size:14px; text-overflow:ellipsis;
+    color:#FFF;font-style:normal;
+}
+
+.iconButtonHIcon{
+	vertical-align: middle;
+}
+.iconButtonHMenuIcon{
+	 position: absolute;
+    top: 50%;
+    margin-top: -5%;
+    right: 10px;
+    height: 15px;
+    width: 15px;
+}
+
+.radio_title_class{
+	width: 160px;
+}
+
+.radio_title_class label{
+	font-size:10px!important;
+	color: #003168;
+}
+
+
+.attachment_pw_head_title{ animation: change 8s  ease-in  infinite;}
+    @keyframes change {
+        0%{ color: #dc1414 ; font-size: 12px;}
+        25%{ color: #0e78ab; font-size: 22px;}
+        50%{ color: green; font-size: 22px;}
+        75%{ color: #c14141; font-size: 22px;}
+        100%{ color: #2626da; font-size: 22px;}
+}
+.login_background {
+	background-size: 100% 100%;
+	background-position: 100% 100%;
+    background-size: cover;
+}
+.login_logo{
+	width: 100%;
+	height: 100%;   
+}
+.loginLayoutClass{
+	border-radius: 8px;
+}
+input[name="username"]{
+    border-radius: 8px;
+}
+
+input[name="password"]{
+    border-radius: 8px;
+}

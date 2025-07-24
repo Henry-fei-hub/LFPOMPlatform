@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../../../common_new/DelicacyGWT/DelicacyGWT.iml" filepath="$PROJECT_DIR$/../../../common_new/DelicacyGWT/DelicacyGWT.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../../FileUpload/FileUpload.iml" filepath="$PROJECT_DIR$/../../../FileUpload/FileUpload.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../../MCExternalApplication/MCExternalApplication.iml" filepath="$PROJECT_DIR$/../../../MCExternalApplication/MCExternalApplication.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../POMPlatformClient/POMPlatformClient.iml" filepath="$PROJECT_DIR$/../POMPlatformClient/POMPlatformClient.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../DBAccess/POMPlatformDB/POMPlatformDB.iml" filepath="$PROJECT_DIR$/../../DBAccess/POMPlatformDB/POMPlatformDB.iml" />
+      <module fileurl="file://$PROJECT_DIR$/POMPlatformService.iml" filepath="$PROJECT_DIR$/POMPlatformService.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../../common_new/delicacy_ext/delicacy_ext.iml" filepath="$PROJECT_DIR$/../../../common_new/delicacy_ext/delicacy_ext.iml" />
+    </modules>
+  </component>
+</project>

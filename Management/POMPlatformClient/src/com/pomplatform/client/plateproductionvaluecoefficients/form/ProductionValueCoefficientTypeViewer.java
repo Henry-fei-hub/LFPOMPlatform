@@ -1,0 +1,154 @@
+package com.pomplatform.client.plateproductionvaluecoefficients.form;
+
+import com.delicacy.client.data.DBDataSource;
+import com.delicacy.client.data.GroupColumn;
+import com.delicacy.client.ui.AbstractDetailViewer;
+import com.delicacy.client.ui.DelicacyListGrid;
+import com.delicacy.client.ui.GenericViewWindow;
+import com.pomplatform.client.plateproductionvaluecoefficients.datasource.DSProductionValueCoefficient;
+import com.pomplatform.client.plateproductionvaluecoefficientstype.datasource.DSProductionValueCoefficientType;
+import com.smartgwt.client.data.*;
+import com.smartgwt.client.widgets.events.DoubleClickEvent;
+import com.smartgwt.client.widgets.events.DoubleClickHandler;
+import com.smartgwt.client.widgets.form.SearchForm;
+import com.smartgwt.client.widgets.grid.ListGrid;
+import com.smartgwt.client.widgets.viewer.DetailViewer;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class ProductionValueCoefficientTypeViewer extends AbstractDetailViewer
+{
+
+
+	private final DelicacyListGrid productionValueCoefficientsGrid = new DelicacyListGrid();
+	private SearchForm __parentSearchForm;
+
+
+	public ProductionValueCoefficientTypeViewer() {
+	}
+
+	@Override
+	public void initComponents() {
+		super.initComponents();
+		productionValueCoefficientsGrid.setDataSource(DSProductionValueCoefficient.getInstance());
+		productionValueCoefficientsGrid.addDoubleClickHandler(new DoubleClickHandler(){
+			@Override
+			public void onDoubleClick(DoubleClickEvent event) {
+				GenericViewWindow detail = new GenericViewWindow();
+				detail.setTitle("");
+				detail.setWidth(700); detail.setHeight(500); 
+				ProductionValueCoefficientViewer viewer = new ProductionValueCoefficientViewer();
+				viewer.setLayoutMode(AbstractDetailViewer.COMPONENT_LAYOUT_NORMAL);
+				viewer.initComponents();
+				viewer.viewSelectedData((ListGrid)event.getSource());
+				detail.setContent(viewer);
+				detail.centerInPage();detail.show();
+			}
+		});
+	}
+
+	@Override
+	public int getHorizontalPercent() {
+		return 0;
+	}
+
+	@Override
+	public String getName() {
+		return "Sproductionvaluecoefficienttypepor";
+	}
+
+	@Override
+	public int getGroupCount() {
+		return 0;
+	}
+
+	@Override
+	public List<GroupColumn> getGroupColumnNames() {
+		List<GroupColumn> gcs = new ArrayList<GroupColumn>();
+		return gcs;
+	}
+
+	@Override
+	public void load() {
+		if(getBusinessId() == null) return;
+		Map params = new HashMap();
+		params.put("productionValueCoefficientTypeId", getBusinessId());
+		DBDataSource.callOperation("NQ_ProductionValueCoefficientType", "find", new DSCallback() {
+			@Override
+			public void execute(DSResponse dsResponse, Object data, DSRequest dsRequest) {
+				if(dsResponse.getStatus() >= 0){
+					for(DetailViewer v : detailViewers){
+						v.setData(dsResponse.getData());
+						if(dsResponse.getData().length == 0) continue;
+						v.selectRecord(0);
+						v.redraw();
+					}
+					setRecord(dsResponse.getData()[0]);
+					viewDetailData();
+				}
+			}
+		});
+	}
+
+	@Override
+	public void viewSelectedData(ListGrid grid){
+		super.viewSelectedData(grid);
+		setRecord(grid.getSelectedRecord());
+		viewDetailData();
+	}
+
+	public void viewDetailData(){
+		Record selected = getRecord();
+		Object val;
+		Map condition = null;
+		Map parentSearch = __parentSearchForm == null ? new HashMap() : __parentSearchForm.getValues();
+		condition = new HashMap();
+		condition.put("productionValueCoefficientTypeId", selected.getAttributeAsString("productionValueCoefficientTypeId"));
+		DBDataSource.callOperation("ST_ProductionValueCoefficient", "find", condition, new DSCallback(){
+			@Override
+			public void execute(DSResponse dsResponse, Object data, DSRequest dsRequest) {
+				if(dsResponse.getStatus() >= 0){
+					productionValueCoefficientsGrid.setData(dsResponse.getData());
+				}
+			}
+		});
+	}
+
+	@Override
+	public DataSource getMainDataSource() {
+		return DSProductionValueCoefficientType.getInstance();
+	}
+
+	@Override
+	public int getDetailCount(){
+		return 1;
+	}
+
+	@Override
+	public List<ListGrid> getDetailListGrids() {
+		List<ListGrid> res = new ArrayList<ListGrid>();
+		res.add(productionValueCoefficientsGrid);
+		return res;
+	}
+
+	@Override
+	public List<String> getDetailNames() {
+		List<String> res = new ArrayList<String>();
+		res.add("");
+		return res;
+	}
+
+	public SearchForm getParentSearchForm() {
+		return this.__parentSearchForm;
+	}
+
+	public void setParentSearchForm( SearchForm value ) {
+		this.__parentSearchForm = value;
+	}
+
+
+}
+

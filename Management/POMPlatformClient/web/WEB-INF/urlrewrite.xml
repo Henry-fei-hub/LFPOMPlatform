@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE urlrewrite PUBLIC "-//tuckey.org//DTD UrlRewrite 3.0//EN"
+        "http://tuckey.org/res/dtds/urlrewrite3.0.dtd">
+
+<urlrewrite>
+
+<rule>
+      <from>/iclock/cdata</from>
+      <to>/ClockServlet?action=ClockServlet&amp;optType=do_cdata</to>
+  </rule>
+  
+  <rule>
+      <from>/iclock/devicecmd</from>
+      <to>/ClockServlet?action=ClockServlet&amp;optType=do_device_cmd</to>
+  </rule>
+
+      <rule>
+      <from>/iclock/getrequest</from>
+      <to>/ClockServlet?action=ClockServlet&amp;optType=do_get_request</to>
+  </rule>
+  
+  <rule>
+      	<from>/iclock/fdata</from>
+      <to>/ClockServlet?action=ClockServlet&amp;optType=do_fdata</to>
+  </rule>
+  <rule>
+      	<from>/fkwebserver/</from>
+     	 <to>/ClockServlet?action=ClockServlet&amp;optType=do_fkwebserver</to>
+  </rule>
+
+  <rule>
+       <from>/iclock/registry</from>
+       <to>/ClockServlet?action=ClockServlet&amp;optType=do_registry</to>
+  </rule> 
+  <rule>
+       <from>/iclock/push</from>
+       <to>/ClockServlet?action=ClockServlet&amp;optType=do_push</to>
+  </rule> 
+  <rule>
+       <from>/iclock/rtdata</from>
+       <to>/ClockServlet?action=ClockServlet&amp;optType=do_rtdata</to>
+  </rule> 
+
+</urlrewrite>
+

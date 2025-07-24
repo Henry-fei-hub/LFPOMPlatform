@@ -1,0 +1,81 @@
+package com.pomplatform.client.account.datasource;
+
+import com.smartgwt.client.data.DataSource;
+import com.smartgwt.client.data.fields.*;
+import com.delicacy.client.data.KeyValueManager;
+
+public class CDOnLoadCommonTwoDetailOfPlateAccount extends DataSource
+{
+
+
+	public static CDOnLoadCommonTwoDetailOfPlateAccount instance = null;
+
+	public static CDOnLoadCommonTwoDetailOfPlateAccount getInstance() {
+		if(instance == null) {
+			instance = new CDOnLoadCommonTwoDetailOfPlateAccount("CDOnLoadCommonTwoDetailOfPlateAccount");
+		}
+		return instance;
+	}
+
+	private final DataSourceIntegerField plateIdField;
+	private final DataSourceIntegerField businessTypeIdField;
+	private final DataSourceTextField employeeNoField;
+	private final DataSourceTextField employeeNameField;
+	private final DataSourceIntegerField yearField;
+	private final DataSourceIntegerField monthField;
+
+	public CDOnLoadCommonTwoDetailOfPlateAccount(String dataSourceID) {
+
+		setID(dataSourceID);
+		plateIdField = new DataSourceIntegerField("plateId", "业务部门");
+		plateIdField.setRequired(false);
+		plateIdField.setLength(11);
+		plateIdField.setHidden(false);
+		plateIdField.setValueMap(KeyValueManager.getValueMap("system_dictionary"));
+
+		businessTypeIdField = new DataSourceIntegerField("businessTypeId", "11绩效奖金)");
+		businessTypeIdField.setRequired(false);
+		businessTypeIdField.setLength(11);
+		businessTypeIdField.setHidden(false);
+
+		employeeNoField = new DataSourceTextField("employeeNo", "员工编号");
+		employeeNoField.setRequired(true);
+		employeeNoField.setLength(64);
+		employeeNoField.setHidden(false);
+
+		employeeNameField = new DataSourceTextField("employeeName", "员工姓名");
+		employeeNameField.setRequired(true);
+		employeeNameField.setLength(64);
+		employeeNameField.setHidden(false);
+
+		yearField = new DataSourceIntegerField("year", "年份");
+		yearField.setRequired(true);
+		yearField.setLength(11);
+		yearField.setHidden(false);
+
+		monthField = new DataSourceIntegerField("month", "月份");
+		monthField.setRequired(true);
+		monthField.setLength(11);
+		monthField.setHidden(false);
+
+		DataSourceIntegerField currentPageField
+			= new DataSourceIntegerField("currentPage", "当前页");
+		currentPageField.setRequired(true);
+		currentPageField.setLength(10);
+		currentPageField.setHidden(true);
+
+		DataSourceIntegerField pageLinesField
+			= new DataSourceIntegerField("pageLines", "每页行数");
+		pageLinesField.setRequired(true);
+		pageLinesField.setLength(10);
+		pageLinesField.setHidden(true);
+
+
+		setFields(plateIdField, businessTypeIdField, employeeNoField, employeeNameField, yearField, monthField, currentPageField, pageLinesField);
+
+		setClientOnly(true);
+	}
+
+
+}
+

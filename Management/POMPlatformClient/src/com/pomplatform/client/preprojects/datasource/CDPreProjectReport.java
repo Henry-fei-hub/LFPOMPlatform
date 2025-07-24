@@ -1,0 +1,44 @@
+package com.pomplatform.client.preprojects.datasource;
+
+import com.smartgwt.client.data.DataSource;
+import com.smartgwt.client.data.fields.*;
+import com.delicacy.client.data.KeyValueManager;
+
+public class CDPreProjectReport extends DataSource
+{
+
+
+	public static CDPreProjectReport instance = null;
+
+	public static CDPreProjectReport getInstance() {
+		if(instance == null) {
+			instance = new CDPreProjectReport("CDPreProjectReport");
+		}
+		return instance;
+	}
+
+
+	public CDPreProjectReport(String dataSourceID) {
+
+		setID(dataSourceID);
+		DataSourceIntegerField currentPageField
+			= new DataSourceIntegerField("currentPage", "当前页");
+		currentPageField.setRequired(true);
+		currentPageField.setLength(10);
+		currentPageField.setHidden(true);
+
+		DataSourceIntegerField pageLinesField
+			= new DataSourceIntegerField("pageLines", "每页行数");
+		pageLinesField.setRequired(true);
+		pageLinesField.setLength(10);
+		pageLinesField.setHidden(true);
+
+
+		setFields(currentPageField, pageLinesField);
+
+		setClientOnly(true);
+	}
+
+
+}
+

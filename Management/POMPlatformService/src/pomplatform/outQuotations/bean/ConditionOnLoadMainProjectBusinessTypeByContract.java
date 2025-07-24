@@ -1,0 +1,85 @@
+package pomplatform.outQuotations.bean;
+
+import delicacy.common.GenericCondition;
+import java.util.Map;
+
+import java.util.Set;
+
+import java.util.HashSet;
+
+public class ConditionOnLoadMainProjectBusinessTypeByContract extends GenericCondition{
+
+	public ConditionOnLoadMainProjectBusinessTypeByContract(){
+		setParameterCount(4);
+	}
+
+	public java.lang.Integer getContractId() {
+		return this.__contract_id;
+	}
+
+	public void setContractId( java.lang.Integer value ) {
+		this.__contract_id = value;
+	}
+
+	public java.lang.String getProjectCode() {
+		return this.__project_code == null ? null : (this.__project_code.indexOf("%") >= 0 ? this.__project_code : "%"+this.__project_code+"%");
+	}
+
+	public void setProjectCode( java.lang.String value ) {
+		this.__project_code = value;
+	}
+
+	public java.lang.String getContractName() {
+		return this.__contract_name == null ? null : (this.__contract_name.indexOf("%") >= 0 ? this.__contract_name : "%"+this.__contract_name+"%");
+	}
+
+	public void setContractName( java.lang.String value ) {
+		this.__contract_name = value;
+	}
+
+	public java.lang.Integer getStatus() {
+		return this.__status;
+	}
+
+	public void setStatus( java.lang.Integer value ) {
+		this.__status = value;
+	}
+
+	@Override
+	public java.lang.String toJSONString() {
+
+		StringBuilder sb = new StringBuilder();
+		sb.append(super.toJSONString());
+		if(getContractId() != null) sb.append(__wrapNumber(1, "contractId", getContractId()));
+		if(getProjectCode() != null) sb.append(__wrapString(1, "projectCode", getProjectCode()));
+		if(getContractName() != null) sb.append(__wrapString(1, "contractName", getContractName()));
+		if(getStatus() != null) sb.append(__wrapNumber(1, "status", getStatus()));
+		return sb.toString();
+	}
+
+	@Override
+	public void setDataFromMap(Map<String, Object> values){
+		super.setDataFromMap(values);
+		Object val;
+		if((val = values.get("contractId")) != null) setContractId(__getInt(val)); 
+		if((val = values.get("projectCode")) != null) setProjectCode(__getString(val));
+		if((val = values.get("contractName")) != null) setContractName(__getString(val));
+		if((val = values.get("status")) != null) setStatus(__getInt(val)); 
+	}
+
+	@Override
+	public Set<String> getNotNullNames(){
+		Set<String> res = new HashSet<>();
+		if(getContractId() != null) res.add("contractId");
+		if(getProjectCode() != null) res.add("projectCode");
+		if(getContractName() != null) res.add("contractName");
+		if(getStatus() != null) res.add("status");
+		return res;
+	}
+
+	private java.lang.Integer __contract_id = null;
+	private java.lang.String __project_code = null;
+	private java.lang.String __contract_name = null;
+	private java.lang.Integer __status = null;
+}
+

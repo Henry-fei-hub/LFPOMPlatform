@@ -1,0 +1,56 @@
+package com.pomplatform.client.revenuevoucher.datasource;
+
+import com.smartgwt.client.data.DataSource;
+import com.smartgwt.client.data.fields.*;
+import com.delicacy.client.data.KeyValueManager;
+
+public class CDMprojectcrymor extends DataSource
+{
+
+
+	public static CDMprojectcrymor instance = null;
+
+	public static CDMprojectcrymor getInstance() {
+		if(instance == null) {
+			instance = new CDMprojectcrymor("CDMprojectcrymor");
+		}
+		return instance;
+	}
+
+	private final DataSourceIntegerField yearField;
+	private final DataSourceIntegerField monthField;
+
+	public CDMprojectcrymor(String dataSourceID) {
+
+		setID(dataSourceID);
+		yearField = new DataSourceIntegerField("year", "年份");
+		yearField.setRequired(false);
+		yearField.setLength(11);
+		yearField.setHidden(false);
+
+		monthField = new DataSourceIntegerField("month", "月份");
+		monthField.setRequired(false);
+		monthField.setLength(11);
+		monthField.setHidden(false);
+
+		DataSourceIntegerField currentPageField
+			= new DataSourceIntegerField("currentPage", "当前页");
+		currentPageField.setRequired(true);
+		currentPageField.setLength(10);
+		currentPageField.setHidden(true);
+
+		DataSourceIntegerField pageLinesField
+			= new DataSourceIntegerField("pageLines", "每页行数");
+		pageLinesField.setRequired(true);
+		pageLinesField.setLength(10);
+		pageLinesField.setHidden(true);
+
+
+		setFields(yearField, monthField, currentPageField, pageLinesField);
+
+		setClientOnly(true);
+	}
+
+
+}
+

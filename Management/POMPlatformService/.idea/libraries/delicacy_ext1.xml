@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="delicacy_ext1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../../common_new/delicacy_ext/dist/delicacy_ext.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

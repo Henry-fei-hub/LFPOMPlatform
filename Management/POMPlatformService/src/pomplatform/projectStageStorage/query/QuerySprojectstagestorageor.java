@@ -1,0 +1,77 @@
+package pomplatform.projectStageStorage.query;
+
+import org.apache.log4j.Logger;
+import delicacy.common.KeyValuePair;
+import delicacy.common.AbstractQuery;
+import delicacy.common.GenericBase;
+import delicacy.common.BaseCollection;
+import delicacy.connection.ThreadConnection;
+import pomplatform.projectStageStorage.bean.BaseSprojectstagestorageor;
+import pomplatform.projectStageStorage.bean.ConditionSprojectstagestorageor;
+
+public class QuerySprojectstagestorageor extends AbstractQuery<BaseSprojectstagestorageor, ConditionSprojectstagestorageor>
+{
+
+	private static final Logger __logger = Logger.getLogger(QuerySprojectstagestorageor.class);
+
+	public QuerySprojectstagestorageor() throws java.sql.SQLException 
+	{
+		setParameterNumber(1);
+		setConnection(ThreadConnection.getConnection());
+		setOrderByFields("pss.project_stage_storage_id");
+	}
+
+	@Override
+	public BaseCollection<BaseSprojectstagestorageor> executeQuery( KeyValuePair[] replacements, ConditionSprojectstagestorageor condition ) throws java.sql.SQLException {
+		return executeQuery(replacements, 
+				condition.getProjectStageStorageId()
+			);
+	}
+
+	@Override
+	public BaseSprojectstagestorageor generateBase(Object[] __data) throws java.sql.SQLException {
+		BaseSprojectstagestorageor __base = new BaseSprojectstagestorageor();
+		int count = 0;
+		Object val;
+		if((val = __data[count++]) != null) __base.setProjectStageStorageId(GenericBase.__getInt(val));
+		if((val = __data[count++]) != null) __base.setProjectId(GenericBase.__getInt(val));
+		if((val = __data[count++]) != null) __base.setStageId(GenericBase.__getInt(val));
+		if((val = __data[count++]) != null) __base.setPercent(GenericBase.__getInt(val));
+		if((val = __data[count++]) != null) __base.setProjectAmount(GenericBase.__getDecimal(val));
+		if((val = __data[count++]) != null) __base.setStageName(GenericBase.__getString(val));
+		if((val = __data[count++]) != null) __base.setRemark(GenericBase.__getString(val));
+		if((val = __data[count++]) != null) __base.setRiginalPlan(GenericBase.__getInt(val));
+		if((val = __data[count++]) != null) __base.setProjectConfirmAmount(GenericBase.__getDecimal(val));
+		if((val = __data[count++]) != null) __base.setTabAmount(GenericBase.__getInt(val));
+		return __base;
+	}
+
+	@Override
+	public int setStatementParameters(int count, java.lang.Object ... args) throws java.sql.SQLException {
+
+		int index = 0;
+		for(int ii = 0; ii < args.length; ii++){
+			if(args[ii] == null) continue;
+			index++;
+			__logger.info(String.format("%1$s = [%2$s]", fieldNames[ii], args[ii]));
+		}
+		if( index > 0 ) __logger.info("=================================================");
+		if(args[0] != null) __statement.setInt(count++, GenericBase.__getInt(args[0]));
+		return count;
+	}
+
+	@Override
+	public String getSQLText() {
+		__logger.info(__SQLText);
+		return __SQLText;
+	}
+
+	@Override
+	public String getFieldList(){
+		return RESULTSETFIELDLIST;
+	}
+
+	private final static String __SQLText = "select pss.project_stage_storage_id, pss.project_id, pss.stage_id, pss.percent, pss.project_amount, pss.stage_name, pss.remark, pss.riginal_plan, pss.project_confirm_amount, pss.tab_amount from project_stage_storages pss where pss.project_stage_storage_id = ?" ;
+	private final static String RESULTSETFIELDLIST = "project_stage_storage_id,project_id,stage_id,percent,project_amount,stage_name,remark,riginal_plan,project_confirm_amount,tab_amount";
+	private final static String[] fieldNames = { "project_stage_storage_id"};
+}

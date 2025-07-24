@@ -1,0 +1,56 @@
+package com.pomplatform.client.report.form;
+
+import java.util.*;
+import com.smartgwt.client.widgets.form.fields.*;
+import com.smartgwt.client.types.TextMatchStyle;
+import com.smartgwt.client.widgets.form.SearchForm;
+import com.smartgwt.client.widgets.form.fields.events.ChangedEvent;
+import com.smartgwt.client.widgets.form.fields.events.ChangedHandler;
+import com.delicacy.client.data.ClientUtil;
+import com.delicacy.client.data.KeyValueManager;
+import com.pomplatform.client.report.datasource.CDReportOnEmployeeGradeTotal;
+
+public class ReportOnEmployeeGradeTotalSearchForm extends SearchForm
+{
+
+
+	private final SelectItem yearItem;
+	private final SelectItem monthItem;
+	private final SelectItem statusItem;
+	private final ComboBoxItem plateIdItem;
+
+	public ReportOnEmployeeGradeTotalSearchForm() {
+		setWidth100();
+		setHeight100();
+		setDataSource(CDReportOnEmployeeGradeTotal.getInstance());
+
+		Date d = new Date();
+		yearItem = new SelectItem("year", "年份");
+		yearItem.setValue(d.getYear()+1900);
+		yearItem.setWidth("*");
+		yearItem.setValueMap(KeyValueManager.getValueMap("system_dictionary_18"));
+		
+		monthItem = new SelectItem("month", "月份");
+		monthItem.setWidth("*");
+		monthItem.setValue(d.getMonth() + 1);
+		monthItem.setValueMap(KeyValueManager.getValueMap("system_dictionary_19"));
+
+		
+		statusItem = new SelectItem("status", "状态");
+//		statusItem.setDefaultValue(0);// 默认显示在职的
+		statusItem.setWidth("*");
+		statusItem.setValueMap(KeyValueManager.getValueMap("system_dictionary_11"));
+		statusItem.hide();
+		
+		plateIdItem = new ComboBoxItem("plateId", "业务部门");
+		plateIdItem.setWidth("*");
+		plateIdItem.setTextMatchStyle(TextMatchStyle.SUBSTRING);
+		plateIdItem.setValueMap(KeyValueManager.getValueMap("system_dictionary_1"));
+
+		setItems(yearItem, monthItem, statusItem, plateIdItem);
+
+		setNumCols(9);
+		ClientUtil.searchFormProcessAccordingToDevice(this);
+	}
+
+}

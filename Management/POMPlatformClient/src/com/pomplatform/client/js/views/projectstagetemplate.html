@@ -1,0 +1,204 @@
+<div id="main-projectstagetemplate">
+	<div id="projectstagetemplate-form-container" class="oj-flex">
+		<div id="projectstagetemplate-form-pad" class="oj-flex-item oj-sm-12 oj-md-8" data-bind="ojModule : {name: 'searchprojectstagetemplate', params: {data: $data}, cacheKey: 'projectstagetemplateform'}">
+		</div>
+		<div id="projectstagetemplate-buttons" class="oj-flex-item oj-sm-12 oj-md-4">
+<div id="projectstagetemplate-button-container">
+	<div style="width: 100%;"
+		data-bind="ojComponent: {
+			component: 'ojConveyorBelt', 
+			orientation: 'horizontal'}" > 
+<button id="btn-query-projectstagetemplate" data-bind="event: { click: queryprojectstagetemplateClick},ojComponent: {
+	component:'ojButton',
+	display: 'all',
+	icons: {start:'bootstrap-icon glyphicon glyphicon-search '}, 
+	label: '查询' }"
+style = "margin-left: 10px; width: 100px; " ></button>
+<button id="btn-add-projectstagetemplate" data-bind="event: { click: addprojectstagetemplateClick},ojComponent: {
+	component:'ojButton',
+	display: 'all',
+	icons: {start:'bootstrap-icon glyphicon glyphicon-plus '}, 
+	label: '添加' }"
+style = "margin-left: 10px; width: 100px; " ></button>
+<button id="btn-modify-projectstagetemplate" data-bind="event: { click: modifyprojectstagetemplateClick},ojComponent: {
+	component:'ojButton',
+	display: 'all',
+	icons: {start:'bootstrap-icon glyphicon glyphicon-edit '}, 
+	label: '修改' }"
+style = "margin-left: 10px; width: 100px; " ></button>
+<button id="btn-delete-projectstagetemplate" data-bind="event: { click: deleteprojectstagetemplateClick},ojComponent: {
+	component:'ojButton',
+	display: 'all',
+	icons: {start:'bootstrap-icon glyphicon glyphicon-trash '}, 
+	label: '删除' }"
+style = "margin-left: 10px; width: 100px; " ></button>
+	</div>
+</div>
+		</div>
+	</div>
+<div id="projectstagetemplate-container">
+	<div id="projectstagetemplate-datagrid"
+		style="position:relative;width:100%;margin: auto;height:400px"
+		aria-label="projectstagetemplate"
+		data-bind="ojComponent:
+			{
+				component: 'ojDataGrid',
+				data: projectstagetemplateDatasource,
+				editMode: editMode,
+				beforeEdit: handleEdit,
+				beforeEditEnd: handleEditEnd,
+				selectionMode: {row: 'single'},
+				header:
+				{
+					column:
+					{
+						style: 'width:150px',
+						template: 'projectstagetemplateHeaderTemplate'
+					}
+				},
+				cell: {
+					template: getCellTemplate,
+					className: getCellClassName
+				}
+			}"
+		>
+	</div>
+	<div id="projectstagetemplate-paging" data-bind="ojComponent: { component: 'ojPagingControl', data: projectstagetemplateDatasource, pageSize: 15}">
+	</div>
+</div>
+<script type="text/html" id="projectstagetemplateHeaderTemplate">
+	<!-- ko if: $headerContext.key === 'projectStageTemplateId' -->
+		<span>id</span>
+	<!-- /ko -->
+
+	<!-- ko if: $headerContext.key === 'projectStageTemplateName' -->
+		<span>模板名称</span>
+	<!-- /ko -->
+
+	<!-- ko if: $headerContext.key === 'plateId' -->
+		<span>业务部门id</span>
+	<!-- /ko -->
+
+	<!-- ko if: $headerContext.key === 'projectId' -->
+		<span>项目id</span>
+	<!-- /ko -->
+
+	<!-- ko if: $headerContext.key === 'projectType' -->
+		<span>项目类别</span>
+	<!-- /ko -->
+
+	<!-- ko if: $headerContext.key === 'remark' -->
+		<span>备注</span>
+	<!-- /ko -->
+
+</script>
+<script type="text/html" id="projectstagetemplateDisplayTemplate">
+	<!-- ko if: $keys.column == 'projectStageTemplateId' -->
+		<span data-bind="text: $cell.data"></span>
+	<!-- /ko -->
+
+	<!-- ko if: $keys.column == 'projectStageTemplateName' -->
+		<span data-bind="text: $cell.data"></span>
+	<!-- /ko -->
+
+	<!-- ko if: $keys.column == 'plateId' -->
+		<span data-bind="text: $cell.data"></span>
+	<!-- /ko -->
+
+	<!-- ko if: $keys.column == 'projectId' -->
+		<span data-bind="text: $cell.data"></span>
+	<!-- /ko -->
+
+	<!-- ko if: $keys.column == 'projectType' -->
+		<span data-bind="text: $cell.data"></span>
+	<!-- /ko -->
+
+	<!-- ko if: $keys.column == 'remark' -->
+		<span data-bind="text: $cell.data"></span>
+	<!-- /ko -->
+
+</script>
+<script type="text/html" id="projectstagetemplateEditTemplate">
+	<!-- ko if: $cellContext.keys.column == 'projectStageTemplateId' -->
+		<input data-bind="ojComponent:{ 
+			component:'ojInputText',
+			value: $cell.data,
+			rootAttributes: {class: 'oj-helper-text-align-start'}
+		}">
+	<!-- /ko -->
+
+	<!-- ko if: $cellContext.keys.column == 'projectStageTemplateName' -->
+		<input data-bind="ojComponent:{ 
+			component:'ojInputText',
+			value: $cell.data,
+			rootAttributes: {class: 'oj-helper-text-align-start'}
+		}">
+	<!-- /ko -->
+
+	<!-- ko if: $cellContext.keys.column == 'plateId' -->
+		<input data-bind="ojComponent:{ 
+			component:'ojInputText',
+			value: $cell.data,
+			rootAttributes: {class: 'oj-helper-text-align-start'}
+		}">
+	<!-- /ko -->
+
+	<!-- ko if: $cellContext.keys.column == 'projectId' -->
+		<input data-bind="ojComponent:{ 
+			component:'ojInputText',
+			value: $cell.data,
+			rootAttributes: {class: 'oj-helper-text-align-start'}
+		}">
+	<!-- /ko -->
+
+	<!-- ko if: $cellContext.keys.column == 'projectType' -->
+		<input data-bind="ojComponent:{ 
+			component:'ojInputText',
+			value: $cell.data,
+			rootAttributes: {class: 'oj-helper-text-align-start'}
+		}">
+	<!-- /ko -->
+
+	<!-- ko if: $cellContext.keys.column == 'remark' -->
+		<input data-bind="ojComponent:{ 
+			component:'ojInputText',
+			value: $cell.data,
+			rootAttributes: {class: 'oj-helper-text-align-start'}
+		}">
+	<!-- /ko -->
+
+</script>
+</div>
+<div style="display: none; width: 100%; height: 400px; min-height: 200px;" id="projectstagetemplateDialog" title="项目阶段模板表"
+	data-bind="ojComponent:{ component: 'ojDialog', initialVisibility: 'hide'}">
+	<div class="oj-dialog-body">
+		<div id="projectstagetemplate-body" data-bind="ojModule: currentEditPage">
+		</div>
+	</div>
+<div class="oj-dialog-footer">
+<button id="btn-previous" data-bind="event: { click: previousClick},ojComponent: {
+	component:'ojButton',
+	display: 'all',
+	icons: {start:'oj-fwk-icon-back oj-fwk-icon'}, 
+	label: '上一页' }"
+style = "margin-left: 10px; width: 100px; " ></button>
+<button id="btn-next" data-bind="event: { click: nextClick},ojComponent: {
+	component:'ojButton',
+	display: 'all',
+	icons: {end:'oj-fwk-icon-next oj-fwk-icon'}, 
+	label: '下一页' }"
+style = "margin-left: 10px; width: 100px; " ></button>
+<button id="btn-ok" data-bind="event: { click: okClick},ojComponent: {
+	component:'ojButton',
+	display: 'all',
+	icons: {start:'oj-fwk-icon-status-confirmation oj-fwk-icon'}, 
+	label: '确定' }"
+style = "margin-left: 10px; width: 100px; " ></button>
+<button id="btn-cancel" data-bind="event: { click: cancelClick},ojComponent: {
+	component:'ojButton',
+	display: 'all',
+	icons: {start:'oj-fwk-icon-status-error oj-fwk-icon'}, 
+	label: '取消' }"
+style = "margin-left: 10px; width: 100px; " ></button>
+</div>
+</div>
