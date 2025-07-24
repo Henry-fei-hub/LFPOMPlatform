@@ -1,0 +1,385 @@
+<?xml version="1.0"	encoding="utf-8" ?>
+<project name="SOHOVita" default="all" basedir=".">
+	<!-- Arguments to gwtc and devmode targets -->
+	<property name="gwt.args" value="-strict" />
+	<property name="build.compiler" value="modern" />
+	<!-- Configure path to GWT SDK -->
+	<property name="commonNew.dir" location="./" />
+	<property name="common.dir" location="../common_new" />
+	<property name="lib.dir" location="${common.dir}/DelicacyCommonLib/current" />
+	<property name="dbaccess.dir" location="./DBAccess/POMPlatformDB" />
+	<property name="service.dir" location="./Management/POMPlatformService" />
+	<property name="client.dir" location="./Management/POMPlatformClient" />
+	<property name="fileupload.dir" location="../FileUpload" />
+	<property name="externalapplication.dir" location="../MCExternalApplication" />
+	
+	<property name="gwt.sdk" location="${lib.dir}" />
+	<property name="smartgwt.sdk" location="${lib.dir}" />
+	
+	<property name="dbutil.src" location="${dbaccess.dir}/src" />
+	
+	<property name="service.src" location="${service.dir}/src" />
+	<property name="common.src" location="${common.dir}/delicacy_ext/src" />
+	
+	<property name="client.src" location="${client.dir}/src" />
+	<property name="client.web" location="${client.dir}/web" />
+	<property name="delicacy.base" location="${common.dir}/DelicacyGWT" />
+	<property name="fileupload.src" location="${fileupload.dir}/src" />
+	<property name="externalapplication.src" location="${externalapplication.dir}/src" />
+	<property name="mobileclient.src" location="./erpmobile" />
+	
+	
+	<path id="smartgwt.class.path">
+		<pathelement location="${gwt.sdk}/gwt-user.jar"/>
+		<pathelement location="${smartgwt.sdk}/smartgwt.jar"/>
+		<pathelement location="${smartgwt.sdk}/smartgwt-skins.jar"/>
+		<pathelement location="${lib.dir}/libgwtsvg.jar"/>
+		<pathelement location="${lib.dir}/org.moxieapps.gwt.uploader-1.1.0.jar"/>
+	</path>
+	
+	<target name="delicacy" >
+		<delete dir="${commonNew.dir}/comWar" />
+		<delete dir="${commonNew.dir}/dist" />
+		<mkdir dir="${commonNew.dir}/comWar"/>
+		<mkdir dir="${commonNew.dir}/dist"/>
+		<javac srcdir="${delicacy.base}/src" includes="**"	encoding="utf-8"
+			destdir="${commonNew.dir}/comWar"
+			source="8" target="8" nowarn="true" includeantruntime="on"
+			debug="true" debuglevel="lines,vars,source">
+			<classpath refid="smartgwt.class.path"/>
+		</javac>
+		<copy todir="${commonNew.dir}/comWar">
+			<fileset dir="${delicacy.base}/src" includes="**/*.java, **/*.xml" />
+		</copy>
+		<zip destfile="${commonNew.dir}/dist/DelicacyGWT.jar" basedir="${commonNew.dir}/comWar"/>
+	</target>
+
+	<path id="project.class.path">
+		<pathelement location="${lib.dir}/servlet-api.jar"/>
+		<pathelement location="${lib.dir}/websocket-api.jar"/>
+		<pathelement location="${commonNew.dir}/dist/DelicacyGWT.jar"/>
+		<pathelement location="war/WEB-INF/classes"/>
+		<pathelement location="${gwt.sdk}/gwt-user.jar"/>
+		<pathelement location="${lib.dir}/libgwtsvg.jar"/>
+		<pathelement location="${smartgwt.sdk}/smartgwt.jar"/>
+		<pathelement location="${smartgwt.sdk}/smartgwt-skins.jar"/>
+		<fileset dir="${gwt.sdk}" includes="gwt-dev*.jar"/>
+		
+		<!-- Add any additional	non-server libs	(such as JUnit)	-->
+		<fileset dir="war/WEB-INF/lib" includes="**/*.jar"/>
+	</path>
+	
+	<target	name="clean"	description="Cleans	this project">
+		<!--<delete	includeEmptyDirs="true"	quiet="true">
+			<fileset dir="war"/>
+		</delete>-->
+		<delete	dir="war" />
+	</target>
+	
+	<target name="clsclasses" >
+		<delete dir="war/WEB-INF/classes" />
+		<delete dir="war/WEB-INF/lib" />
+	</target>
+	
+	<target name="image">
+		<copy todir="war/images">
+			<fileset dir="${client.web}/images"/>
+		</copy>
+	</target>
+
+	<target name="libs" depends="clsclasses" description="Copy libs to WEB-INF/lib">
+		<mkdir dir="war/WEB-INF/lib" />
+		<mkdir dir="war/WEB-INF/classes" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/activation-1.1.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/apache-mime4j-core-0.7.2.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/axiom-api-1.2.13.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/axiom-dom-1.2.13.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/axiom-impl-1.2.13.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/axis2-adb-1.6.2.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/org.moxieapps.gwt.uploader-1.1.0.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/thumbnailator-0.4.8.jar" />
+		
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/axis2-clustering-1.6.2.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/axis2-corba-1.6.2.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/axis2-fastinfoset-1.6.2.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/axis2-jaxbri-1.6.2.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/axis2-jaxws-1.6.2.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/axis2-jibx-1.6.2.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/axis2-json-1.6.2.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/axis2-kernel-1.6.2.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/axis2-metadata-1.6.2.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/axis2-mtompolicy-1.6.2.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/axis2-saaj-1.6.2.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/axis2-transport-http-1.6.2.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/axis2-transport-local-1.6.2.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/axis2-xmlbeans-1.6.2.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/commons-lang3-3.2.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/commons-codec-1.9.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/commons-logging-1.2.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/commons-lang-2.6.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/commons-fileupload-1.3.3.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/commons-io-2.4.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/commons-cli-1.2.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/commons-httpclient-3.1.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/log4j-1.2.17.jar" />
+		
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/poi-3.7-20101029.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/poi-ooxml-3.7-20101029.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/poi-ooxml-schemas-3.7-20101029.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/poi-scratchpad-3.7-20101029.jar" />
+
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/httpclient-4.5.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/httpclient-cache-4.5.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/httpcore-4.4.6.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/httpmime-4.5.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/httpclient-win-4.5.jar" />
+		
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/hsqldb.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/jackcess-2.1.3.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/ucanaccess-3.0.4.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/jtds-1.3.1.jar" />
+		
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/fluent-hc-4.5.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/jna-4.1.0.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/jna-platform-4.1.0.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/jalopy-1.5rc3.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/jaxb-api-2.1.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/jaxb-impl-2.1.7.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/jaxb-xjc-2.1.7.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/jaxen-1.1.1.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/jaxws-tools-2.1.3.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/jettison-1.0-RC2.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/jibx-bind-1.2.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/jibx-run-1.2.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/jsr311-api-1.0.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/juli-6.0.16.jar" />
+		
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/jsoup-1.6.2.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/websocket-api.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/jxl.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/javax.mail-1.5.5.jar" />
+
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/mariadb-java-client-1.1.7.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/postgresql-9.4.1208.jar" />
+
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/bcel-5.1.jar" />
+		
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/geronimo-annotation_1.0_spec-1.1.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/geronimo-jaxws_2.2_spec-1.0.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/geronimo-jta_1.1_spec-1.1.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/geronimo-saaj_1.3_spec-1.0.1.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/geronimo-stax-api_1.0_spec-1.0.1.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/geronimo-ws-metadata_2.0_spec-1.1.2.jar" />
+		
+		
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/mail-1.4.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/mex-1.6.2-impl.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/neethi-3.0.2.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/regexp-1.2.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/tribes-6.0.16.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/woden-api-1.0M9.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/woden-impl-commons-1.0M9.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/woden-impl-dom-1.0M9.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/wsdl4j-1.6.2.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/wstx-asl-3.2.9.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/xalan-2.7.0.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/xmlbeans-2.6.0.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/xml-resolver-1.2.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/XmlSchema-1.4.7.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/commons-beanutils.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/commons-lang-2.6.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/ezmorph-1.0.2.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/json-lib-1.1-jdk13.jar" />
+		
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/dom4j-2.0.1.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/org.moxieapps.gwt.highcharts-1.7.0.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/urlrewrite-3.0.4.jar" />
+		
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/pinyin4j-2.5.0.jar" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/commons-email-1.3.2.jar" />
+		
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/mysql-connector-java-5.1.36-bin.jar" />
+		
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/core-3.0.0.jar"/>
+		
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/solr-solrj-7.4.0.jar"/>
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/noggit-0.8.jar"/>
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/slf4j-log4j12-1.7.25.jar"/>
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/slf4j-api-1.7.25.jar"/>
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/zookeeper-3.4.11.jar"/>
+		<!--cmyk图片处理而引入的jar   start-->
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/common-image-3.6.jar"/>
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/common-io-3.6.jar"/>
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/common-lang-3.6.jar"/>
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/imageio-batik-3.6.jar"/>
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/imageio-bmp-3.6.jar"/>
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/imageio-core-3.6.jar"/>
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/imageio-jpeg-3.6.jar"/>
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/imageio-metadata-3.6.jar"/>
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/imageio-psd-3.6.jar"/>
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/imageio-tiff-3.6.jar"/>
+		<!--cmyk图片处理而引入的jar   end-->
+		<copy todir="war/WEB-INF" file="${client.web}/WEB-INF/web.xml"	/>
+		<copy todir="war/WEB-INF" file="${client.web}/WEB-INF/urlrewrite.xml"	/>
+		<copy todir="war/WEB-INF/classes">
+		  <fileset dir="${service.src}"> 
+			<include name="connection.properties" /> 
+			</fileset>
+		</copy>
+		<copy todir="war/WEB-INF/classes" file="${service.src}/log4j.properties" />
+		<copy todir="war/WEB-INF/classes" file="${service.src}/timer.properties" />
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/delicacy.jar"/>
+		
+		<!--obs的jar   start-->
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/hutool-all-5.6.2.jar"/>
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/obs/esdk-obs-java-3.20.6.1.jar"/>
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/obs/okhttp-3.14.4.jar"/>
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/obs/okio-1.17.2.jar"/>
+
+		<!--阿里云obs的jar   start-->
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/obs/aliyun-sdk-oss-3.10.2.jar"/>
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/obs/hamcrest-core-1.1.jar"/>
+		<copy todir="war/WEB-INF/lib" file="${lib.dir}/obs/jdom2-2.0.6.jar"/>
+		
+	</target>
+	
+	<target name="clientfiles" description="copy client files to the target location">
+		<copy todir="war/WEB-INF/classes">
+		  <fileset dir="${service.src}"> 
+			<include name="connection.properties" /> 
+			</fileset>
+		</copy>
+		<copy todir="war" file="${client.web}/Material.css" />
+		<copy todir="war" file="${client.web}/index.html" />
+		<copy todir="war/images">
+			<fileset dir="${client.web}/images"/>
+		</copy>
+		<copy todir="war/js">
+			<fileset dir="${client.web}/js"/>
+		</copy>
+		<copy todir="war/htmlEmail">
+			<fileset dir="${client.web}/htmlEmail"/>
+		</copy>
+		<copy todir="war/files">
+			<fileset dir="${client.web}/files"/>
+		</copy>		
+	</target>
+	
+	<target name="mobile" description="copy client files to the target location">
+		<copy todir="war">
+			<fileset dir="${mobileclient.src}"/>
+		</copy>
+	</target>
+
+
+	<target depends="libs" name="javac" description="Compile java source to bytecode">
+		<mkdir dir="war/WEB-INF/classes"/>
+		<!-- compile DBUTIL	-->
+		<javac srcdir="${common.src}" includes="**"	encoding="utf-8"
+			destdir="war/WEB-INF/classes"
+			source="8" target="8" nowarn="true" includeantruntime="on"
+			debug="true" debuglevel="lines,vars,source">
+			<classpath refid="project.class.path"/>
+		</javac>
+		<!-- compile DBUTIL	-->
+		<javac srcdir="${dbutil.src}" includes="**"	encoding="utf-8"
+			destdir="war/WEB-INF/classes"
+			source="8" target="8" nowarn="true" includeantruntime="on"
+			debug="true" debuglevel="lines,vars,source">
+			<classpath refid="project.class.path"/>
+		</javac>
+		<javac srcdir="${fileupload.src}" includes="**"	encoding="utf-8"
+			destdir="war/WEB-INF/classes"
+			source="8" target="8" nowarn="true" includeantruntime="on"
+			debug="true" debuglevel="lines,vars,source">
+			<classpath refid="project.class.path"/>
+		</javac>
+		<javac srcdir="${externalapplication.src}" includes="**" encoding="utf-8"
+			destdir="war/WEB-INF/classes"
+			source="8" target="8" nowarn="true" includeantruntime="on"
+			debug="true" debuglevel="lines,vars,source">
+			<classpath refid="project.class.path"/>
+		</javac>
+		<!-- compile Service -->
+		<javac srcdir="${service.src}" includes="**" encoding="utf-8"
+			destdir="war/WEB-INF/classes"
+			source="8" target="8" nowarn="true" includeantruntime="on"
+			debug="true" debuglevel="lines,vars,source">
+			<classpath refid="project.class.path"/>
+		</javac>
+		
+	</target>
+
+	<target name="gwtc" depends="delicacy, clientfiles, mobile" description="GWT compile to JavaScript (production mode)">
+		<java failonerror="true" fork="true" classname="com.google.gwt.dev.Compiler">
+			<classpath>
+				<pathelement location="${client.src}"/> <!--	source folder -->
+				<path refid="project.class.path"/>
+				
+				<pathelement location="${gwt.sdk}/validation-api-1.0.0.GA.jar" />
+				<pathelement location="${gwt.sdk}/validation-api-1.0.0.GA-sources.jar" />
+			</classpath>
+			<!-- add jvmarg -Xss16M or similar if you see	a StackOverflowError -->
+			<jvmarg value="-Xmx12g"/> 
+			<jvmarg value="-Xms4g"/>
+			<!--
+			<jvmarg value="-Dcom.sun.management.jmxremote"/>
+			<jvmarg value="-Dcom.sun.management.jmxremote.port=4321"/>
+			<jvmarg value="-Dcom.sun.management.jmxremote.authenticate=false"/>
+			<jvmarg value="-Dcom.sun.management.jmxremote.ssl=false"/>
+			-->
+			<arg line="-sourceLevel"/>
+			<arg value="1.8"/>
+			<arg line="-war"/>
+			<arg value="war"/>
+			<arg line="-localWorkers"/>
+			<arg value="6"/>
+			<arg line="-style"/>
+			<arg value="OBF"/>
+			<!-- Additional arguments like -style PRETTY or -logLevel DEBUG -->
+			<arg line="${gwt.args}"/>
+			<arg value="com.pomplatform.POMPlatform"/>
+		</java>
+		<touch file="war/pom/pom.nocache.js"/>
+	</target>
+	
+	<target name="devmode" depends="clientfiles,delicacy,javac" description="Run development mode (pass -Dgwt.args=-nosuperDevMode to fallback to classic DevMode)">
+		<java failonerror="true" fork="true" classname="com.google.gwt.dev.DevMode" maxmemory="4g">
+		  <classpath>
+			<pathelement location="${client.src}"/>
+			<path refid="project.class.path"/>
+			<pathelement location="${gwt.sdk}/gwt-codeserver.jar"/>
+			<pathelement location="${gwt.sdk}/validation-api-1.0.0.GA.jar"/>
+			<pathelement location="${gwt.sdk}/validation-api-1.0.0.GA-sources.jar"/>
+			<pathelement location="${gwt.sdk}/gwt-dev.jar"/>
+			<pathelement location="${gwt.sdk}/gwt-api-checker.jar"/>
+			<pathelement location="${gwt.sdk}/gwt-elemental.jar"/>
+			<pathelement location="${gwt.sdk}/gwt-user.jar"/>
+		  </classpath>
+		  <arg value="-startupUrl"/>
+		  <arg value="index.html"/>
+		  <arg line="-war"/>
+		  <arg value="war"/>
+			<arg line="-style"/>
+			<arg value="PRETTY"/>
+			<arg line="-workDir"/>
+			<arg value="workdir"/>
+			<arg line="-bindAddress"/>
+			<arg value="127.0.0.1"/>
+			<arg line="-port"/>
+			<arg value="7788"/>
+		  
+		  <!-- Additional arguments like -style PRETTY, -logLevel DEBUG or -nosuperDevMode -->
+		  <arg line="${gwt.args}"/>
+		  <arg value="com.pomplatform.POMPlatform"/>
+		</java>
+	</target>
+	
+	<target name="all" depends="javac,gwtc" />
+
+	<target name="war" depends="javac,gwtc" description="Create a war file">
+		<mkdir dir="dist"/>
+		<zip destfile="dist/SOHOVita.war" basedir="war"/>
+	</target>
+
+</project>
