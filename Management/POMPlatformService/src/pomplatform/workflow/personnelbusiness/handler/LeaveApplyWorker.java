@@ -463,8 +463,8 @@ public class LeaveApplyWorker implements GenericWorkflowProcessor {
 		logger.info("---------------------------------- now date："+DateUtil.getDateOfDay(new Date()));
 		logger.info("---------------------------------- start date："+DateUtil.getDateOfDay(date));
 		logger.info("---------------------------------- days："+days);
-		//除年假可以不限日期，其他假类，可以只能延后一天申请，即今天可以申请昨天的数据
-		if(days > 1 && type != 22){
+		//除年假和事假可以不限日期，其他假类，可以只能延后一天申请，即今天可以申请昨天的数据
+		if(days > 1 && type != 22 && type != 19){
 			throw new Exception("请假日期不可延后申请，即请假开始日期不可早于昨日日期");
 		}
 		Date endDate = dao.getEndDate();
